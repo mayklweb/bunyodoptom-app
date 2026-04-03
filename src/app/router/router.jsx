@@ -14,9 +14,9 @@ export default function Router() {
       <Route
         path="/profile"
         element={
-          <ProtectedRoute>
+          // <ProtectedRoute>
             <ProfilePage />
-          </ProtectedRoute>
+          // </ProtectedRoute>
         }
       />
 

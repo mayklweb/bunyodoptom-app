@@ -54,7 +54,7 @@ function Footer() {
               <UserIcon />
             </span>
             <span className="text-sm font-medium">
-              {user?.name ? user.name : "Kirish"}
+              {user ? user.name : "Kirish"}
             </span>
           </Link>
         </div>
