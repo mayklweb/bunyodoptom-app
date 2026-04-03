@@ -69,7 +69,7 @@ function Brands() {
       <div className="container">
         <div className="mt-5 lg:mt-10">
           <div className="flex items-center justify-between">
-            <h1 className="text-2xl md:text-3xl lg:text-4xl font-semibold tracking-tight">
+            <h1 className="text-2xl md:text-3xl lg:text-4xl font-medium tracking-tight">
               Brendlar
             </h1>
             <div className="flex items-center gap-2">

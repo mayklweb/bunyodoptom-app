@@ -72,7 +72,7 @@ function FavoriteProducts() {
       <div className="container">
         <div className="mt-5 lg:mt-10">
           <div>
-            <h1 className="text-2xl md:text-3xl lg:text-4xl font-semibold">
+            <h1 className="text-2xl md:text-3xl lg:text-4xl font-medium">
               Sizga yoqadiganlar
             </h1>
           </div>

@@ -27,10 +27,10 @@ function ProductCard({ product, onClick }) {
         />
       </div>
       <div className="flex flex-col items-start gap-0.5 w-full">
-        <h2 className="w-full font-semibold text-black text-base tracking-tight leading-[100%] truncate">
+        <h2 className="w-full font-medium text-black text-base tracking-tight leading-[100%] truncate">
           {product.name}
         </h2>
-        <p className="font-semibold text-[#000000cc] text-base tracking-tight">
+        <p className="font-medium text-[#000000cc] text-base tracking-tight">
           {product.price?.toLocaleString()} so'm
         </p>
       </div>
