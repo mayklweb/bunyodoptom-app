@@ -32,7 +32,7 @@ const banner = [
 function HeroBanner() {
   return (
     <section>
-      <div className="mt-24">
+      <div className="mt-20">
         <div className="container">
           <div className="rounded-xl overflow-hidden relative">
             <Swiper

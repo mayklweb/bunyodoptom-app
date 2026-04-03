@@ -7,7 +7,7 @@ function Header() {
       <div className="w-full bg-white shadow-sm fixed top-0 z-10">
         <div className="container">
           <div className="relative">
-            <div className="w-full flex gap-4 items-center justify-between py-4">
+            <div className="w-full flex gap-4 items-center justify-between py-2">
               <div>
                 <Link to={"/"} className="w-40 h-12 hidden lg:block">
                   <img

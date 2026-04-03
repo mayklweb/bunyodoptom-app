@@ -11,7 +11,7 @@ function Footer() {
       <div className="container">
         <div className="flex items-center justify-between">
           <Link
-            className="flex my-4 items-center justify-center flex-col gap-1 "
+            className="flex my-2 items-center justify-center flex-col gap-1 "
             to="/"
           >
             <span>
@@ -20,7 +20,7 @@ function Footer() {
             <span className="text-sm font-medium">Asosiy</span>
           </Link>
           <Link
-            className="my-4 flex items-center justify-center flex-col gap-1 "
+            className="my-2 flex items-center justify-center flex-col gap-1 "
             to="/categories"
           >
             <span>
@@ -29,7 +29,7 @@ function Footer() {
             <span className="text-sm font-medium">Katalog</span>
           </Link>
           <Link
-            className="my-4 flex items-center justify-center flex-col gap-1 "
+            className="my-2 flex items-center justify-center flex-col gap-1 "
             to="/cart"
           >
             <span>
@@ -47,7 +47,7 @@ function Footer() {
             <span className="text-sm font-medium">Savat</span>
           </Link> */}
           <Link
-            className="my-4 flex items-center justify-center flex-col gap-1 "
+            className="my-2 flex items-center justify-center flex-col gap-1 "
             to={"/profile"}
           >
             <span>
