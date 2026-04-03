@@ -4,11 +4,12 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        background: "var(--color-background)",
-        foreground: "var(--color-foreground)",
+        background: "#ffffff",
+        foreground: "#0a0a0a",
         primary: "#2e3192",
         secondary: "#cecfff",
         red: "#ff0000",
+        gray: "#e5e7eb",
       },
       fontFamily: {
         sans: "'Roboto', sans-serif",

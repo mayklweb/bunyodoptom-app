@@ -56,7 +56,7 @@ function Categories() {
   return (
     <section>
       <div className="container">
-        <div className="mt-5">
+        <div className="mt-5 lg:mt-10">
           <div className="flex items-center justify-between">
             <h1 className="text-2xl md:text-3xl lg:text-4xl font-medium tracking-tight">
               Kategoriya
@@ -97,7 +97,7 @@ function Categories() {
                 1024: { slidesPerView: 5.4, spaceBetween: 14 },
                 // 1280: { slidesPerView: 6, spaceBetween: 14 },
               }}
-              className="w-full mt-3 lg:mt-5"
+              className="w-full mt-2.5 lg:mt-5"
             >
               {categories
                 .slice(2)

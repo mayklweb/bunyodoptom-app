@@ -1,20 +1,7 @@
-// import { usePathname, useRouter } from "next/navigation";
-// import { useEffect, useRef, useState } from "react";
-// import { useCartStore } from "@/app/store/CartStore";
-// import { useGetMe, useUser } from "@/app/shared/lib/useAuth";
-// import { useCategories } from "@/app/shared/lib/hooks/useCategories";
-// import { CategoriesType } from "@/app/types";
-// import useIsAuth from "@/app/context/useIsAuth";
-
 import { Link } from "react-router-dom";
-import { CartIcon, SearchIcon, UserIcon } from "../../assets/icons";
-import { useAuthUser } from "../../features/auth/hooks/useAuthUser";
+import { SearchIcon } from "../../assets/icons";
 
-// --- Katalog Dropdown ---
-
-// --- AppHeader ---
 function Header() {
-  const { data: user, isLoading } = useAuthUser();
   return (
     <header>
       <div className="w-full bg-white shadow-sm fixed top-0 z-10">
@@ -53,7 +40,7 @@ function Header() {
                       className="px-2.5 bg-primary/10 rounded-md hover:bg-secondary transition-all ease-in-out duration-300"
                       type="submit"
                     >
-                      <SearchIcon />
+                      <SearchIcon className={"text-primary"} />
                     </button>
                   </div>
                 </form>

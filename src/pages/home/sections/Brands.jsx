@@ -67,7 +67,7 @@ function Brands() {
   return (
     <section>
       <div className="container">
-        <div className="mt-5">
+        <div className="mt-5 lg:mt-10">
           <div className="flex items-center justify-between">
             <h1 className="text-2xl md:text-3xl lg:text-4xl font-semibold tracking-tight">
               Brendlar
@@ -112,7 +112,7 @@ function Brands() {
                 // 1280: { slidesPerView: 8, spaceBetween: 20 },
                 // 1536: { slidesPerView: 10, spaceBetween: 20 },
               }}
-              className="w-full mt-3 lg:mt-5"
+              className="w-full mt-2.5 lg:mt-5"
             >
               {brands.slice(1).map(({ name, id }, i) => (
                 <SwiperSlide key={i}>

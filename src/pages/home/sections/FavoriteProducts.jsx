@@ -70,14 +70,14 @@ function FavoriteProducts() {
   return (
     <section>
       <div className="container">
-        <div className="mt-5">
+        <div className="mt-5 lg:mt-10">
           <div>
             <h1 className="text-2xl md:text-3xl lg:text-4xl font-semibold">
               Sizga yoqadiganlar
             </h1>
           </div>
 
-          <div className="mt-6 mb-10 grid grid-cols-2 md:grid-cols-2  gap-4">
+          <div className="mt-2.5 mb-5 grid grid-cols-2 md:grid-cols-2 gap-4">
             {favoriteProducts.map((product, i) => (
               <ProductCard
                 key={i}
