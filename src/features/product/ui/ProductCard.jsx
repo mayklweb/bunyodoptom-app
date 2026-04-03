@@ -41,7 +41,7 @@ function ProductCard({ product, onClick }) {
     <div className="relative">
       <button
         onClick={() => toggleFavorite(product)}
-        className="p-1 absolute top-2 right-2 z-3 bg-white rounded-full cursor-pointer"
+        className="p-1 absolute top-2 right-2 z-10 bg-white rounded-full cursor-pointer"
       >
         <FavoriteIcon
           className={`w-5 h-5 transition-colors ${

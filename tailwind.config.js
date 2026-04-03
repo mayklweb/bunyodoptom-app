@@ -11,8 +11,7 @@ module.exports = {
         red: "#ff0000",
       },
       fontFamily: {
-        sans: "Instrument Sans, sans-serif",
-        nunito: "var(--font-nunito)",
+        sans: "'Roboto', sans-serif",
       },
     },
   },

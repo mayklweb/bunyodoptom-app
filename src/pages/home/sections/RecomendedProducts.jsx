@@ -1,9 +1,8 @@
-// import { ProductCard } from "@/app/components";
-// import ProductModal from "@/app/components/ProductModal/ProductModal";
-// import { useProductModal } from "@/app/shared/lib/hooks/useProductModal";
-// import { useProducts } from "@/app/shared/lib/hooks/useProducts";
-// import { useShuffledProducts } from "@/app/shared/lib/hooks/useShuffledProducts";
-// import { ProductsType } from "@/app/types";
+import { useProducts } from "../../../features/product/hooks/useProducts";
+import { useShuffledProducts } from "../../../features/product/hooks/useShuffledProducts";
+import ProductCard from "../../../features/product/ui/ProductCard";
+// import ProductModal from "../../../features/product/ui/ProductModal";
+// import { useProductModal } from "../../../features/product/model/useProductModal";
 
 function RecomendedProductsSkeleton() {
   return (
@@ -60,7 +59,7 @@ function RecomendedProducts() {
   const filtred = normalizeProducts(products)
   const recomendedProduct = useShuffledProducts(filtred, 20);
 
-  const { selectedProduct, openModal, closeModal } = useProductModal();
+  // const { selectedProduct, openModal, closeModal } = useProductModal();
 
   if (isLoading) return <RecomendedProductsSkeleton />;
   if (isError) return <div>Error</div>;
@@ -74,7 +73,7 @@ function RecomendedProducts() {
               Trenddagi mahsulotlar
             </h1>
           </div>
-          <div className="mt-6 mb-10 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
+          <div className="mt-6 mb-10 grid grid-cols-2 md:grid-cols-3 gap-4">
             {recomendedProduct.map((product, i) => (
               <ProductCard
                 key={i}
@@ -85,7 +84,7 @@ function RecomendedProducts() {
           </div>
         </div>
       </div>
-      <ProductModal product={selectedProduct} onClose={closeModal} />
+      {/* <ProductModal product={selectedProduct} onClose={closeModal} /> */}
     </section>
   );
 }

@@ -1,12 +1,13 @@
-import { Brands, Categories, FavoriteProducts, HeroBanner } from "./sections";
+import { Brands, Categories, FavoriteProducts, HeroBanner, RecomendedProducts } from "./sections";
 
 function Home() {
   return (
     <div>
       <HeroBanner />
       <Categories />
-      <Brands />
       <FavoriteProducts />
+      <Brands />
+      <RecomendedProducts />
     </div>
   );
 }
