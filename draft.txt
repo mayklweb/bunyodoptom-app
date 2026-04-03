@@ -1,0 +1,132 @@
+src/
+├── app/                          # global app layer
+│   ├── providers/                # global providers
+│   │   ├── QueryProvider.jsx
+│   │   └── index.js
+│   │
+│   ├── router/                   # routing
+│   │   ├── router.jsx
+│   │   └── routes.js
+│   │
+│   └── store/                    # global state (zustand)
+│       ├── useAuthStore.js
+│       └── useUIStore.js
+│
+├── pages/                        # route-level pages
+│   ├── home/
+│   │   └── HomePage.jsx
+│   │
+│   ├── product/
+│   │   ├── ProductPage.jsx
+│   │   └── ProductDetails.jsx
+│   │
+│   ├── cart/
+│   │   └── CartPage.jsx
+│   │
+│   ├── checkout/
+│   │   └── CheckoutPage.jsx
+│   │
+│   ├── auth/
+│   │   ├── LoginPage.jsx
+│   │   └── RegisterPage.jsx
+│   │
+│   └── profile/
+│       └── ProfilePage.jsx
+│
+├── widgets/                      # katta UI bloklar
+│   ├── header/
+│   │   ├── Header.jsx
+│   │   └── NavLinks.jsx
+│   │
+│   ├── footer/
+│   │   └── Footer.jsx
+│   │
+│   ├── product-list/
+│   │   ├── ProductList.jsx
+│   │   └── ProductGrid.jsx
+│   │
+│   ├── filters/
+│   │   └── FiltersSidebar.jsx
+│   │
+│   └── cart/
+│       └── CartSidebar.jsx
+│
+├── features/                     # BUSINESS LOGIC 🔥
+│   ├── auth/
+│   │   ├── api/
+│   │   │   └── authApi.js
+│   │   ├── model/
+│   │   │   └── useAuthStore.js
+│   │   └── ui/
+│   │       ├── LoginForm.jsx
+│   │       └── RegisterForm.jsx
+│   │
+│   ├── product/
+│   │   ├── api/
+│   │   │   └── productApi.js
+│   │   ├── hooks/
+│   │   │   └── useProducts.js
+│   │   └── ui/
+│   │       ├── ProductCard.jsx
+│   │       └── ProductInfo.jsx
+│   │
+│   ├── cart/
+│   │   ├── model/
+│   │   │   └── useCartStore.js
+│   │   └── ui/
+│   │       ├── AddToCartButton.jsx
+│   │       └── CartItem.jsx
+│   │
+│   ├── order/
+│   │   ├── api/
+│   │   │   └── orderApi.js
+│   │   └── ui/
+│   │       └── OrderSummary.jsx
+│   │
+│   └── filter/
+│       ├── model/
+│       │   └── useFilterStore.js
+│       └── ui/
+│           └── FilterControls.jsx
+│
+├── entities/                     # DOMAIN MODELS
+│   ├── product/
+│   │   ├── types.js
+│   │   └── helpers.js
+│   │
+│   ├── user/
+│   │   └── types.js
+│   │
+│   └── order/
+│       └── types.js
+│
+├── shared/                       # REUSABLE 🔁
+│   ├── api/
+│   │   ├── client.js             # axios instance
+│   │   └── endpoints.js
+│   │
+│   ├── hooks/
+│   │   └── useDebounce.js
+│   │
+│   ├── ui/
+│   │   ├── Button.jsx
+│   │   ├── Input.jsx
+│   │   ├── Modal.jsx
+│   │   └── Loader.jsx
+│   │
+│   ├── lib/
+│   │   ├── formatPrice.js
+│   │   └── storage.js
+│   │
+│   └── config/
+│       └── constants.js
+│
+├── assets/                       # static files
+│   ├── images/
+│   └── icons/
+│
+├── styles/
+│   └── globals.css
+│
+├── main.jsx
+└── App.jsx
