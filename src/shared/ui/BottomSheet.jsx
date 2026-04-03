@@ -31,7 +31,7 @@ function BottomSheet({ title, open, onClose, children }) {
           borderRadius: "16px 16px 0 0",
           transform: open ? "translateY(0)" : "translateY(100%)",
           transition: "transform 0.35s ease",
-          maxHeight: "92svh",
+          maxHeight: "90svh",
           height: "100%",
           display: "flex",
           flexDirection: "column",

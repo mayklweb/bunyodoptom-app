@@ -114,7 +114,7 @@ export default function ProfilePage() {
           <div>
             <div className="mt-20">
               <div className="flex flex-col gap-3">
-                <div className="bg-white/10 rounded-[14px] border border-secondary py-[14px] px-4 flex items-center gap-3">
+                <div className="bg-white/10 rounded-[14px] border border-primary py-[14px] px-4 flex items-center gap-3">
                   <div
                     style={{
                       width: 48,
