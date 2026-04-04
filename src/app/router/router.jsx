@@ -4,19 +4,21 @@ import { Routes, Route, Navigate } from "react-router-dom";
 import ProtectedRoute from "../../shared/ui/ProtectedRoute";
 import HomePage from "../../pages/home/HomePage";
 import ProfilePage from "../../pages/profile/ProfilePage";
+import LoginPage from "../../pages/login/LoginPage";
 
 export default function Router() {
   return (
     <Routes>
       <Route path="/" element={<HomePage />} />
+      <Route path="/login" element={<LoginPage />} />
 
       {/* Protected routes */}
       <Route
         path="/profile"
         element={
-          // <ProtectedRoute>
+          <ProtectedRoute>
             <ProfilePage />
-          // </ProtectedRoute>
+          </ProtectedRoute>
         }
       />
 

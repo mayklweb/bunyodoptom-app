@@ -37,40 +37,42 @@ function BottomSheet({ title, open, onClose, children }) {
           flexDirection: "column",
         }}
       >
-        {/* Header */}
-        <div
-          style={{
-            padding: "12px 16px 10px",
-            borderBottom: "0.5px solid rgba(0,0,0,0.1)",
-            display: "flex",
-            alignItems: "center",
-            gap: 10,
-            flexShrink: 0,
-          }}
-        >
-          <button
-            onClick={onClose}
+        <div className="container">
+          {/* Header */}
+          <div
             style={{
-              width: 32,
-              height: 32,
-              border: "none",
-              background: "none",
+              padding: "12px 16px 10px",
+              borderBottom: "0.5px solid rgba(0,0,0,0.1)",
               display: "flex",
               alignItems: "center",
-              justifyContent: "center",
-              borderRadius: 8,
-              color: "#666",
-              cursor: "pointer",
+              gap: 10,
+              flexShrink: 0,
             }}
           >
-            <CloseIcon/>
-          </button>
-          <span style={{ fontSize: 20, fontWeight: 500 }}>{title}</span>
-        </div>
+            <button
+              onClick={onClose}
+              style={{
+                width: 32,
+                height: 32,
+                border: "none",
+                background: "none",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                borderRadius: 8,
+                color: "#666",
+                cursor: "pointer",
+              }}
+            >
+              <CloseIcon />
+            </button>
+            <span style={{ fontSize: 20, fontWeight: 500 }}>{title}</span>
+          </div>
 
-        {/* Content */}
-        <div style={{ flex: 1, overflowY: "auto", padding: 16 }}>
-          {children}
+          {/* Content */}
+          <div style={{ flex: 1, overflowY: "auto", padding: 16 }}>
+            {children}
+          </div>
         </div>
       </div>
     </>
