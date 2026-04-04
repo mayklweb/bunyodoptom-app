@@ -1,7 +1,7 @@
-import { Order, OrderStatus } from "@/app/types";
-import { CartIcon, CloseIcon, EyeIcon, LocationIcon } from "@/app/shared/icons";
 import { useState } from "react";
-import { useOrders, useCancelOrder } from "@/app/shared/lib/hooks/useOrders";
+import { CartIcon, CloseIcon, EyeIcon, LocationIcon } from "../../../../assets/icons";
+import { useCancelOrder, useOrders } from "../../../order/hooks/useOrder";
+// import { useOrders, useCancelOrder } from "@/app/shared/lib/hooks/useOrders";
 
 // ── Status config keyed to real OrderStatus values ────────────────────────────
 const STATUS = {
@@ -90,7 +90,7 @@ function OrdersSkeleton() {
 export function Orders() {
   const { data: orders, isLoading, isError, refetch } = useOrders();
   const { mutate: cancelOrder, isPending: isCancelling } = useCancelOrder();
-  const [selectedOrder, setSelectedOrder] = (useState < Order) | (null > null);
+  const [selectedOrder, setSelectedOrder] = useState(null);
 
   console.log(orders);
 

@@ -1,6 +1,9 @@
-import { ProductCard } from "@/app/components";
-import { products } from "@/app/profile/model/constants/constants";
-import { useFavoritesStore } from "@/app/store/favoritesStore";
+// import { ProductCard } from "@/app/components";
+// import { products } from "@/app/profile/model/constants/constants";
+// import { useFavoritesStore } from "@/app/store/favoritesStore";
+
+import { useFavoritesStore } from "../../../../shared/lib/favorites";
+import ProductCard from "../../../product/ui/ProductCard";
 
 export function Favorites() {
   const { favorites, clearFavorites } = useFavoritesStore();

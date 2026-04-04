@@ -1,10 +1,12 @@
-import {
-  DeliveryIcon,
-  FavoriteIcon,
-  FileIcon,
-  LocationIcon,
-  MarketIcon,
-} from "@/app/shared/icons";
+// import {
+//   DeliveryIcon,
+//   FavoriteIcon,
+//   FileIcon,
+//   LocationIcon,
+//   MarketIcon,
+// } from "@/app/shared/icons";
+
+import { DeliveryIcon, FavoriteIcon, FileIcon, LocationIcon, MarketIcon } from "../../assets/icons";
 
 
 export const ROUTES = {

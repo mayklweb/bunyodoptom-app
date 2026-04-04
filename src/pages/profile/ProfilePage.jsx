@@ -8,6 +8,10 @@ import {
   LocationIcon,
   MarketIcon,
 } from "../../assets/icons";
+import { Orders } from "../../features/profile/ui/sections/Order";
+import { Addresses } from "../../features/profile/ui/sections/Addresses";
+import { Favorites } from "../../features/profile/ui/sections/Fovarite";
+import { Market } from "../../features/profile/ui/sections/Market";
 
 const NAV_ITEMS = [
   { key: "personal", label: "Shaxsiy ma'lumotlar", icon: <FileIcon /> },
@@ -46,10 +50,10 @@ function PlaceholderSection({ title, icon }) {
 
 const SECTION_MAP = {
   personal: null, // rendered separately so it receives props
-  orders: <PlaceholderSection title="Buyurtmalar" icon={<DeliveryIcon />} />,
-  addresses: <PlaceholderSection title="Manzillar" icon={<LocationIcon />} />,
-  favorites: <PlaceholderSection title="Sevimlilar" icon={<FavoriteIcon />} />,
-  shop: <PlaceholderSection title="Do'kon" icon={<MarketIcon />} />,
+  orders: <Orders />,
+  addresses: <Addresses title="Manzillar" icon={<LocationIcon />} />,
+  favorites: <Favorites title="Sevimlilar" icon={<FavoriteIcon />} />,
+  shop: <Market title="Do'kon" icon={<MarketIcon />} />,
 };
 
 // ── Sidebar ────────────────────────────────────────────────────────────────

@@ -1,31 +1,24 @@
-"use client";
-
 import { useState } from "react";
-import { DISTRICTS } from "@/app/profile/model/constants/constants";
+import { DISTRICTS } from "../../../../shared/config/constants";
+import { DeleteIcon, EditIcon, LocationIcon, MarketIcon } from "../../../../assets/icons";
 import {
-  EditIcon,
-  LocationIcon,
-  MarketIcon,
-  DeleteIcon,
-} from "@/app/shared/icons";
-import {
-  useCreateMarket,
+  useAddMarket,
   useDeleteMarket,
+  useEditMarket,
   useMarkets,
-  useUpdateMarket,
-} from "@/app/shared/lib/hooks/useMarket";
+} from "../../../markets/hooks/useMarkets";
 
 const empty = { name: "", district: "", address: "" };
 
 export function Market() {
   const { data: markets, isLoading } = useMarkets();
-  const { mutate: createMarket, isPending: creating } = useCreateMarket();
-  const { mutate: updateMarket, isPending: updating } = useUpdateMarket();
+  const { mutate: createMarket, isPending: creating } = useAddMarket();
+  const { mutate: updateMarket, isPending: updating } = useEditMarket();
   const { mutate: deleteMarket, isPending: deleting } = useDeleteMarket();
 
   const [isEditing, setIsEditing] = useState(false);
   const [confirmDelete, setConfirmDelete] = useState(false);
-  const [draft, setDraft] = useState < FormState > empty;
+  const [draft, setDraft] = useState(empty);
 
   const shop = markets?.[0];
   const isEmpty = !shop;
