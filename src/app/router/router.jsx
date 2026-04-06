@@ -7,6 +7,7 @@ import ProfilePage from "../../pages/profile/ProfilePage";
 import LoginPage from "../../pages/login/LoginPage";
 import MainLayout from "../../layouts/MainLayout";
 import AuthLayout from "../../layouts/AuthLayout";
+import SignupPage from "../../pages/signup/SignUpPage";
 
 export default function Router() {
   return (
@@ -27,6 +28,7 @@ export default function Router() {
       {/* 🔥 AUTH LAYOUT */}
       <Route element={<AuthLayout />}>
         <Route path="/login" element={<LoginPage />} />
+        <Route path="/signup" element={<SignupPage />} />
       </Route>
 
       {/* Catch all */}
