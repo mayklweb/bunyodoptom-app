@@ -1,6 +1,7 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useCartStore } from "../../app/store/useCartStore";
 import { CloseIcon } from "../../assets/icons";
+import { motion, AnimatePresence } from "framer-motion";
 
 function ProductBottomSheet({ product, open, onClose }) {
   const addToCart = useCartStore((s) => s.addToCart);
@@ -36,149 +37,148 @@ function ProductBottomSheet({ product, open, onClose }) {
 
   return (
     <>
-      {/* Backdrop */}
-      <div
-        onClick={onClose}
-        style={{
-          position: "fixed",
-          inset: 0,
-          background: "rgba(0,0,0,0.4)",
-          zIndex: 40,
-          opacity: open ? 1 : 0,
-          transition: "opacity 0.35s ease",
-          pointerEvents: open ? "auto" : "none",
-        }}
-      />
+      <AnimatePresence>
+        {/* Backdrop */}
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          transition={{ duration: 0.3 }}
+          className="fixed inset-0 z-50 bg-black/50"
+          onClick={onClose}
+        />
 
-      {/* Sheet */}
-      <div
-        onClick={(e) => e.stopPropagation()} // 🔥 prevent close
-        style={{
-          position: "fixed",
-          left: 0,
-          bottom: 0,
-          zIndex: 50,
-          width: "100%",
-          background: "#fff",
-          borderRadius: "16px 16px 0px 0px",
-          transform: open ? "translateY(0)" : "translateY(100%)",
-          transition: "transform 0.45s cubic-bezier(0.22, 1, 0.36, 1)",
-          height: "90svh",
-          display: "flex",
-          flexDirection: "column",
-          overflow: "hidden",
-        }}
-      >
-        {/* <div className="container"> */}
-        {/* Header */}
-        <div className="relative overflow-y-auto">
-          <button
-            className="absolute top-5 right-5 bg-white rounded-full p-1 shadow-md"
-            onClick={onClose}
-          >
-            <CloseIcon className="w-5 h-5" />
-          </button>
+        {/* Sheet */}
+        <motion.div
+          initial={{ y: "100%" }}
+          animate={{ y: 0 }}
+          exit={{ y: "100%" }}
+          transition={{
+            type: "spring",
+            stiffness: 180,
+            damping: 25,
+          }}
+          drag="y"
+          dragConstraints={{ top: 0, bottom: 0 }}
+          dragElastic={{ top: 0, bottom: 0.5 }}
+          onDragEnd={(e, { offset, velocity }) => {
+            if (offset.y > 150 || velocity.y > 500) {
+              onClose();
+            }
+          }}
+          className="fixed bottom-0 left-0 right-0 z-50 bg-white rounded-t-3xl shadow-2xl max-h-[90vh] overflow-hidden md:max-w-2xl md:left-1/2 md:-translate-x-1/2"
+        >
+          {/* <div className="container"> */}
+          {/* Header */}
+          <div className="relative overflow-y-auto">
+            <button
+              className="absolute top-5 right-5 bg-white rounded-full p-1 shadow-md"
+              onClick={onClose}
+            >
+              <CloseIcon className="w-5 h-5" />
+            </button>
 
-          {/* Content */}
-          <div className="overflow-hidden flex-1">
-            <img
-              src={imageUrl}
-              alt={product.name}
-              className="w-full object-contain bg-gray-100"
-            />
+            {/* Content */}
+            <div className="overflow-hidden flex-1">
+              <img
+                src={imageUrl}
+                alt={product.name}
+                className="w-full object-contain bg-gray-100"
+              />
 
-            <div className="p-4">
-              <h2 className="text-xl font-bold mb-3">{product.name}</h2>
+              <div className="p-4">
+                <h2 className="text-xl font-bold mb-3">{product.name}</h2>
 
-              {/* Price */}
-              <div className="mb-4">
-                <span className="text-2xl font-bold">
-                  {Number(product.price).toLocaleString()}
-                </span>{" "}
-                so'm
+                {/* Price */}
+                <div className="mb-4">
+                  <span className="text-2xl font-bold">
+                    {Number(product.price).toLocaleString()}
+                  </span>{" "}
+                  so'm
+                </div>
+
+                {/* Stock */}
+                {product.stock_qty > 0 ? (
+                  <div className="text-green-600 text-sm mb-3">
+                    {product.stock_qty} ta mavjud
+                  </div>
+                ) : (
+                  <div className="text-red-500 text-sm mb-3">Tugagan</div>
+                )}
+
+                {/* Extra prices */}
+                {(product.kg_price || product.piece_price) && (
+                  <div className="bg-gray-100 p-3 rounded mb-4 text-sm">
+                    {product.kg_price && (
+                      <div className="flex justify-between">
+                        <span>Kg narxi:</span>
+                        <span>{product.kg_price.toLocaleString()} so'm</span>
+                      </div>
+                    )}
+
+                    {product.piece_price && (
+                      <div className="flex justify-between">
+                        <span>Dona narxi:</span>
+                        <span>{product.piece_price.toLocaleString()} so'm</span>
+                      </div>
+                    )}
+                  </div>
+                )}
+
+                {/* Description */}
+                {product.description && (
+                  <p className="text-gray-500 text-sm">{product.description}</p>
+                )}
               </div>
+            </div>
 
-              {/* Stock */}
+            {/* 🔥 Bottom Action */}
+            <div
+              style={{
+                padding: "12px 16px",
+                borderTop: "1px solid #eee",
+                background: "#fff",
+              }}
+            >
               {product.stock_qty > 0 ? (
-                <div className="text-green-600 text-sm mb-3">
-                  {product.stock_qty} ta mavjud
-                </div>
+                <button
+                  onClick={() =>
+                    addToCart({
+                      id: product.id,
+                      price: product.price,
+                      stock_qty: product.stock_qty,
+                    })
+                  }
+                  style={{
+                    width: "100%",
+                    padding: "14px",
+                    borderRadius: "12px",
+                    background: "#2e3192",
+                    color: "#fff",
+                    fontWeight: 600,
+                  }}
+                >
+                  {qty > 0 ? `${qty} ta savatda` : "Savatga qo‘shish"}
+                </button>
               ) : (
-                <div className="text-red-500 text-sm mb-3">Tugagan</div>
-              )}
-
-              {/* Extra prices */}
-              {(product.kg_price || product.piece_price) && (
-                <div className="bg-gray-100 p-3 rounded mb-4 text-sm">
-                  {product.kg_price && (
-                    <div className="flex justify-between">
-                      <span>Kg narxi:</span>
-                      <span>{product.kg_price.toLocaleString()} so'm</span>
-                    </div>
-                  )}
-
-                  {product.piece_price && (
-                    <div className="flex justify-between">
-                      <span>Dona narxi:</span>
-                      <span>{product.piece_price.toLocaleString()} so'm</span>
-                    </div>
-                  )}
-                </div>
-              )}
-
-              {/* Description */}
-              {product.description && (
-                <p className="text-gray-500 text-sm">{product.description}</p>
+                <button
+                  disabled
+                  style={{
+                    width: "100%",
+                    padding: "14px",
+                    borderRadius: "12px",
+                    background: "#ccc",
+                    color: "#666",
+                  }}
+                >
+                  Tugagan
+                </button>
               )}
             </div>
           </div>
-
-          {/* 🔥 Bottom Action */}
-          <div
-            style={{
-              padding: "12px 16px",
-              borderTop: "1px solid #eee",
-              background: "#fff",
-            }}
-          >
-            {product.stock_qty > 0 ? (
-              <button
-                onClick={() =>
-                  addToCart({
-                    id: product.id,
-                    price: product.price,
-                    stock_qty: product.stock_qty,
-                  })
-                }
-                style={{
-                  width: "100%",
-                  padding: "14px",
-                  borderRadius: "12px",
-                  background: "#2e3192",
-                  color: "#fff",
-                  fontWeight: 600,
-                }}
-              >
-                {qty > 0 ? `${qty} ta savatda` : "Savatga qo‘shish"}
-              </button>
-            ) : (
-              <button
-                disabled
-                style={{
-                  width: "100%",
-                  padding: "14px",
-                  borderRadius: "12px",
-                  background: "#ccc",
-                  color: "#666",
-                }}
-              >
-                Tugagan
-              </button>
-            )}
-          </div>
-        </div>
-        {/* </div> */}
-      </div>
+          {/* </div> */}
+        </motion.div>
+      </AnimatePresence>
     </>
   );
 }
