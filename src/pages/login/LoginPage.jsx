@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 import { useLogin } from "../../features/auth/hooks/useAuthUser";
 
 function LoginPage() {
-  const router = useNavigate();
+  const navigate = useNavigate();
   const { mutate: login, isPending, isError, error } = useLogin();
 
   const {
@@ -18,7 +18,7 @@ function LoginPage() {
   const onSubmit = (data) => {
     login(data, {
       onSuccess: () => {
-        router("/profile", { replace: true });
+        navigate("/profile", { replace: true });
       },
     });
   };
@@ -29,7 +29,7 @@ function LoginPage() {
         {/* Back button */}
         <button
           type="button"
-          onClick={() => router.back()}
+          onClick={() => navigate('/')}
           className="flex items-center gap-1 text-base font-semibold text-gray-900 fixed top-10 left-5"
         >
           <LeftArrowIcon />
@@ -156,7 +156,7 @@ function LoginPage() {
               Hisobingiz yo'qmi?{" "}
               <button
                 type="button"
-                onClick={() => router.push("/signup")}
+                onClick={() => navigate("/signup")}
                 className="text-primary font-semibold hover:underline"
               >
                 Ro'yxatdan o'tish

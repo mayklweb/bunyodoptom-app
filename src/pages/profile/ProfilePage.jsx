@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef, useCallback } from "react";
+import { useState, useCallback } from "react";
 import BottomSheet from "../../shared/ui/BottomSheet";
 import PersonalInfo from "../../features/profile/ui/sections/PersonalInfo";
 import {

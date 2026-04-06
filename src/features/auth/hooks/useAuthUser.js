@@ -49,9 +49,14 @@ export function useSignup() {
 
 // 👤 GET PROFILE
 export function useProfile() {
+
+  const token = useAuthStore((s) => s.token);
+
   return useQuery({
     queryKey: ["user"],
     queryFn: authApi.getProfile,
+    enabled: !!token, // 🔥 MUHIM
+    retry: false,
     staleTime: 1000 * 60 * 5,
   });
 }
