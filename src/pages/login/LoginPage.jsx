@@ -30,7 +30,7 @@ function LoginPage() {
         <button
           type="button"
           onClick={() => navigate("/")}
-          className="flex items-center gap-1 text-base font-semibold text-gray-900 fixed top-10 left-5"
+          className="flex items-center gap-1 text-base font-semibold text-gray-900 absolute top-10 left-5"
         >
           <LeftArrowIcon />
           <span>Orqaga</span>
