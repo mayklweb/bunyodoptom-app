@@ -76,3 +76,11 @@ export const STATUS_CONFIG = {
   },
 };
 
+export const queryKeys = {
+  user: ["auth", "user"],
+  cart: ["cart"],
+  orders: ["orders"],
+  order: (id) => ["orders", id],
+  addresses: ["addresses"],
+  market: ["market"],
+};

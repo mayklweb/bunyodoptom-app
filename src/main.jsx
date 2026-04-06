@@ -12,9 +12,7 @@ ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
     <Providers>
       <BrowserRouter>
-        <Header />
         <Router />
-        <Footer/>
       </BrowserRouter>
     </Providers>
   </React.StrictMode>,

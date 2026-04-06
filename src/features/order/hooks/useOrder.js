@@ -1,9 +1,5 @@
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
-import {
-  fetchOrdersApi,
-  fetchOrderByIdApi,
-  cancelOrderApi,
-} from "../api/orderApi";
+
 
 export const orderKeys = {
   all: ["orders"],
@@ -14,7 +10,7 @@ export const orderKeys = {
 export function useOrders() {
   return useQuery({
     queryKey: orderKeys.all,
-    queryFn: fetchOrdersApi,
+    queryFn: ordersApi.fetchAll,
   });
 }
 
@@ -22,7 +18,7 @@ export function useOrders() {
 export function useOrder(id) {
   return useQuery({
     queryKey: orderKeys.one(id),
-    queryFn: () => fetchOrderByIdApi(id),
+    queryFn: () => ordersApi.fetchById(id),
     enabled: !!id,
   });
 }
@@ -32,7 +28,7 @@ export function useCancelOrder() {
   const queryClient = useQueryClient();
 
   return useMutation({
-    mutationFn: cancelOrderApi,
+    mutationFn: (id) => ordersApi.cancel(id),
 
     onSuccess: (_, id) => {
       queryClient.setQueryData(orderKeys.all, (old) =>

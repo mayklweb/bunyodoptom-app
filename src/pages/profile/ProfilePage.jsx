@@ -12,6 +12,7 @@ import { Orders } from "../../features/profile/ui/sections/Order";
 import { Addresses } from "../../features/profile/ui/sections/Addresses";
 import { Favorites } from "../../features/profile/ui/sections/Fovarite";
 import { Market } from "../../features/profile/ui/sections/Market";
+import { useLogout } from "../../features/auth/hooks/useAuthUser";
 
 const NAV_ITEMS = [
   { key: "personal", label: "Shaxsiy ma'lumotlar", icon: <FileIcon /> },
@@ -66,14 +67,8 @@ export default function ProfilePage() {
   const [active, setActive] = useState("personal");
   const [sheetNav, setSheetNav] = useState(null);
   const [sheetOpen, setSheetOpen] = useState(false);
-  const [isMobile, setIsMobile] = useState(window.innerWidth < 1024);
-  const [loggingOut, setLoggingOut] = useState(false);
 
-  // useEffect(() => {
-  //   const check = () => setIsMobile(window.innerWidth < 1024);
-  //   window.addEventListener("resize", check);
-  //   return () => window.removeEventListener("resize", check);
-  // }, []);
+  const logout = useLogout();
 
   const handleNav = useCallback((key) => {
     setActive(key);
@@ -92,18 +87,9 @@ export default function ProfilePage() {
     }, 380);
   };
 
-  const handleLogout = () => {
-    setLoggingOut(true);
-    // Replace with your real logout call
-    setTimeout(() => {
-      setLoggingOut(false);
-      alert("Logged out!");
-    }, 1000);
-  };
-
   const renderSection = (key) => {
     if (key === "personal")
-      return <PersonalInfo onLogout={handleLogout} loggingOut={loggingOut} />;
+      return <PersonalInfo />;
     return SECTION_MAP[key];
   };
 
@@ -160,11 +146,10 @@ export default function ProfilePage() {
                 ))}
 
                 <button
-                  onClick={handleLogout}
-                  disabled={loggingOut}
+                  onClick={logout}
                   className="text-base text-red mt-6 p-3.5 font-medium rounded-[14px] bg-red/10 border border-red/40"
                 >
-                  {loggingOut ? "Chiqilmoqda..." : "Hisobdan chiqish"}
+                  Hisobdan chiqish
                 </button>
               </div>
 

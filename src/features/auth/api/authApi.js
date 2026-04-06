@@ -1,9 +1,32 @@
 import { api } from "../../../shared/api/client";
 
-export const loginApi = (data) => api.post("/login", data);
-export const registerApi = (data) => api.post("/register", data);
+export const authApi = {
+  login: async (creds) => {
+    const { data } = await api.post("/users/login", creds);
+    return {
+      user: data.data,
+      token: data.token,
+    };
+  },
 
-export const fetchProfileApi = async () => {
-  const { data } = await api.get("/users/me");
-  return data.data; // backend structurega qarab
+  signup: async (payload) => {
+    const { data } = await api.post("/users/signup", payload);
+    return {
+      user: data.data,
+      token: data.token,
+    };
+  },
+
+  logout: async () => {
+  },
+
+  getProfile: async () => {
+    const { data } = await api.get("/users/me");
+    return data.data;
+  },
+
+  updateProfile: async (payload) => {
+    const { data } = await api.put("/users/me", payload);
+    return data.data;
+  },
 };

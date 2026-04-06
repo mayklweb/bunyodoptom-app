@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import ProfileField from "../ProfileField";
+import { useLogout } from "../../../auth/hooks/useAuthUser";
 
 const MOCK_USER = {
   name: "Alisher Toshmatov",
@@ -7,13 +8,13 @@ const MOCK_USER = {
   id: "USR-0042",
 };
 
-
-function PersonalInfo({ onLogout, loggingOut }) {
+function PersonalInfo({}) {
   const [fields, setFields] = useState({
     name: MOCK_USER.name,
     phone: MOCK_USER.phone,
     id: MOCK_USER.id,
   });
+  const logout = useLogout();
   const [draft, setDraft] = useState({ ...fields });
   const [editing, setEditing] = useState(null);
   const [saving, setSaving] = useState(false);
@@ -46,10 +47,6 @@ function PersonalInfo({ onLogout, loggingOut }) {
 
   return (
     <div style={{ display: "flex", flexDirection: "column", gap: 10 }}>
-      <h2 style={{ fontSize: 20, fontWeight: 500, marginBottom: 4 }}>
-        Shaxsiy ma'lumotlar
-      </h2>
-
       {fieldConfig.map(({ key, label, disabled }) => (
         <ProfileField
           key={key}
@@ -71,22 +68,10 @@ function PersonalInfo({ onLogout, loggingOut }) {
       ))}
 
       <button
-        onClick={onLogout}
-        disabled={loggingOut}
-        style={{
-          marginTop: 6,
-          padding: 12,
-          borderRadius: 12,
-          border: "0.5px solid rgba(220,50,50,0.35)",
-          background: "none",
-          color: "#c0392b",
-          fontSize: 14,
-          fontWeight: 500,
-          opacity: loggingOut ? 0.5 : 1,
-          cursor: "pointer",
-        }}
+        onClick={logout}
+        className="text-base text-red mt-6 p-3.5 font-medium rounded-[14px] bg-red/10 border border-red/40"
       >
-        {loggingOut ? "Chiqilmoqda..." : "Hisobdan chiqish"}
+        Hisobdan chiqish
       </button>
     </div>
   );
