@@ -29,7 +29,7 @@ function LoginPage() {
         {/* Back button */}
         <button
           type="button"
-          onClick={() => navigate('/')}
+          onClick={() => navigate("/")}
           className="flex items-center gap-1 text-base font-semibold text-gray-900 fixed top-10 left-5"
         >
           <LeftArrowIcon />
@@ -75,22 +75,20 @@ function LoginPage() {
                     focus:ring-2 focus:ring-primary/30 focus:border-primary
                     ${
                       errors.phone
-                        ? "border-red-400 bg-red-50"
-                        : "border-gray-200 bg-gray-50 hover:border-gray-300"
+                        ? "border-red"
+                        : "border-zinc-700 bg-zinc-50-50 hover:border-primary/30"
                     }`}
                   />
                 )}
               />
               {errors.phone && (
-                <p className="text-xs text-red-500 mt-1">
-                  {errors.phone.message}
-                </p>
+                <p className="text-xs text-red mt-1">{errors.phone.message}</p>
               )}
             </div>
 
             {/* Password */}
             <div className="space-y-1.5">
-              <label className="block text-sm font-medium text-gray-700">
+              <label className="block text-sm font-medium text-zinc-800">
                 Parol
               </label>
               <input
@@ -100,8 +98,8 @@ function LoginPage() {
                 focus:ring-2 focus:ring-primary/30 focus:border-primary
                 ${
                   errors.password
-                    ? "border-red-400 bg-red-50"
-                    : "border-gray-200 bg-gray-50 hover:border-gray-300"
+                    ? "border-red"
+                    : "border-zinc-700 bg-zinc-50-50 hover:border-primary/30"
                 }`}
                 {...register("password", {
                   required: "Parol kiritilishi shart",
@@ -109,7 +107,7 @@ function LoginPage() {
                 })}
               />
               {errors.password && (
-                <p className="text-xs text-red-500 mt-1">
+                <p className="text-xs text-red mt-1">
                   {errors.password.message}
                 </p>
               )}
