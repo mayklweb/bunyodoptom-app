@@ -4,7 +4,7 @@ import { CheckIcon } from "../../assets/icons";
 function SelectAllToggle({ isAllSelected, selectedCount, onToggle }) {
   return (
     <div
-      className="flex items-center gap-3 cursor-pointer select-none bg-primary/10 p-4 rounded-xl"
+      className="flex items-center gap-3 cursor-pointer select-none bg-secondary/50 p-4 rounded-xl"
       onClick={onToggle}
     >
       <div
