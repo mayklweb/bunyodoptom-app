@@ -7,7 +7,7 @@ import ProfilePage from "../../pages/profile/ProfilePage";
 import LoginPage from "../../pages/login/LoginPage";
 import MainLayout from "../../layouts/MainLayout";
 import AuthLayout from "../../layouts/AuthLayout";
-import SignupPage from "../../pages/signup/SignUpPage";
+import SignupPage from "../../pages/signup/SignupPage";
 
 export default function Router() {
   return (
