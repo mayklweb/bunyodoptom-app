@@ -11,7 +11,6 @@ import { useProfile } from "../../features/auth/hooks/useAuthUser";
 import { useMarkets } from "../../features/markets/hooks/useMarkets";
 import { useAddresses } from "../../features/addresses/hooks/useAddresses";
 
-
 function CartPage() {
   const {
     cart,
@@ -31,16 +30,13 @@ function CartPage() {
   // const navigate = Navigate();
 
   console.log(cart);
-  
 
   const { data: user } = useProfile();
   const { data: addresses } = useAddresses();
   // const { mutate: checkout, isPending } = useCheckout();
   const { hasMarket, myMarket, isLoading } = useMarkets();
 
-  const [selectedAddressId, setSelectedAddressId] = useState(
-    null,
-  );
+  const [selectedAddressId, setSelectedAddressId] = useState(null);
   const [paymentMethod, setPaymentMethod] = useState("cash");
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [showMarketModal, setShowMarketModal] = useState(false);
@@ -154,44 +150,45 @@ function CartPage() {
 
   return (
     <>
-      <div className="w-full h-full flex flex-col mt-24">
-        <CartHeader />
+      <div className="container">
+        <div className="w-full h-full flex flex-col mt-24">
+          <CartHeader />
 
-        {cart.length === 0 ? (
-          <EmptyCart />
-        ) : (
-          <div className="flex flex-col lg:flex-row items-start gap-5">
-            {/* Cart items section */}
-            <div className="w-full lg:w-7/10 flex flex-col gap-5">
-              <SelectAllToggle
-                isAllSelected={allSelected()}
-                selectedCount={selectedItems().length}
-                onToggle={toggleAll}
-              />
+          {cart.length === 0 ? (
+            <EmptyCart />
+          ) : (
+            <div className="flex flex-col lg:flex-row items-start gap-5">
+              {/* Cart items section */}
+              <div className="w-full lg:w-7/10 flex flex-col gap-5">
+                <SelectAllToggle
+                  isAllSelected={allSelected()}
+                  selectedCount={selectedItems().length}
+                  onToggle={toggleAll}
+                />
 
-              <div className="flex flex-col gap-3">
-                {cart.map((item) => (
-                  <CartItemCard
-                    key={item.id}
-                    item={item}
-                    isSelected={selectedIds.includes(item.id)}
-                    onToggle={toggleItem}
-                    onChangeQty={changeQty}
-                    onRemove={remove}
-                  />
-                ))}
+                <div className="flex flex-col gap-3">
+                  {cart.map((item) => (
+                    <CartItemCard
+                      key={item.id}
+                      item={item}
+                      isSelected={selectedIds.includes(item.id)}
+                      onToggle={toggleItem}
+                      onChangeQty={changeQty}
+                      onRemove={remove}
+                    />
+                  ))}
+                </div>
               </div>
-            </div>
 
-            {/* Mobile bottom bar */}
-            {/* <MobileBottomBar
+              {/* Mobile bottom bar */}
+              {/* <MobileBottomBar
               totalCount={totalCount()}
               total={total()}
               selectedCount={selectedItems().length}
               onCheckout={() => setIsModalOpen(true)}
             /> */}
 
-            {/* Mobile checkout modal
+              {/* Mobile checkout modal
             <CheckoutModal
               isOpen={isModalOpen}
               onClose={() => setIsModalOpen(false)}
@@ -207,16 +204,17 @@ function CartPage() {
               isPending={isPending}
               onCheckout={handleCheckout}
             /> */}
-          </div>
+            </div>
+          )}
+        </div>
+
+        {showMarketModal && (
+          <MarketRegisterModal
+            onSuccess={handleMarketRegistered}
+            onClose={() => setShowMarketModal(false)}
+          />
         )}
       </div>
-
-      {showMarketModal && (
-        <MarketRegisterModal
-          onSuccess={handleMarketRegistered}
-          onClose={() => setShowMarketModal(false)}
-        />
-      )}
     </>
   );
 }

@@ -8,14 +8,15 @@ function CartItemCard({ item, isSelected, onToggle, onChangeQty, onRemove }) {
         isSelected ? "bg-secondary/10" : "bg-[#E5E6FF]"
       }`}
     >
-      <div className="w-full flex gap-2">
-        <div className="w-25 h-18.5 rounded-xl bg-gray-100 overflow-hidden shrink-0">
-          {/* <img
-            src={`https://api.bunyodoptom.uz${item.images[0].url}`}
+      <div className="w-full flex gap-4">
+        <div className="w-25 h-18.5 rounded-xl bg-gray-100 overflow-hidden">
+          <img
+            src={item.mainImage}
             alt={item.name}
-            width={300}
-            height={225}
-          /> */}
+            // width={300}
+            // height={225}
+            className="w-40 h-[120px] object-contain"
+          />
         </div>
         <div className="flex-1 min-w-0 flex flex-col">
           <Link
