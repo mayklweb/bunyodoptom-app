@@ -45,7 +45,7 @@ function ProductBottomSheet({ product, open, onClose }) {
           background: "rgba(0,0,0,0.4)",
           zIndex: 40,
           opacity: open ? 1 : 0,
-          transition: "all 0.35s ease",
+          transition: "opacity 0.35s ease",
           pointerEvents: open ? "auto" : "none",
         }}
       />
@@ -62,7 +62,7 @@ function ProductBottomSheet({ product, open, onClose }) {
           background: "#fff",
           borderRadius: "16px 16px 0px 0px",
           transform: open ? "translateY(0)" : "translateY(100%)",
-          transition: "all 0.35s ease",
+          transition: "transform 0.45s cubic-bezier(0.22, 1, 0.36, 1)",
           height: "90svh",
           display: "flex",
           flexDirection: "column",
