@@ -45,7 +45,7 @@ function ProductBottomSheet({ product, open, onClose }) {
           background: "rgba(0,0,0,0.4)",
           zIndex: 40,
           opacity: open ? 1 : 0,
-          transition: "0.5s",
+          transition: "translate 0.35s ease",
           pointerEvents: open ? "auto" : "none",
         }}
       />
@@ -62,7 +62,7 @@ function ProductBottomSheet({ product, open, onClose }) {
           background: "#fff",
           borderRadius: "16px 16px 0px 0px",
           transform: open ? "translateY(0)" : "translateY(100%)",
-          transition: "0.5s",
+          transition: "translate 0.35s ease",
           height: "90svh",
           display: "flex",
           flexDirection: "column",
@@ -72,7 +72,10 @@ function ProductBottomSheet({ product, open, onClose }) {
         {/* <div className="container"> */}
         {/* Header */}
         <div className="relative overflow-y-auto">
-          <button className="absolute top-5 right-5 bg-white rounded-full p-1 shadow-md" onClick={onClose}>
+          <button
+            className="absolute top-5 right-5 bg-white rounded-full p-1 shadow-md"
+            onClick={onClose}
+          >
             <CloseIcon className="w-5 h-5" />
           </button>
 
