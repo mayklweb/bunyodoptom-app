@@ -10,6 +10,7 @@ module.exports = {
         secondary: "#cecfff",
         red: "#ff0000",
         gray: "#e5e7eb",
+        accent: "#f5f5f5"
       },
       fontFamily: {
         sans: "'Roboto', sans-serif",

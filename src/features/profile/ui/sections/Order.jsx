@@ -1,5 +1,11 @@
 import { useState } from "react";
-import { CartIcon, CloseIcon, EyeIcon, LocationIcon } from "../../../../assets/icons";
+import {
+  CartIcon,
+  CloseIcon,
+  DownIcon,
+  EyeIcon,
+  LocationIcon,
+} from "../../../../assets/icons";
 import { useCancelOrder, useOrders } from "../../../order/hooks/useOrder";
 // import { useOrders, useCancelOrder } from "@/app/shared/lib/hooks/useOrders";
 
@@ -254,85 +260,285 @@ export function Orders() {
   );
 }
 
-// ── Order card ────────────────────────────────────────────────────────────────
-function OrderCard({ order, onViewDetails, onCancel, isCancelling }) {
-  const status = STATUS[order.status];
-  const previewProducts = order.products;
-  const remaining = order.products.length - 3;
+// // ── Order card ────────────────────────────────────────────────────────────────
+// function OrderCard({ order, onViewDetails, onCancel, isCancelling }) {
+//   const status = STATUS[order.status];
+//   const previewProducts = order.products;
+//   const remaining = order.products.length - 3;
 
-  console.log(previewProducts);
+//   console.log(previewProducts);
+
+//   return (
+//     <div className=" rounded-xl shadow-sm border border-zinc-200 overflow-hidden">
+//       {/* Header */}
+//       <div className="flex items-center justify-between px-3 py-2 border-b border-zinc-200">
+//         <div className="flex items-center gap-2">
+//           {/* <span className="text-sm font-semibold text-gray-700">
+//             #{order.id}
+//           </span> */}
+//           {order.address && (
+//             <>
+//               {/* <span className="text-gray-300">·</span> */}
+//               <span className="text-xs text-gray-400 truncate max-w-48">
+//                 {order.address.district}, {order.address.address}
+//               </span>
+//             </>
+//           )}
+//         </div>
+//         <span
+//           className={`flex items-center gap-1.5 text-xs font-medium px-2.5 py-1 rounded-xl ${status.className}`}
+//         >
+//           <span className={`w-1.5 h-1.5 rounded-full ${status.dot}`} />
+//           {status.label}
+//         </span>
+//       </div>
+
+//       {/* Products */}
+//       <div className="px-4 py-3 flex flex-col gap-3">
+//         {previewProducts.map((item, i) => (
+//           <div key={i} className="flex items-center gap-3">
+//             <div className="flex-1 min-w-0">
+//               <p className="text-sm font-medium text-gray-800 truncate">
+//                 {item.name ?? "Mahsulot"}
+//               </p>
+//               <p className="text-xs text-gray-400 mt-0.5">{item.qty} dona</p>
+//             </div>
+//             <p className="text-sm font-semibold text-gray-800 shrink-0">
+//               {(item.price * item.qty).toLocaleString()} so'm
+//             </p>
+//           </div>
+//         ))}
+//         {remaining > 0 && (
+//           <p className="text-xs text-gray-400">+{remaining} ta mahsulot yana</p>
+//         )}
+//       </div>
+
+//       {/* Footer */}
+//       <div className="flex items-center justify-between px-4 py-3 bg-gray-50 border-t border-zinc-100">
+//         <div>
+//           <p className="text-xs text-gray-400">Jami:</p>
+//           <p className="">
+//             {order.products.length} ta mahsulot,
+//           </p>
+//           <p className="text-sm font-bold text-gray-900">
+//             {getTotal(order).toLocaleString()} so'm
+//           </p>
+//         </div>
+//         <div className="flex items-center gap-2">
+//           {order.status !== "delivered" && order.status !== "cancelled" && (
+//             <button
+//               onClick={() => onCancel(order.id)}
+//               disabled={isCancelling}
+//               className="flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg border border-red text-red text-xs font-medium hover:bg-red-50 transition-colors disabled:opacity-50"
+//             >
+//               Bekor qilish
+//             </button>
+//           )}
+//           <button
+//             onClick={onViewDetails}
+//             className="flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg bg-primary text-white text-xs font-medium hover:opacity-90 transition-opacity"
+//           >
+//             <EyeIcon className="w-3.5 h-3.5" />
+//             Batafsil
+//           </button>
+//         </div>
+//       </div>
+//     </div>
+//   );
+// }
+
+
+
+// import { formatDate, formatPrice } from "@/utils/formatters";
+// import { ChevronDown, Copy, Receipt } from "lucide-react";
+
+export default function OrderCard({ order }) {
+  const [isExpanded, setIsExpanded] = useState(false);
+
+  const handleCopyOrderId = () => {
+    navigator.clipboard.writeText(order.id);
+  };
+
+  const getStatusStyle = (status) => {
+    const styles = {
+      returned: "bg-gray-200 text-gray-900",
+      delivered: "bg-green-100 text-green-900",
+      pending: "bg-yellow-100 text-yellow-900",
+      cancelled: "bg-red-100 text-red-900",
+    };
+    return styles[status] || styles.pending;
+  };
+
+  const getStatusText = (status) => {
+    const texts = {
+      returned: "Qaytarildi",
+      delivered: "Yetkazildi",
+      pending: "Kutilmoqda",
+      cancelled: "Bekor qilindi",
+    };
+    return texts[status] || status;
+  };
 
   return (
-    <div className="bg-white border border-gray-100 rounded-xl shadow-sm overflow-hidden">
+    <article className="bg-secondary/20 p-2 rounded-lg overflow-hidden">
       {/* Header */}
-      <div className="flex items-center justify-between px-4 py-3 border-b border-gray-100">
-        <div className="flex items-center gap-2">
-          <span className="text-sm font-semibold text-gray-700">
-            #{order.id}
-          </span>
-          {order.address && (
-            <>
-              <span className="text-gray-300">·</span>
-              <span className="text-xs text-gray-400 truncate max-w-40">
-                {order.address.district}
-              </span>
-            </>
-          )}
-        </div>
-        <span
-          className={`flex items-center gap-1.5 text-xs font-medium px-2.5 py-1 rounded-xl ${status.className}`}
-        >
-          <span className={`w-1.5 h-1.5 rounded-full ${status.dot}`} />
-          {status.label}
-        </span>
-      </div>
-
-      {/* Products */}
-      <div className="px-4 py-3 flex flex-col gap-3">
-        {previewProducts.map((item, i) => (
-          <div key={i} className="flex items-center gap-3">
-            <div className="flex-1 min-w-0">
-              <p className="text-sm font-medium text-gray-800 truncate">
-                {item.name ?? "Mahsulot"}
-              </p>
-              <p className="text-xs text-gray-400 mt-0.5">{item.qty} dona</p>
-            </div>
-            <p className="text-sm font-semibold text-gray-800 shrink-0">
-              {(item.price * item.qty).toLocaleString()} so'm
-            </p>
-          </div>
-        ))}
-        {remaining > 0 && (
-          <p className="text-xs text-gray-400">+{remaining} ta mahsulot yana</p>
-        )}
-      </div>
-
-      {/* Footer */}
-      <div className="flex items-center justify-between px-4 py-3 bg-gray-50 border-t border-gray-100">
-        <div>
-          <p className="text-xs text-gray-400">Jami</p>
-          <p className="text-base font-bold text-gray-900">
-            {getTotal(order).toLocaleString()} so'm
-          </p>
-        </div>
-        <div className="flex items-center gap-2">
-          {order.status !== "delivered" && order.status !== "cancelled" && (
-            <button
-              onClick={() => onCancel(order.id)}
-              disabled={isCancelling}
-              className="flex items-center gap-1.5 px-3 py-2 rounded-xl border border-red-200 text-red-500 text-xs font-medium hover:bg-red-50 transition-colors disabled:opacity-50"
-            >
-              Bekor qilish
-            </button>
-          )}
-          <button
-            onClick={onViewDetails}
-            className="flex items-center gap-1.5 px-3 py-2 rounded-xl bg-primary text-white text-xs font-medium hover:opacity-90 transition-opacity"
+      <header className="p-2 border-b border-zinc-300">
+        <div className="flex items-start justify-between">
+          <span
+            className={`px-3 py-1 rounded-full text-sm font-semibold ${getStatusStyle(
+              order.status
+            )}`}
           >
-            <EyeIcon className="w-3.5 h-3.5" />
-            Batafsil
+            {getStatusText(order.status)}
+          </span>
+          
+          <button
+            onClick={handleCopyOrderId}
+            className="flex items-center gap-2 text-sm text-gray-600 hover:text-gray-900"
+          >
+            <h3 className="font-semibold">Buyurtma №{order.id}</h3>
+            {/* <Copy className="w-4 h-4" /> */}
           </button>
         </div>
+
+        <p className="text-sm text-gray-500">
+          {/* {formatDate(order.createdAt)} */}
+        </p>
+      </header>
+
+      {/* Products Summary */}
+      <div className="p-2 border-b border-zinc-300">
+        <p className="text-sm font-semibold mb-3">
+          {/* {order.returnedAt && `${formatDate(order.returnedAt)} qaytarildi`} */}
+        </p>
+
+        {/* Product Images */}
+        <div className="flex gap-2 mb-3">
+          {order.products.slice(0, 4).map((item) => (
+            <div key={item.id} className="relative">
+              <div className="w-14 h-14 rounded-md bg-zinc-500"></div>
+              {/* <img
+                src={item?.images[0]?.url}
+                alt={item.name}
+                className="w-16 h-16 object-cover rounded-lg"
+              /> */}
+              {item.status === "returned" && (
+                <div className="absolute inset-0 bg-black/50 rounded-lg flex items-center justify-center">
+                  <span className="text-xs text-white font-medium">
+                    Bekor
+                  </span>
+                </div>
+              )}
+            </div>
+          ))}
+          {order.products.length > 4 && (
+            <div className="w-16 h-16 bg-gray-100 rounded-lg flex items-center justify-center">
+              <span className="text-sm text-gray-600">
+                +{order.products.length - 4}
+              </span>
+            </div>
+          )}
+        </div>
+
+        {/* Totals */}
+        <div className="flex items-center gap-2 text-sm text-gray-600">
+          <span>{order.products.length} ta tovar</span>
+          <span>·</span>
+          <span className="font-semibold text-gray-900">
+            {/* {formatPrice(order.total)} */}
+          </span>
+        </div>
+      </div>
+
+      {/* Delivery Info */}
+      <div className="p-2 space-y-3">
+
+        <div>
+          <p className="text-xs font-semibold text-gray-900 mb-1">
+            Buyurtmani qabul qiluvchi
+          </p>
+          <div className="text-sm text-gray-600">
+            <p>{order.user.name}</p>
+            <p>{order.user.phone}</p>
+          </div>
+        </div>
+
+        {/* Total with Details */}
+        <div className="pt-3 border-t border-zinc-300">
+          <div className="flex items-center justify-between">
+            <div className="flex gap-1">
+              <span className="text-sm font-medium text-gray-900">Jami {" "}</span>
+              <p className="text-sm font-medium text-zinc-700">
+                {" "} {order.products.length} ta mahsulot
+              </p>
+            </div>
+            <button className="flex items-center gap-1 text-sm text-blue-600 hover:text-blue-700">
+              Batafsil
+              {/* <ChevronDown className="w-4 h-4" /> */}
+            </button>
+          </div>
+        </div>
+      </div>
+
+      {/* Expandable Products List */}
+      <footer className="border-t border-zinc-300">
+        <button
+          onClick={() => setIsExpanded(!isExpanded)}
+          className="w-full  p-2 flex items-center justify-between hover:bg-gray-50 transition-colors"
+        >
+          <span className="font-medium text-gray-900">
+            {order.products.length} mahsulot
+          </span>
+          <DownIcon
+            className={`w-5 h-5 transition-transform ${
+              isExpanded ? "rotate-180" : ""
+            }`}
+          />
+        </button>
+
+        {isExpanded && (
+          <div className="px-4 pb-4 space-y-3">
+            {order.products.map((item) => (
+              <OrderItem key={item.id} item={item} />
+            ))}
+          </div>
+        )}
+      </footer>
+    </article>
+  );
+}
+
+// Separate component for individual items
+function OrderItem({ item }) {
+  return (
+    <div className="flex gap-3">
+      <img
+        src={item.image}
+        alt={item.name}
+        className="w-20 h-28 object-cover rounded-lg"
+      />
+      
+      <div className="flex-1 flex flex-col justify-between">
+        <h4 className="text-sm text-gray-900 line-clamp-2">
+          {item.name}
+        </h4>
+        
+        <div className="space-y-1">
+          <div className="flex justify-between text-xs">
+            <span className="text-gray-500">Soni</span>
+            <span className="text-gray-900">{item.quantity}</span>
+          </div>
+          <div className="flex justify-between text-xs">
+            <span className="text-gray-500">Narxi</span>
+            {/* <span className="text-gray-900">{formatPrice(item.price)}</span> */}
+          </div>
+        </div>
+      </div>
+
+      <div className="flex flex-col justify-between items-end">
+        <span className="text-xs text-gray-500">
+          {item.status === "returned" ? "Qaytarildi" : "Yetkazildi"}
+        </span>
       </div>
     </div>
   );

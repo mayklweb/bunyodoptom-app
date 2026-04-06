@@ -9,6 +9,11 @@ export const useAuthStore = create((set) => ({
     set({ token, isAuthenticated: true });
   },
 
+  signup: (token) => {
+    localStorage.setItem("token", token);
+    set({ token, isAuthenticated: true });
+  },
+
   logout: () => {
     localStorage.removeItem("token");
     set({ token: null, isAuthenticated: false });

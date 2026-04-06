@@ -8,12 +8,14 @@ import LoginPage from "../../pages/login/LoginPage";
 import MainLayout from "../../layouts/MainLayout";
 import AuthLayout from "../../layouts/AuthLayout";
 import SignupPage from "../../pages/signup/SignupPage";
+import CartPage from "../../pages/cart/CartPage";
 
 export default function Router() {
   return (
     <Routes>
       <Route element={<MainLayout />}>
         <Route path="/" element={<HomePage />} />
+        <Route path="/cart" element={<CartPage />} />
         {/* Protected routes */}
         <Route
           path="/profile"

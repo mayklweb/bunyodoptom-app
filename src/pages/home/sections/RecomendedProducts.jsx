@@ -1,6 +1,8 @@
+import { useUIStore } from "../../../app/store/useUIStore";
 import { useProducts } from "../../../features/product/hooks/useProducts";
 import { useShuffledProducts } from "../../../features/product/hooks/useShuffledProducts";
 import ProductCard from "../../../features/product/ui/ProductCard";
+import ProductBottomSheet from "../../../shared/ui/ProductBottomSheet";
 
 function RecomendedProductsSkeleton() {
   return (
@@ -41,7 +43,7 @@ function RecomendedProductsSkeleton() {
 function normalizeProducts(products) {
   return products
     ?.filter(
-      (p) => Array.isArray(p.images) && p.images.length > 0 && p.images[0]?.url
+      (p) => Array.isArray(p.images) && p.images.length > 0 && p.images[0]?.url,
     )
     .map((p) => ({
       ...p,
@@ -51,12 +53,12 @@ function normalizeProducts(products) {
     }));
 }
 
-
 function RecomendedProducts() {
   const { data: products, isLoading, isError } = useProducts();
-  const filtred = normalizeProducts(products)
+  const filtred = normalizeProducts(products);
   const recomendedProduct = useShuffledProducts(filtred, 20);
 
+  const { selectedProduct, openModal, closeModal } = useUIStore();
 
   if (isLoading) return <RecomendedProductsSkeleton />;
   if (isError) return <div>Error</div>;
@@ -81,7 +83,8 @@ function RecomendedProducts() {
           </div>
         </div>
       </div>
-      {/* <ProductModal product={selectedProduct} onClose={closeModal} /> */}
+          <ProductBottomSheet product={selectedProduct} onClose={closeModal} />
+
     </section>
   );
 }

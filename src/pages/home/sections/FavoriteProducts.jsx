@@ -2,9 +2,11 @@
 // import { useProductModal } from "@/app/shared/lib/hooks/useProductModal";
 // import { useProducts } from "@/app/shared/lib/hooks/useProducts";
 // import { useShuffledProducts } from "@/app/shared/lib/hooks/useShuffledProducts";
+import { useUIStore } from "../../../app/store/useUIStore";
 import { useProducts } from "../../../features/product/hooks/useProducts";
 import { useShuffledProducts } from "../../../features/product/hooks/useShuffledProducts";
 import ProductCard from "../../../features/product/ui/ProductCard";
+import ProductBottomSheet from "../../../shared/ui/ProductBottomSheet";
 
 function FavoriteProductsSkeleton() {
   return (
@@ -45,7 +47,7 @@ function FavoriteProductsSkeleton() {
 function normalizeProducts(products) {
   return products
     ?.filter(
-      (p) => Array.isArray(p.images) && p.images.length > 0 && p.images[0]?.url
+      (p) => Array.isArray(p.images) && p.images.length > 0 && p.images[0]?.url,
     )
     .map((p) => ({
       ...p,
@@ -57,12 +59,11 @@ function normalizeProducts(products) {
 
 function FavoriteProducts() {
   const { data: products, isLoading, isError } = useProducts();
-  const filtred = normalizeProducts(products)
-  // const { selectedProduct, openModal, closeModal } = useProductModal();
-  
+  const filtred = normalizeProducts(products);
+  const { selectedProduct, openModal, closeModal } = useUIStore();
+
   // const favoriteProducts = useShuffledProducts(products, 8);
   const favoriteProducts = useShuffledProducts(filtred, 10);
-
 
   if (isLoading) return <FavoriteProductsSkeleton />;
   if (isError) return <div>Error</div>;
@@ -88,7 +89,7 @@ function FavoriteProducts() {
           </div>
         </div>
       </div>
-      {/* <ProductModal product={selectedProduct} onClose={closeModal} /> */}
+      <ProductBottomSheet product={selectedProduct} onClose={closeModal} open={openModal} />
     </section>
   );
 }

@@ -10,7 +10,7 @@ export function useLogin() {
   const queryClient = useQueryClient();
   const navigate = useNavigate();
 
-  const login = useAuthStore((s) => s.login); // 👈 nomni o‘zgartir
+  const login = useAuthStore((s) => s.login);
 
   return useMutation({
     mutationFn: authApi.login,
@@ -30,14 +30,14 @@ export function useSignup() {
   const queryClient = useQueryClient();
   const navigate = useNavigate();
 
-  const setToken = useAuthStore((s) => s.setToken);
-  const setUser = useAuthStore((s) => s.setUser);
+  const signup = useAuthStore((s) => s.signup);
 
   return useMutation({
     mutationFn: authApi.signup,
     onSuccess: ({ user, token }) => {
-      setToken(token);
-      setUser(user);
+      signup(token);
+      // setToken(token);
+      // setUser(user);
 
       queryClient.setQueryData(["user"], user);
 

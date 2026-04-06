@@ -1,7 +1,6 @@
 "use client";
 import { useForm, Controller } from "react-hook-form";
 import { PatternFormat } from "react-number-format";
-// import { LeftArrowIcon } from "../shared/icons";
 import { useSignup } from "../../features/auth/hooks/useAuthUser";
 import { LeftArrowIcon } from "../../assets/icons";
 import { useNavigate } from "react-router-dom";
@@ -30,7 +29,7 @@ function SignupPage() {
     focus:ring-2 focus:ring-primary/30 focus:border-primary
     ${
       hasError
-        ? "border-red-400 bg-red-50"
+        ? "border-red"
         : "border-gray-200 bg-gray-50 hover:border-gray-300"
     }`;
 
@@ -56,10 +55,10 @@ function SignupPage() {
 
           <form
             onSubmit={handleSubmit(onSubmit)}
-            className="rounded-2xl flex flex-col gap-5"
+            className="rounded-2xl p-8 flex flex-col gap-5"
           >
             {isError && (
-              <div className="flex items-center gap-2 border border-red-200 text-red-600 text-sm px-4 py-3 rounded-lg">
+              <div className="flex items-center gap-2 border border-red-200 text-red text-sm px-4 py-3 rounded-lg">
                 <span>⚠️</span>
                 <span>
                   {error?.status === 409
@@ -91,7 +90,7 @@ function SignupPage() {
                 })}
               />
               {errors.name && (
-                <p className="text-xs text-red-500">{errors.name.message}</p>
+                <p className="text-xs text-red">{errors.name.message}</p>
               )}
             </div>
 
@@ -119,7 +118,7 @@ function SignupPage() {
                 )}
               />
               {errors.phone && (
-                <p className="text-xs text-red-500">{errors.phone.message}</p>
+                <p className="text-xs text-red">{errors.phone.message}</p>
               )}
             </div>
 
@@ -138,7 +137,7 @@ function SignupPage() {
                 })}
               />
               {errors.password && (
-                <p className="text-xs text-red-500">
+                <p className="text-xs text-red">
                   {errors.password.message}
                 </p>
               )}

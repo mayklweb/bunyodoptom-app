@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import ProfileField from "../ProfileField";
-import { useLogout } from "../../../auth/hooks/useAuthUser";
+import { useLogout, useProfile } from "../../../auth/hooks/useAuthUser";
 
 const MOCK_USER = {
   name: "Alisher Toshmatov",
@@ -14,8 +14,15 @@ function PersonalInfo({}) {
     phone: MOCK_USER.phone,
     id: MOCK_USER.id,
   });
+
+
+  const { data: user } = useProfile();
+
+  console.log(user);
+  
+
   const logout = useLogout();
-  const [draft, setDraft] = useState({ ...fields });
+  const [draft, setDraft] = useState({ ...user });
   const [editing, setEditing] = useState(null);
   const [saving, setSaving] = useState(false);
   const inputRefs = useRef({});
@@ -35,7 +42,7 @@ function PersonalInfo({}) {
   };
 
   const handleCancel = (key) => {
-    setDraft((prev) => ({ ...prev, [key]: fields[key] }));
+    setDraft((prev) => ({ ...prev, [key]: user[key] }));
     setEditing(null);
   };
 
@@ -52,7 +59,7 @@ function PersonalInfo({}) {
           key={key}
           label={label}
           disabled={disabled}
-          value={editing === key ? draft[key] : fields[key]}
+          value={editing === key ? draft[key] : user[key]}
           editing={editing === key}
           saving={saving && editing === key}
           onChange={(e) =>

@@ -1,3 +1,5 @@
+import { api } from "../../../shared/api/client";
+
 export const ordersApi = {
   fetchAll: async () => {
     const { data } = await api.get("/orders");

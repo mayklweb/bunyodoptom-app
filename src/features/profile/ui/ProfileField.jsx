@@ -1,4 +1,4 @@
-import { EditIcon } from "../../../assets/icons";
+import { CheckIcon, CloseIcon, EditIcon } from "../../../assets/icons";
 
 function ProfileField({
   label,
@@ -81,7 +81,7 @@ function ProfileField({
               cursor: "pointer",
             }}
           >
-            <IconCheck />
+            <CheckIcon />
           </button>
           <button
             onClick={onCancel}
@@ -96,7 +96,7 @@ function ProfileField({
               cursor: "pointer",
             }}
           >
-            <IconXMark />
+            <CloseIcon />
           </button>
         </div>
       ) : (

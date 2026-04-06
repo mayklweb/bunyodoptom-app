@@ -1,11 +1,12 @@
 import { Link } from "react-router-dom";
-import { useFavoritesStore } from "../../../shared/lib/favorites";
+// import { useFavoritesStore } from "../../../shared/lib/favorites";
 import { FavoriteIcon } from "../../../assets/icons";
+// import { useFavoritesStore } from "../../../app/store/useFavoritesStore";
 
 function ProductCard({ product, onClick }) {
-  const { toggleFavorite, isFavorite } = useFavoritesStore();
+  // const { toggleFavorite, isFavorite } = useFavoritesStore();
 
-  const liked = isFavorite(product.id);
+  // const liked = isFavorite(product.id);
 
   const imagePath = product?.images?.[0]?.url;
 
@@ -39,8 +40,8 @@ function ProductCard({ product, onClick }) {
 
   return (
     <div className="relative">
-      <button
-        onClick={() => toggleFavorite(product)}
+      {/* <button
+        // onClick={() => toggleFavorite(product)}
         className="p-1 absolute top-2 right-2 z-[3] bg-white rounded-full cursor-pointer"
       >
         <FavoriteIcon
@@ -48,7 +49,7 @@ function ProductCard({ product, onClick }) {
             liked ? "fill-red text-red" : "text-black"
           }`}
         />
-      </button>
+      </button> */}
 
       {onClick ? (
         <div onClick={onClick} className={`${cardClass} cursor-pointer`}>
