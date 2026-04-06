@@ -5,18 +5,18 @@ function CartItemCard({ item, isSelected, onToggle, onChangeQty, onRemove }) {
 
   return (
     <div
-      className={`rounded-xl p-2 flex flex-col gap-2 shadow-sm transition-all ${
-        isSelected ? "bg-secondary/10" : "bg-[#E5E6FF]"
+      className={`rounded-xl p-2 flex flex-col gap-2 shadow-sm transition-all  ${
+        isSelected ? "bg-secondary/20" : "bg-white"
       }`}
     >
       <div className="w-full flex gap-4">
-        <div className="w-25 h-18.5 rounded-xl bg-gray-100 overflow-hidden">
+        <div className=" rounded-xl bg-gray-100 overflow-hidden">
           <img
             src={item.mainImage}
             alt={item.name}
             // width={300}
             // height={225}
-            className="w-40 h-[120px] object-contain"
+            className="w-[107px] h-[80px] object-contain"
           />
         </div>
         <div className="flex-1 min-w-0 flex flex-col">
@@ -35,10 +35,10 @@ function CartItemCard({ item, isSelected, onToggle, onChangeQty, onRemove }) {
           onClick={() => onToggle(item.id)}
         >
           <div
-            className={`w-5 h-5 rounded-md border-2 flex items-center justify-center transition-colors ${
+            className={`w-5 h-5 rounded-md border-[1px] flex items-center justify-center transition-colors ${
               isSelected
                 ? "bg-primary border-primary"
-                : "border-gray-300 bg-white"
+                : "border-gray bg-white"
             }`}
           >
             {isSelected && <CheckIcon className="w-3 h-3 text-white" />}

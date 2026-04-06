@@ -10,6 +10,7 @@ import { useCartStore } from "../../app/store/useCartStore";
 import { useProfile } from "../../features/auth/hooks/useAuthUser";
 import { useMarkets } from "../../features/markets/hooks/useMarkets";
 import { useAddresses } from "../../features/addresses/hooks/useAddresses";
+import { div } from "framer-motion/client";
 
 function CartPage() {
   const {
@@ -151,7 +152,7 @@ function CartPage() {
   return (
     <>
       <div className="container">
-        <div className="w-full h-full flex flex-col mt-24">
+        <div className="w-full h-full flex flex-col mt-20">
           <CartHeader />
 
           {cart.length === 0 ? (
@@ -168,14 +169,16 @@ function CartPage() {
 
                 <div className="flex flex-col gap-3">
                   {cart.map((item) => (
-                    <CartItemCard
-                      key={item.id}
-                      item={item}
-                      isSelected={selectedIds.includes(item.id)}
-                      onToggle={toggleItem}
-                      onChangeQty={changeQty}
-                      onRemove={remove}
-                    />
+                    // <div className="border-[1px] border-top">
+                      <CartItemCard
+                        key={item.id}
+                        item={item}
+                        isSelected={selectedIds.includes(item.id)}
+                        onToggle={toggleItem}
+                        onChangeQty={changeQty}
+                        onRemove={remove}
+                      />
+                    // </div>
                   ))}
                 </div>
               </div>
