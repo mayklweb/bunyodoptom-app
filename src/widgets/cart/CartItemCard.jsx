@@ -5,7 +5,7 @@ function CartItemCard({ item, isSelected, onToggle, onChangeQty, onRemove }) {
 
   return (
     <div
-      className={`rounded-xl p-2 flex flex-col gap-2 shadow-sm transition-all  ${
+      className={`rounded-xl p-2 flex flex-col gap-2 shadow-sm transition-all border border-gray ${
         isSelected ? "bg-secondary/20" : "bg-white"
       }`}
     >
