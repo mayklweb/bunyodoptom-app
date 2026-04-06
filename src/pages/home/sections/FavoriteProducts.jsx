@@ -52,8 +52,7 @@ function normalizeProducts(products) {
     .map((p) => ({
       ...p,
       mainImage:
-        `https://api.bunyodoptom.uz${p.images[0]?.url}` &&
-        `https://api.bunyodoptom.uz${p.images[1]?.url}`,
+        `https://api.bunyodoptom.uz${p.images[0]?.url}`
     }));
 }
 

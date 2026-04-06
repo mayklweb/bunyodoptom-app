@@ -131,11 +131,9 @@ function ProductBottomSheet({ product, open, onClose }) {
             {product.stock_qty > 0 ? (
               <button
                 onClick={() =>
-                  addToCart({
-                    id: product.id,
-                    price: product.price,
-                    stock_qty: product.stock_qty,
-                  })
+                  addToCart(
+                  product
+                  )
                 }
                 style={{
                   width: "100%",

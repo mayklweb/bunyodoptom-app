@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import { CheckIcon, DeleteIcon, MinusIcon, PlusIcon } from "../../assets/icons";
 
 function CartItemCard({ item, isSelected, onToggle, onChangeQty, onRemove }) {
+
   return (
     <div
       className={`rounded-xl p-2 flex flex-col gap-2 shadow-sm transition-all ${
