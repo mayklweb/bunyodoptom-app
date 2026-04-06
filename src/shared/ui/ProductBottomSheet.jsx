@@ -67,7 +67,7 @@ function ProductBottomSheet({ product, open, onClose }) {
           flexDirection: "column",
         }}
       >
-        <div className="container">
+        {/* <div className="container"> */}
           {/* Header */}
           <div className="relative overflow-y-auto">
             <button className="absolute top-0 right-0" onClick={onClose}>
@@ -79,7 +79,7 @@ function ProductBottomSheet({ product, open, onClose }) {
               <img
                 src={imageUrl}
                 alt={product.name}
-                className="w-full  aspect-[4/3] object-cover bg-gray-100"
+                className="w-full object-contain bg-gray-100"
               />
 
               <div className="p-4">
@@ -172,7 +172,7 @@ function ProductBottomSheet({ product, open, onClose }) {
               )}
             </div>
           </div>
-        </div>
+        {/* </div> */}
       </div>
     </>
   );
