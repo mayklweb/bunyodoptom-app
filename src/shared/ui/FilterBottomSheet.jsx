@@ -31,7 +31,7 @@ function FilterBottomSheet({
         {/* Handle */}
 
         {/* Title */}
-        <div className="flex items-center justify-between px-5 py-3 border-b border-grayy shrink-0">
+        <div className="flex items-center justify-between px-5 py-3 border-b border-gray shrink-0">
           <h2 className="text-lg font-medium text-zinc-800">Filtr</h2>
           <button
             className="text-zinc-700 p-1 bg-gray rounded-lg"
