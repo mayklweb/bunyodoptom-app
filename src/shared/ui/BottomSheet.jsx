@@ -41,7 +41,7 @@ function BottomSheet({ title, open, onClose, children }) {
         {/* Header */}
         <div
           style={{
-            padding: "12px 16px 10px",
+            padding: "12px 0px 10px",
             borderBottom: "1px solid rgba(0,0,0,0.1)",
             display: "flex",
             alignItems: "center",
@@ -50,25 +50,18 @@ function BottomSheet({ title, open, onClose, children }) {
           }}
         >
           <div className="container">
-            <div className="w-full flex items-center gap-5">
-              {/* <button
-                onClick={onClose}
-                style={{
-                  width: 32,
-                  height: 32,
-                  border: "none",
-                  background: "none",
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "center",
-                  borderRadius: 8,
-                  color: "#666",
-                  cursor: "pointer",
-                }}
+            <div className="w-full flex items-center ">
+              <span
+                className="pl-7 text-xl font-medium text-center w-full"
               >
-                <CloseIcon />
-              </button> */}
-              <span className="text-center w-full" style={{ fontSize: 20, fontWeight: 500,  }}>{title}</span>
+                {title}
+              </span>
+              <button
+                className="text-zinc-500 p-1 bg-gray rounded-lg"
+                onClick={onClose}
+              >
+                <CloseIcon className={"w-5.5 h-5.5"} />
+              </button>
             </div>
           </div>
         </div>
