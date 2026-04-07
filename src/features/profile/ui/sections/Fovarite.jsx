@@ -1,12 +1,9 @@
-// import { ProductCard } from "@/app/components";
-// import { products } from "@/app/profile/model/constants/constants";
-// import { useFavoritesStore } from "@/app/store/favoritesStore";
-
-import { useFavoritesStore } from "../../../../shared/lib/favorites";
+import { useFavoritesStore } from "../../../../app/store/useFavoritesStore";
 import ProductCard from "../../../product/ui/ProductCard";
 
 export function Favorites() {
-  const { favorites, clearFavorites } = useFavoritesStore();
+  const { favorites } = useFavoritesStore();
+        
   return (
     <div>
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-3">
