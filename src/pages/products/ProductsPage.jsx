@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import { useCategoryStore } from "../../app/store/useCategoryStore";
 import { useCategories } from "../../features/categories/hooks/useCategories";
 import { useProducts } from "../../features/product/hooks/useProducts";
@@ -132,9 +132,9 @@ function ProductsPage() {
                   ) : (
                     <div className="grid grid-cols-2 gap-3">
                       {filtered.map((product, i) => (
-                        // <Link key={i} href={`/product/${product.id}`}>
+                        <Link key={i} to={`/product/${product.id}`}>
                         <ProductCard product={product} />
-                        // </Link>
+                        </Link>
                       ))}
                     </div>
                   )}

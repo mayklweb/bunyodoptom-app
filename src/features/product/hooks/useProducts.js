@@ -14,7 +14,10 @@ export const useProducts = () => {
 export const useProduct = (id) => {
   return useQuery({
     queryKey: ["product", id],
-    queryFn: () => fetchProductByIdApi(id),
+    queryFn: async () => {
+      const { data } = await fetchProductByIdApi(id)
+      return data.data;
+    },
     enabled: !!id, // id bo‘lmasa fetch qilmaydi
   });
 };

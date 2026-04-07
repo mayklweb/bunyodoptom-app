@@ -11,6 +11,7 @@ import SignupPage from "../../pages/signup/SignupPage";
 import CartPage from "../../pages/cart/CartPage";
 import CategoriesPage from "../../pages/categories/CategoriesPage";
 import ProductsPage from "../../pages/products/ProductsPage";
+import ProductPage from "../../pages/product/ProductPage";
 
 export default function Router() {
   return (
@@ -20,6 +21,7 @@ export default function Router() {
         <Route path="/cart" element={<CartPage />} />
         <Route path="/categories" element={<CategoriesPage />} />
         <Route path="/categories/:id" element={<ProductsPage />} />
+        <Route path="/product/:id" element={<ProductPage />} />
         {/* Protected routes */}
         <Route
           path="/profile"
