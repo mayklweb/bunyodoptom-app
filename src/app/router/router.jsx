@@ -9,6 +9,8 @@ import MainLayout from "../../layouts/MainLayout";
 import AuthLayout from "../../layouts/AuthLayout";
 import SignupPage from "../../pages/signup/SignupPage";
 import CartPage from "../../pages/cart/CartPage";
+import CategoriesPage from "../../pages/categories/CategoriesPage";
+import ProductsPage from "../../pages/products/ProductsPage";
 
 export default function Router() {
   return (
@@ -16,6 +18,8 @@ export default function Router() {
       <Route element={<MainLayout />}>
         <Route path="/" element={<HomePage />} />
         <Route path="/cart" element={<CartPage />} />
+        <Route path="/categories" element={<CategoriesPage />} />
+        <Route path="/categories/:id" element={<ProductsPage />} />
         {/* Protected routes */}
         <Route
           path="/profile"
