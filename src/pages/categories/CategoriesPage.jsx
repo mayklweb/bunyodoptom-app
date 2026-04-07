@@ -34,7 +34,7 @@ function CategoriesPage() {
       <div className="container">
         <div className="flex flex-col h-full mt-20">
           {categoriesLoading ? (
-            <div className="grid grid-cols-2 gap-3 px-4 pb-24 mt-24">
+            <div className="grid grid-cols-2 gap-3 pb-24">
               {Array.from({ length: 9 }).map((_, i) => (
                 <div
                   key={i}
@@ -43,20 +43,20 @@ function CategoriesPage() {
               ))}
             </div>
           ) : (
-            <div className="grid grid-cols-2 gap-3 px-4 pb-24">
+            <div className="grid grid-cols-2 gap-3 pb-24">
               {categories?.map((category) => (
                 <button
                   key={category.id}
                   onClick={() => handleMobileClick(category)}
-                  className="flex flex-col bg-white border border-gray-100 rounded-2xl overflow-hidden shadow-sm active:scale-[0.97] transition-transform text-left"
+                  className="flex flex-col bg-white border border-zinc-100 rounded-xl overflow-hidden shadow-md active:scale-[0.97] transition-transform text-left"
                 >
-                  <div className="w-full aspect-4/3 bg-primary/5 relative overflow-hidden rounded-xl">
+                  <div className=" relative overflow-hidden rounded-md">
                     <img
-                      src={`${category.id}.jpg`}
+                      src={`/images/${category.id}.jpg`}
                       alt={category.name}
                       width={300}
                       height={225}
-                      className="w-full h-full object-cover"
+                      className="w-full h-full object-cover aspect-[4/3]"
                       unoptimized
                     />
                   </div>
