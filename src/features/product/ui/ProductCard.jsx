@@ -10,9 +10,7 @@ function ProductCard({ product, onClick }) {
 
   const imagePath = product?.images?.[0]?.url;
 
-  const imageUrl = imagePath
-    ? `https://api.bunyodoptom.uz${imagePath}`
-    : "/placeholder.png";
+  const imageUrl = `https://api.bunyodoptom.uz${imagePath}`;
 
   const cardClass = "flex flex-col items-start gap-5 border-0 shadow-none";
 

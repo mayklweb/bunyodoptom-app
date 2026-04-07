@@ -26,8 +26,7 @@ export function useProductFilters(
     makeInitial(defaultCategoryId)
   );
 
-  // FIX: if defaultCategoryId arrives late (e.g. from useParams),
-  // sync it into both states
+
   useEffect(() => {
     if (defaultCategoryId) {
       const catId = Number(defaultCategoryId);

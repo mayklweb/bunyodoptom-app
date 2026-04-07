@@ -44,7 +44,7 @@ function CategoriesPage() {
             </div>
           ) : (
             <div className="grid grid-cols-2 gap-3 pb-24">
-              {categories?.map((category) => (
+              {categories.reverse().map((category) => (
                 <button
                   key={category.id}
                   onClick={() => handleMobileClick(category)}
