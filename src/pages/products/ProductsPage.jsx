@@ -42,7 +42,7 @@ function ProductsPage() {
     <section>
       <div className="container">
         <div>
-          <div className="flex h-full overflow-hidden mt-24">
+          <div className="flex h-full overflow-hidden mt-20">
             {/* ── DESKTOP LEFT: categories sidebar ── */}
 
             {/* ── MAIN AREA ── */}
@@ -90,7 +90,7 @@ function ProductsPage() {
                     setPendingFilters(filters);
                     setSheetOpen(true);
                   }}
-                  className="relative flex items-center gap-1.5 px-3 py-2 rounded-xl border border-gray-200 bg-white text-sm font-medium text-gray-600"
+                  className="relative flex items-center gap-1.5 px-3 py-2 rounded-xl border border-zinc-200 bg-white text-sm font-medium text-zinc-600"
                 >
                   <FilterIcon />
                   Filtr

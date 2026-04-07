@@ -43,10 +43,10 @@ export function FilterPanel({ filters, onChange, brands, categories }) {
             <button
               key={opt.value}
               onClick={() => set({ sortBy: opt.value })}
-              className={`px-3 py-1.5 rounded-xl text-sm font-medium border transition-colors ${
+              className={`px-3 py-1.5 rounded-lg text-sm font-medium border transition-colors ${
                 filters.sortBy === opt.value
                   ? "bg-primary text-white border-primary"
-                  : "bg-white text-gray-600 border-gray-200 hover:border-primary/40"
+                  : "bg-white text-zinc-700 border-zinc-300 hover:border-primary/40"
               }`}
             >
               {opt.label}
@@ -63,15 +63,15 @@ export function FilterPanel({ filters, onChange, brands, categories }) {
             placeholder="dan"
             value={filters.priceMin}
             onChange={(e) => set({ priceMin: e.target.value })}
-            className="w-full flex-1 px-3 py-2 rounded-xl border border-gray-200 text-sm outline-none focus:border-primary transition-colors"
+            className="w-full flex-1 px-3 py-2 rounded-xl border border-zinc-300 text-sm outline-none focus:border-primary transition-colors"
           />
-          {/* <span className="text-gray-400 text-sm">—</span> */}
+          {/* <span className="text-zinc-400 text-sm">—</span> */}
           <input
             type="number"
             placeholder="gacha"
             value={filters.priceMax}
             onChange={(e) => set({ priceMax: e.target.value })}
-            className="w-full flex-1 px-3 py-2 rounded-xl border border-gray-200 text-sm outline-none focus:border-primary transition-colors"
+            className="w-full flex-1 px-3 py-2 rounded-xl border border-zinc-300 text-sm outline-none focus:border-primary transition-colors"
           />
         </div>
       </Section>
@@ -90,7 +90,7 @@ export function FilterPanel({ filters, onChange, brands, categories }) {
                   checked={filters.categoryIds.includes(cat.id)}
                   onChange={() => toggleCategory(cat.id)}
                 />
-                <span className="text-sm text-gray-700">{cat.name}</span>
+                <span className="text-sm text-zinc-700">{cat.name}</span>
               </label>
             ))}
           </div>
@@ -178,12 +178,12 @@ function Checkbox({ checked, onChange, locked }) {
   return (
     <div
       onClick={locked ? undefined : onChange}
-      className={`w-5 h-5 rounded-md border-2 flex items-center justify-center shrink-0 transition-colors ${
+      className={`w-5 h-5 rounded-md border flex items-center justify-center shrink-0 transition-colors ${
         locked
           ? "bg-primary/60 border-primary/60 cursor-not-allowed"
           : checked
             ? "bg-primary border-primary cursor-pointer"
-            : "border-gray-300 cursor-pointer"
+            : "border-zinc-300 cursor-pointer"
       }`}
     >
       {checked && (
