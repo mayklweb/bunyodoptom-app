@@ -1,14 +1,10 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useCartStore } from "../../app/store/useCartStore";
 import { CloseIcon, MinusIcon, PlusIcon } from "../../assets/icons";
-import { motion, AnimatePresence, useMotionValue } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 
 function ProductBottomSheet({ product, open, onClose }) {
-  const addToCart = useCartStore((s) => s.addToCart);
-  const getQuantity = useCartStore((s) => s.getQuantity);
-
-  const qty = getQuantity(product?.id);
-  // 🔥 Body scroll lock + ESC close
+const { addToCart, inc, dec, remove, getQuantity } = useCartStore();
 
   useEffect(() => {
     if (open) {
@@ -23,6 +19,8 @@ function ProductBottomSheet({ product, open, onClose }) {
   }, [open]);
 
   if (!product) return null;
+
+  const qty = getQuantity(product.id);
 
   const imagePath = product?.images?.[0]?.url;
   const imageUrl = imagePath
@@ -142,17 +140,17 @@ function ProductBottomSheet({ product, open, onClose }) {
                 Savatga qo'shish
               </button>
             ) : (
-              <div className="flex w-full justify-between bg-primary/10 rounded-xl p-2">
+              <div className="flex w-full justify-between bg-primary/10 rounded-xl p-2.5">
                 <button
                   onClick={() =>
                     qty === 1 ? remove(product.id) : dec(product.id)
                   }
                 >
-                  <MinusIcon />
+                  <MinusIcon className={'w-7 h-7'} />
                 </button>
-                <span>{qty}</span>
+                <span className="text-lg">{qty}</span>
                 <button onClick={() => inc(product.id)}>
-                  <PlusIcon />
+                  <PlusIcon className={'w-7 h-7'} />
                 </button>
               </div>
             )}
