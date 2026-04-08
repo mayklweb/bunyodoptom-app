@@ -77,8 +77,8 @@ export default function ProfilePage() {
           <div>
             <div className="pt-20">
               <div className="flex flex-col gap-3">
-                <div className="rounded-[14px] border border-primary py-[14px] px-4 flex items-center gap-3">
-                  <div className="w-12 h-12 text-base font-medium bg-secondary/50 rounded-1/2 flex flex-1 items-center justify-center">
+                <div className="rounded-[14px] bg-accent border border-accent py-[14px] px-4 flex items-center gap-3">
+                  <div className="w-12 h-12 text-base font-medium bg-secondary/50 rounded-[50%] flex items-center justify-center">
                     AT
                   </div>
                   <div>
@@ -109,7 +109,7 @@ export default function ProfilePage() {
 
                 <button
                   onClick={logout}
-                  className="text-base text-red mt-6 p-3.5 font-medium rounded-[14px] bg-red/10 border border-red/40"
+                  className="text-base text-red mt-6 p-3 font-medium rounded-[14px] bg-red/10 border border-red/40"
                 >
                   Hisobdan chiqish
                 </button>
