@@ -22,7 +22,13 @@ export default function ProductActions({ product }) {
 
       {qty === 0 ? (
         <button
-          onClick={() => addToCart({ ...product, count: 1 })}
+          onClick={() =>
+            addToCart({
+              ...product,
+              count: 1,
+              mainImage: `https://api.bunyodoptom.uz${product?.images[0].url}`,
+            })
+          }
           className="w-full h-12 bg-primary text-white rounded-xl"
         >
           Savatga qo'shish

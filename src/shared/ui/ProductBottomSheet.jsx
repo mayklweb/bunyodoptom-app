@@ -1,13 +1,13 @@
 import { useEffect, useState } from "react";
 import { useCartStore } from "../../app/store/useCartStore";
-import { CloseIcon } from "../../assets/icons";
+import { CloseIcon, MinusIcon, PlusIcon } from "../../assets/icons";
 import { motion, AnimatePresence, useMotionValue } from "framer-motion";
 
 function ProductBottomSheet({ product, open, onClose }) {
   const addToCart = useCartStore((s) => s.addToCart);
   const getQuantity = useCartStore((s) => s.getQuantity);
 
-  const qty = getQuantity(product);
+  const qty = getQuantity(product.id);
   // 🔥 Body scroll lock + ESC close
 
   useEffect(() => {
@@ -128,37 +128,33 @@ function ProductBottomSheet({ product, open, onClose }) {
               background: "#fff",
             }}
           >
-            {product.stock_qty > 0 ? (
+            {qty === 0 ? (
               <button
                 onClick={() =>
-                  addToCart(
-                  product
-                  )
+                  addToCart({
+                    ...product,
+                    qty: 1,
+                    mainImage: `https://api.bunyodoptom.uz${product?.images[0].url}`,
+                  })
                 }
-                style={{
-                  width: "100%",
-                  padding: "14px",
-                  borderRadius: "12px",
-                  background: "#2e3192",
-                  color: "#fff",
-                  fontWeight: 600,
-                }}
+                className="w-full h-12 bg-primary text-white rounded-xl"
               >
-                {qty > 0 ? `${qty} ta savatda` : "Savatga qo‘shish"}
+                Savatga qo'shish
               </button>
             ) : (
-              <button
-                disabled
-                style={{
-                  width: "100%",
-                  padding: "14px",
-                  borderRadius: "12px",
-                  background: "#ccc",
-                  color: "#666",
-                }}
-              >
-                Tugagan
-              </button>
+              <div className="flex w-full justify-between bg-primary/10 rounded-xl p-2">
+                <button
+                  onClick={() =>
+                    qty === 1 ? remove(product.id) : dec(product.id)
+                  }
+                >
+                  <MinusIcon />
+                </button>
+                <span>{qty}</span>
+                <button onClick={() => inc(product.id)}>
+                  <PlusIcon />
+                </button>
+              </div>
             )}
           </div>
         </div>
