@@ -7,7 +7,7 @@ function ProductBottomSheet({ product, open, onClose }) {
   const addToCart = useCartStore((s) => s.addToCart);
   const getQuantity = useCartStore((s) => s.getQuantity);
 
-  const qty = getQuantity(product.id);
+  const qty = getQuantity(product?.id);
   // 🔥 Body scroll lock + ESC close
 
   useEffect(() => {
