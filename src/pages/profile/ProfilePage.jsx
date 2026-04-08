@@ -7,6 +7,7 @@ import {
   FileIcon,
   LocationIcon,
   MarketIcon,
+  RightIcon,
 } from "../../assets/icons";
 import { Orders } from "../../features/profile/ui/sections/Order";
 import { Addresses } from "../../features/profile/ui/sections/Addresses";
@@ -61,8 +62,7 @@ export default function ProfilePage() {
   };
 
   const renderSection = (key) => {
-    if (key === "personal")
-      return <PersonalInfo />;
+    if (key === "personal") return <PersonalInfo />;
     return SECTION_MAP[key];
   };
 
@@ -109,11 +109,14 @@ export default function ProfilePage() {
                   <button
                     key={key}
                     onClick={() => handleNav(key)}
-                    className="w-full text-primary text-base py-3 px-4 bg-white flex items-center justify-between border border-primary rounded-[14px]"
+                    className="w-full text-primary text-base py-2 px-1 bg-white flex items-center justify-between border-b border-primary "
                   >
                     <span className="flex items-center gap-3">
                       <span>{icon}</span>
-                      {label}
+                      <span>{label}</span>
+                    </span>
+                    <span>
+                      <RightIcon className={"w-5 h-5"} />
                     </span>
                   </button>
                 ))}
