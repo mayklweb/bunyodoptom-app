@@ -77,22 +77,8 @@ export default function ProfilePage() {
           <div>
             <div className="pt-20">
               <div className="flex flex-col gap-3">
-                <div className="bg-secondary rounded-[14px] border border-primary py-[14px] px-4 flex items-center gap-3">
-                  <div
-                    style={{
-                      width: 48,
-                      height: 48,
-                      borderRadius: "50%",
-                      background: "#e6f1fb",
-                      display: "flex",
-                      alignItems: "center",
-                      justifyContent: "center",
-                      fontSize: 15,
-                      fontWeight: 500,
-                      color: "#185fa5",
-                      flexShrink: 0,
-                    }}
-                  >
+                <div className="rounded-[14px] border border-primary py-[14px] px-4 flex items-center gap-3">
+                  <div className="w-12 h-12 text-base font-medium bg-secondary/50 rounded-1/2 flex flex-1 items-center justify-center">
                     AT
                   </div>
                   <div>
