@@ -37,15 +37,6 @@ function Footer() {
             </span>
             <span className="text-sm font-medium">Savat</span>
           </Link>
-          {/* <Link
-            className="my-4 flex items-center justify-center flex-col gap-1 "
-            to="/cart"
-          >
-            <span>
-              <CartIcon />
-            </span>
-            <span className="text-sm font-medium">Savat</span>
-          </Link> */}
           <Link
             className="my-2 flex items-center justify-center flex-col gap-1 "
             to={"/profile"}

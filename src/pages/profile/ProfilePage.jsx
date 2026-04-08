@@ -28,27 +28,6 @@ const MOCK_USER = {
   id: "USR-0042",
 };
 
-function PlaceholderSection({ title, icon }) {
-  return (
-    <div style={{ display: "flex", flexDirection: "column", gap: 16 }}>
-      <h2 style={{ fontSize: 20, fontWeight: 500 }}>{title}</h2>
-      <div
-        style={{
-          background: "#fff",
-          border: "0.5px solid rgba(0,0,0,0.12)",
-          borderRadius: 12,
-          padding: "48px 24px",
-          textAlign: "center",
-          color: "#aaa",
-        }}
-      >
-        <div style={{ fontSize: 36, marginBottom: 12 }}>{icon}</div>
-        <p style={{ fontSize: 14 }}>{title} bo'limi hozircha bo'sh</p>
-      </div>
-    </div>
-  );
-}
-
 const SECTION_MAP = {
   personal: null, // rendered separately so it receives props
   orders: <Orders />,
@@ -56,12 +35,6 @@ const SECTION_MAP = {
   favorites: <Favorites title="Sevimlilar" icon={<FavoriteIcon />} />,
   shop: <Market title="Do'kon" icon={<MarketIcon />} />,
 };
-
-// ── Sidebar ────────────────────────────────────────────────────────────────
-
-// ── BottomSheet ────────────────────────────────────────────────────────────
-
-// ── App (root) ─────────────────────────────────────────────────────────────
 
 export default function ProfilePage() {
   const [active, setActive] = useState("personal");
@@ -102,7 +75,7 @@ export default function ProfilePage() {
       <div>
         <div className="container">
           <div>
-            <div className="mt-20">
+            <div className="pt-20">
               <div className="flex flex-col gap-3">
                 <div className="bg-secondary rounded-[14px] border border-primary py-[14px] px-4 flex items-center gap-3">
                   <div
