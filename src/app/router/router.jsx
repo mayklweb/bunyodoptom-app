@@ -12,6 +12,7 @@ import CartPage from "../../pages/cart/CartPage";
 import CategoriesPage from "../../pages/categories/CategoriesPage";
 import ProductsPage from "../../pages/products/ProductsPage";
 import ProductPage from "../../pages/product/ProductPage";
+import CheckoutPage from "../../pages/checkout/CheckoutPage";
 
 export default function Router() {
   return (
@@ -22,6 +23,8 @@ export default function Router() {
         <Route path="/categories" element={<CategoriesPage />} />
         <Route path="/categories/:id" element={<ProductsPage />} />
         <Route path="/product/:id" element={<ProductPage />} />
+        <Route path="/checkout" element={<CheckoutPage />} />
+
         {/* Protected routes */}
         <Route
           path="/profile"

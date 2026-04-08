@@ -7,6 +7,7 @@ import {
   LocationIcon,
 } from "../../../../assets/icons";
 import { useCancelOrder, useOrders } from "../../../order/hooks/useOrder";
+import { formatPrice } from "../../../../shared/lib/formatPrice";
 // import { useOrders, useCancelOrder } from "@/app/shared/lib/hooks/useOrders";
 
 // ── Status config keyed to real OrderStatus values ────────────────────────────
@@ -98,7 +99,6 @@ export function Orders() {
   const { mutate: cancelOrder, isPending: isCancelling } = useCancelOrder();
   const [selectedOrder, setSelectedOrder] = useState(null);
 
-  console.log(orders);
 
   return (
     <div className="w-full h-full">
@@ -347,8 +347,6 @@ export function Orders() {
 //   );
 // }
 
-
-
 // import { formatDate, formatPrice } from "@/utils/formatters";
 // import { ChevronDown, Copy, Receipt } from "lucide-react";
 
@@ -384,21 +382,15 @@ export default function OrderCard({ order }) {
       {/* Header */}
       <header className="p-2 border-b border-zinc-300">
         <div className="flex items-start justify-between">
+          <h3 className="font-semibold">Buyurtma №{order.id}</h3>
+
           <span
             className={`px-3 py-1 rounded-full text-sm font-semibold ${getStatusStyle(
-              order.status
+              order.status,
             )}`}
           >
             {getStatusText(order.status)}
           </span>
-          
-          <button
-            onClick={handleCopyOrderId}
-            className="flex items-center gap-2 text-sm text-gray-600 hover:text-gray-900"
-          >
-            <h3 className="font-semibold">Buyurtma №{order.id}</h3>
-            {/* <Copy className="w-4 h-4" /> */}
-          </button>
         </div>
 
         <p className="text-sm text-gray-500">
@@ -424,9 +416,7 @@ export default function OrderCard({ order }) {
               /> */}
               {item.status === "returned" && (
                 <div className="absolute inset-0 bg-black/50 rounded-lg flex items-center justify-center">
-                  <span className="text-xs text-white font-medium">
-                    Bekor
-                  </span>
+                  <span className="text-xs text-white font-medium">Bekor</span>
                 </div>
               )}
             </div>
@@ -452,7 +442,6 @@ export default function OrderCard({ order }) {
 
       {/* Delivery Info */}
       <div className="p-2 space-y-3">
-
         <div>
           <p className="text-xs font-semibold text-gray-900 mb-1">
             Buyurtmani qabul qiluvchi
@@ -467,15 +456,16 @@ export default function OrderCard({ order }) {
         <div className="pt-3 border-t border-zinc-300">
           <div className="flex items-center justify-between">
             <div className="flex gap-1">
-              <span className="text-sm font-medium text-gray-900">Jami {" "}</span>
+              <span className="text-sm font-medium text-gray-900">Jami </span>
               <p className="text-sm font-medium text-zinc-700">
-                {" "} {order.products.length} ta mahsulot
+                {" "}
+                {order.products.length} ta mahsulot
               </p>
             </div>
-            <button className="flex items-center gap-1 text-sm text-blue-600 hover:text-blue-700">
-              Batafsil
+            <p className="flex items-center gap-1 text-sm text-primary font-medium">
+              {order.products.reduce((sum, p) => sum + p.price, 0)?.toLocaleString()} so'm
               {/* <ChevronDown className="w-4 h-4" /> */}
-            </button>
+            </p>
           </div>
         </div>
       </div>
@@ -510,23 +500,25 @@ export default function OrderCard({ order }) {
 
 // Separate component for individual items
 function OrderItem({ item }) {
+
+  console.log(item);
+  
+
   return (
     <div className="flex gap-3">
       <img
-        src={item.image}
-        alt={item.name}
+        src={`https://api.bunyodoptom.uz${item.product.images[0].url}`}
+        alt={item.product.name}
         className="w-20 h-28 object-cover rounded-lg"
       />
-      
+
       <div className="flex-1 flex flex-col justify-between">
-        <h4 className="text-sm text-gray-900 line-clamp-2">
-          {item.name}
-        </h4>
-        
+        <h4 className="text-sm text-gray-900 line-clamp-2">{item.product.name}</h4>
+
         <div className="space-y-1">
           <div className="flex justify-between text-xs">
             <span className="text-gray-500">Soni</span>
-            <span className="text-gray-900">{item.quantity}</span>
+            <span className="text-gray-900">{item.product.quantity}</span>
           </div>
           <div className="flex justify-between text-xs">
             <span className="text-gray-500">Narxi</span>
