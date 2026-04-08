@@ -1,17 +1,14 @@
-import { useState } from "react";
 import { useParams } from "react-router-dom";
 import {
   useProduct,
   useProducts,
 } from "../../features/product/hooks/useProducts";
-import { useCartStore } from "../../app/store/useCartStore";
-import { useFavoritesStore } from "../../app/store/useFavoritesStore";
 import { useShuffledProducts } from "../../features/product/hooks/useShuffledProducts";
 import ProductGallery from "../../features/product/ui/ProductGallery";
 import ProductDetails from "../../features/product/ui/ProductDetails";
 import ProductActions from "../../features/product/ui/ProductActions";
 import RecommendedProducts from "../../features/product/ui/RecommendedProducts";
-import { div } from "framer-motion/client";
+import { useMemo } from "react";
 
 function ProductSkeleton() {
   return (
@@ -70,10 +67,9 @@ function ProductPage() {
   const { data: product, isLoading, isError } = useProduct(id);
   console.log(product);
 
-  const { getQuantity } = useCartStore();
-
   const { data: products } = useProducts();
-  const filtred = normalizeProducts(products);
+  const filtred = useMemo(() => normalizeProducts(products), [products]);
+
   const recomendedProduct = useShuffledProducts(filtred, 20);
 
   if (isLoading) return <ProductSkeleton />;

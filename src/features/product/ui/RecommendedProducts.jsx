@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import ProductCard from "./ProductCard";
 
-export default function RecommendedProducts({ products, getQuantity, isFavorite, toggleFavorite }) {
+export default function RecommendedProducts({ products}) {
   return (
     <section className="mt-10 pb-20">
       <div className="container">
@@ -9,9 +9,7 @@ export default function RecommendedProducts({ products, getQuantity, isFavorite,
 
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3">
           {products.map((item) => (
-            <Link key={item.id} to={`/product/${item.id}`}>
               <ProductCard product={item} />
-            </Link>
           ))}
         </div>
       </div>

@@ -1,7 +1,4 @@
-// import ProductModal from "@/app/components/ProductModal/ProductModal";
-// import { useProductModal } from "@/app/shared/lib/hooks/useProductModal";
-// import { useProducts } from "@/app/shared/lib/hooks/useProducts";
-// import { useShuffledProducts } from "@/app/shared/lib/hooks/useShuffledProducts";
+import { useMemo } from "react";
 import { useUIStore } from "../../../app/store/useUIStore";
 import { useProducts } from "../../../features/product/hooks/useProducts";
 import { useShuffledProducts } from "../../../features/product/hooks/useShuffledProducts";
@@ -58,11 +55,11 @@ function normalizeProducts(products) {
 
 function FavoriteProducts() {
   const { data: products, isLoading, isError } = useProducts();
-  const filtred = normalizeProducts(products);
   const { selectedProduct, openModal, closeModal } = useUIStore();
+  
+const filtred = useMemo(() => normalizeProducts(products), [products]);
 
-  // const favoriteProducts = useShuffledProducts(products, 8);
-  const favoriteProducts = useShuffledProducts(filtred, 10);
+const favoriteProducts = useShuffledProducts(filtred, 20);
 
   if (isLoading) return <FavoriteProductsSkeleton />;
   if (isError) return <div>Error</div>;

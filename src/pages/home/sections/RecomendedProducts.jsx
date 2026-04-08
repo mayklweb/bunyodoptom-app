@@ -1,3 +1,4 @@
+import { useMemo } from "react";
 import { useUIStore } from "../../../app/store/useUIStore";
 import { useProducts } from "../../../features/product/hooks/useProducts";
 import { useShuffledProducts } from "../../../features/product/hooks/useShuffledProducts";
@@ -55,8 +56,12 @@ function normalizeProducts(products) {
 
 function RecomendedProducts() {
   const { data: products, isLoading, isError } = useProducts();
-  const filtred = normalizeProducts(products);
-  const recomendedProduct = useShuffledProducts(filtred, 20);
+
+  const filtred = useMemo(() => normalizeProducts(products), [products]);
+
+const recomendedProduct = useShuffledProducts(filtred, 20);
+
+
 
   const { selectedProduct, openModal, closeModal } = useUIStore();
 
