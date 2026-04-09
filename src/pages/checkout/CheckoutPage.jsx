@@ -50,17 +50,17 @@ export function CheckoutPage() {
   };
 
   return (
-    <div className="bg-gray-50">
+    <div className="">
+      <div className="bg-white p-4 shadow-sm ">
+        <h1 className="text-xl font-bold text-gray-900">
+          Buyurtmani tasdiqlash
+        </h1>
+      </div>
       <div className="container">
         <div>
           {/* Header */}
-          <div className="bg-white p-4 shadow-sm ">
-            <h1 className="text-xl font-bold text-gray-900">
-              Buyurtmani tasdiqlash
-            </h1>
-          </div>
 
-          <div className="">
+          <div className="flex flex-col gap-2.5">
             {/* 1. User Info */}
             <div className="bg-white rounded-xl p-4 shadow-sm">
               <h3 className="text-sm font-semibold text-zonc-900 mb-3">
