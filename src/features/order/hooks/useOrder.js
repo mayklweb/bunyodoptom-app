@@ -24,6 +24,18 @@ export function useOrder(id) {
   });
 }
 
+export const useCheckout = () => {
+  const queryClient = useQueryClient();
+
+  return useMutation({
+    mutationFn: (data) => ordersApi.checkout(data),
+
+    onSuccess: () => {
+      queryClient.invalidateQueries(["orders"]);
+    },
+  });
+};
+
 // 🔹 cancel
 export function useCancelOrder() {
   const queryClient = useQueryClient();

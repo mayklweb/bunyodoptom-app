@@ -3,7 +3,7 @@ import { useState } from "react";
 import { useAddMarket } from '../../features/markets/hooks/useMarkets';
 import { CloseIcon } from '../../assets/icons';
 
-function MarketRegisterModal() {
+function MarketRegisterModal({onClose, onSuccess}) {
     const { mutate: createMarket, isPending } = useAddMarket();
   const [form, setForm] = useState({
     name: "",

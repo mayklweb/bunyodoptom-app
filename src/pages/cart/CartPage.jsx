@@ -1,6 +1,5 @@
-"use client";
 import { useState, useEffect } from "react";
-import { Navigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useUIStore } from "../../app/store/useUIStore";
 import CartItemCard from "../../widgets/cart/CartItemCard";
 import SelectAllToggle from "../../widgets/cart/SelectAllToggle";
@@ -10,7 +9,7 @@ import { useCartStore } from "../../app/store/useCartStore";
 import { useProfile } from "../../features/auth/hooks/useAuthUser";
 import { useMarkets } from "../../features/markets/hooks/useMarkets";
 import { useAddresses } from "../../features/addresses/hooks/useAddresses";
-import { div } from "framer-motion/client";
+import MarketRegisterModal from "../../shared/ui/MarketRegisterModal";
 
 function CartPage() {
   const {
@@ -28,7 +27,7 @@ function CartPage() {
   } = useCartStore();
 
   const { setActiveSection, activeSection } = useUIStore();
-  // const navigate = Navigate();
+  const navigate = useNavigate();
 
   console.log(cart);
 
@@ -61,93 +60,117 @@ function CartPage() {
     };
   }, [isModalOpen]);
 
+  // function handleCheckout() {
+  //   if (isLoading) return;
+
+  //   if (!hasMarket && !pendingMarketId) {
+  //     setShowMarketModal(true);
+  //     return;
+  //   }
+
+  //   proceedToCheckout(pendingMarketId ?? myMarket?.id ?? null);
+  // }
+
+  // function handleMarketRegistered(marketId) {
+  //   setPendingMarketId(marketId);
+  //   setShowMarketModal(false);
+  //   proceedToCheckout(marketId);
+  // }
+
+  // const proceedToCheckout = (marketId) => {
+  //   if (!user) {
+  //     alert(
+  //       "Пожалуйста, войдите в систему, чтобы продолжить оформление заказа.",
+  //     );
+  //     return;
+  //   }
+
+  //   if (!marketId) {
+  //     alert("Пожалуйста, выберите магазин.");
+  //     return;
+  //   }
+
+  //   if (!selectedAddressId) {
+  //     alert("Пожалуйста, выберите адрес доставки.");
+  //     return;
+  //   }
+
+  //   const products = selectedItems().map((item) => ({
+  //     id: item.id,
+  //     name: item.name,
+  //     price: item.price,
+  //     qty: item.count ?? 1,
+  //   }));
+
+  //   const totalAmount = selectedItems().reduce(
+  //     (sum, item) => sum + item.price * item.count,
+  //     0,
+  //   );
+
+  //   checkout(
+  //     {
+  //       user_id: parseInt(user.id),
+  //       total_amount: totalAmount,
+  //       address_id: selectedAddressId,
+  //       market_id: marketId,
+  //       payment_method: paymentMethod,
+  //       payed: false,
+  //       status: "preparing",
+  //       products: products,
+  //     },
+  //     {
+  //       onSuccess: () => {
+  //         setIsModalOpen(false);
+
+  //         // ✅ Set active section to orders in the store
+  //         setActiveSection("orders");
+
+  //         // ✅ Optional: Clear cart after successful checkout
+  //         clearCart();
+
+  //         // ✅ Optional: Show success message
+
+  //         // ✅ Redirect to account page
+  //         router.push("/profile");
+  //       },
+  //       onError: (error) => {
+  //         console.error("Checkout failed:", error);
+  //         alert(
+  //           "Buyurtma yuborishda xatolik yuz berdi. Iltimos, qayta urinib ko'ring.",
+  //         );
+  //       },
+  //     },
+  //   );
+
+  //   setIsModalOpen(false);
+  // };
+
+  const canCheckout =
+    selectedItems().length > 0 && !!selectedAddressId && !isPending;
+
   function handleCheckout() {
     if (isLoading) return;
+
+    const items = selectedItems();
+
+    if (!user) {
+      alert("Login qiling");
+      return;
+    }
+
+    if (!items.length) {
+      alert("Cart bo‘sh");
+      return;
+    }
 
     if (!hasMarket && !pendingMarketId) {
       setShowMarketModal(true);
       return;
     }
 
-    proceedToCheckout(pendingMarketId ?? myMarket?.id ?? null);
+    // ✅ HAMMASI OK → CHECKOUT PAGE
+    navigate("/checkout");
   }
-
-  function handleMarketRegistered(marketId) {
-    setPendingMarketId(marketId);
-    setShowMarketModal(false);
-    proceedToCheckout(marketId);
-  }
-
-  const proceedToCheckout = (marketId) => {
-    if (!user) {
-      alert(
-        "Пожалуйста, войдите в систему, чтобы продолжить оформление заказа.",
-      );
-      return;
-    }
-
-    if (!marketId) {
-      alert("Пожалуйста, выберите магазин.");
-      return;
-    }
-
-    if (!selectedAddressId) {
-      alert("Пожалуйста, выберите адрес доставки.");
-      return;
-    }
-
-    const products = selectedItems().map((item) => ({
-      id: item.id,
-      name: item.name,
-      price: item.price,
-      qty: item.count ?? 1,
-    }));
-
-    const totalAmount = selectedItems().reduce(
-      (sum, item) => sum + item.price * item.count,
-      0,
-    );
-
-    checkout(
-      {
-        user_id: parseInt(user.id),
-        total_amount: totalAmount,
-        address_id: selectedAddressId,
-        market_id: marketId,
-        payment_method: paymentMethod,
-        payed: false,
-        status: "preparing",
-        products: products,
-      },
-      {
-        onSuccess: () => {
-          setIsModalOpen(false);
-
-          // ✅ Set active section to orders in the store
-          setActiveSection("orders");
-
-          // ✅ Optional: Clear cart after successful checkout
-          clearCart();
-
-          // ✅ Optional: Show success message
-
-          // ✅ Redirect to account page
-          router.push("/profile");
-        },
-        onError: (error) => {
-          console.error("Checkout failed:", error);
-          alert(
-            "Buyurtma yuborishda xatolik yuz berdi. Iltimos, qayta urinib ko'ring.",
-          );
-        },
-      },
-    );
-
-    setIsModalOpen(false);
-  };
-
-  const canCheckout =
-    selectedItems().length > 0 && !!selectedAddressId && !isPending;
 
   return (
     <>
@@ -170,14 +193,14 @@ function CartPage() {
                 <div className="flex flex-col gap-3">
                   {cart.map((item) => (
                     // <div className="border-[1px] border-top">
-                      <CartItemCard
-                        key={item.id}
-                        item={item}
-                        isSelected={selectedIds.includes(item.id)}
-                        onToggle={toggleItem}
-                        onChangeQty={changeQty}
-                        onRemove={remove}
-                      />
+                    <CartItemCard
+                      key={item.id}
+                      item={item}
+                      isSelected={selectedIds.includes(item.id)}
+                      onToggle={toggleItem}
+                      onChangeQty={changeQty}
+                      onRemove={remove}
+                    />
                     // </div>
                   ))}
                 </div>
@@ -209,6 +232,17 @@ function CartPage() {
             /> */}
             </div>
           )}
+
+          <div className="fixed left-0 bottom-16 w-full bg-white rounded-t-xl shadow-md border-t border-accent p-4 flex items-center justify-between gap-3 lg:hidden">
+            <div className="flex flex-col text-sm shrink-0">
+              {/* <p className="text-gray-500">Mahsulotlar {totalCount} dona</p> */}
+              {/* <p className="font-semibold">{total.toLocaleString()} so'm</p> */}
+            </div>
+
+            <button onClick={handleCheckout} className="flex-1 py-3 rounded-xl bg-primary text-white text-sm font-medium disabled:opacity-40 cursor-pointer hover:opacity-90 transition-opacity">
+              Buyurtma berish
+            </button>
+          </div>
         </div>
 
         {showMarketModal && (
