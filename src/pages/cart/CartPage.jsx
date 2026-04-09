@@ -29,28 +29,27 @@ function CartPage() {
   const { setActiveSection, activeSection } = useUIStore();
   const navigate = useNavigate();
 
-  console.log(cart);
-
   const { data: user } = useProfile();
   const { data: addresses } = useAddresses();
-  // const { mutate: checkout, isPending } = useCheckout();
-  const { hasMarket, myMarket, isLoading } = useMarkets();
+  const { data: market, isLoading } = useMarkets();
+
+  console.log(totalCount);
 
   const [selectedAddressId, setSelectedAddressId] = useState(null);
   const [paymentMethod, setPaymentMethod] = useState("cash");
-  const [isModalOpen, setIsModalOpen] = useState(false);
   const [showMarketModal, setShowMarketModal] = useState(false);
-  const [pendingMarketId, setPendingMarketId] = useState(null);
 
+  // Auto-select default address
   useEffect(() => {
     if (addresses && !selectedAddressId) {
       const defaultAddr = addresses.find((a) => a.is_default);
       if (defaultAddr) setSelectedAddressId(defaultAddr.id);
     }
-  }, [addresses]);
+  }, [addresses, selectedAddressId]);
 
+  // Prevent body scroll when modal is open
   useEffect(() => {
-    if (isModalOpen) {
+    if (showMarketModal) {
       document.body.style.overflow = "hidden";
     } else {
       document.body.style.overflow = "";
@@ -58,95 +57,7 @@ function CartPage() {
     return () => {
       document.body.style.overflow = "";
     };
-  }, [isModalOpen]);
-
-  // function handleCheckout() {
-  //   if (isLoading) return;
-
-  //   if (!hasMarket && !pendingMarketId) {
-  //     setShowMarketModal(true);
-  //     return;
-  //   }
-
-  //   proceedToCheckout(pendingMarketId ?? myMarket?.id ?? null);
-  // }
-
-  // function handleMarketRegistered(marketId) {
-  //   setPendingMarketId(marketId);
-  //   setShowMarketModal(false);
-  //   proceedToCheckout(marketId);
-  // }
-
-  // const proceedToCheckout = (marketId) => {
-  //   if (!user) {
-  //     alert(
-  //       "Пожалуйста, войдите в систему, чтобы продолжить оформление заказа.",
-  //     );
-  //     return;
-  //   }
-
-  //   if (!marketId) {
-  //     alert("Пожалуйста, выберите магазин.");
-  //     return;
-  //   }
-
-  //   if (!selectedAddressId) {
-  //     alert("Пожалуйста, выберите адрес доставки.");
-  //     return;
-  //   }
-
-  //   const products = selectedItems().map((item) => ({
-  //     id: item.id,
-  //     name: item.name,
-  //     price: item.price,
-  //     qty: item.count ?? 1,
-  //   }));
-
-  //   const totalAmount = selectedItems().reduce(
-  //     (sum, item) => sum + item.price * item.count,
-  //     0,
-  //   );
-
-  //   checkout(
-  //     {
-  //       user_id: parseInt(user.id),
-  //       total_amount: totalAmount,
-  //       address_id: selectedAddressId,
-  //       market_id: marketId,
-  //       payment_method: paymentMethod,
-  //       payed: false,
-  //       status: "preparing",
-  //       products: products,
-  //     },
-  //     {
-  //       onSuccess: () => {
-  //         setIsModalOpen(false);
-
-  //         // ✅ Set active section to orders in the store
-  //         setActiveSection("orders");
-
-  //         // ✅ Optional: Clear cart after successful checkout
-  //         clearCart();
-
-  //         // ✅ Optional: Show success message
-
-  //         // ✅ Redirect to account page
-  //         router.push("/profile");
-  //       },
-  //       onError: (error) => {
-  //         console.error("Checkout failed:", error);
-  //         alert(
-  //           "Buyurtma yuborishda xatolik yuz berdi. Iltimos, qayta urinib ko'ring.",
-  //         );
-  //       },
-  //     },
-  //   );
-
-  //   setIsModalOpen(false);
-  // };
-
-  const canCheckout =
-    selectedItems().length > 0 && !!selectedAddressId && !isPending;
+  }, [showMarketModal]);
 
   function handleCheckout() {
     if (isLoading) return;
@@ -154,23 +65,32 @@ function CartPage() {
     const items = selectedItems();
 
     if (!user) {
-      alert("Login qiling");
+      alert("Buyurtma berish uchun tizimga kiring");
+      navigate("/login");
       return;
     }
 
     if (!items.length) {
-      alert("Cart bo‘sh");
+      alert("Kamida bitta mahsulot tanlang");
       return;
     }
 
-    if (!hasMarket && !pendingMarketId) {
+    if (!market || market.length === 0) {
       setShowMarketModal(true);
       return;
     }
 
-    // ✅ HAMMASI OK → CHECKOUT PAGE
+    // All checks passed - go to checkout
     navigate("/checkout");
   }
+
+  function handleMarketRegistered(marketId) {
+    setShowMarketModal(false);
+    // After successful registration, proceed to checkout
+    navigate("/checkout");
+  }
+
+  const canCheckout = selectedItems().length > 0 && !isLoading;
 
   return (
     <>
@@ -182,7 +102,6 @@ function CartPage() {
             <EmptyCart />
           ) : (
             <div className="flex flex-col lg:flex-row items-start gap-5">
-              {/* Cart items section */}
               <div className="w-full lg:w-7/10 flex flex-col gap-5">
                 <SelectAllToggle
                   isAllSelected={allSelected()}
@@ -192,7 +111,6 @@ function CartPage() {
 
                 <div className="flex flex-col gap-3">
                   {cart.map((item) => (
-                    // <div className="border-[1px] border-top">
                     <CartItemCard
                       key={item.id}
                       item={item}
@@ -201,50 +119,29 @@ function CartPage() {
                       onChangeQty={changeQty}
                       onRemove={remove}
                     />
-                    // </div>
                   ))}
                 </div>
               </div>
-
-              {/* Mobile bottom bar */}
-              {/* <MobileBottomBar
-              totalCount={totalCount()}
-              total={total()}
-              selectedCount={selectedItems().length}
-              onCheckout={() => setIsModalOpen(true)}
-            /> */}
-
-              {/* Mobile checkout modal
-            <CheckoutModal
-              isOpen={isModalOpen}
-              onClose={() => setIsModalOpen(false)}
-              user={user}
-              addresses={addresses ?? []}
-              selectedAddressId={selectedAddressId}
-              onSelectAddress={setSelectedAddressId}
-              paymentMethod={paymentMethod}
-              onPaymentMethodChange={setPaymentMethod}
-              totalCount={totalCount()}
-              total={total()}
-              canCheckout={canCheckout}
-              isPending={isPending}
-              onCheckout={handleCheckout}
-            /> */}
             </div>
           )}
 
           <div className="fixed left-0 bottom-16 w-full bg-white rounded-t-xl shadow-md border-t border-accent p-4 flex items-center justify-between gap-3 lg:hidden">
             <div className="flex flex-col text-sm shrink-0">
-              {/* <p className="text-gray-500">Mahsulotlar {totalCount} dona</p> */}
-              {/* <p className="font-semibold">{total.toLocaleString()} so'm</p> */}
+              <p className="text-gray-500">Mahsulotlar {totalCount()} dona</p>
+              <p className="font-semibold">{total().toLocaleString()} so'm</p>
             </div>
 
-            <button onClick={handleCheckout} className="flex-1 py-3 rounded-xl bg-primary text-white text-sm font-medium disabled:opacity-40 cursor-pointer hover:opacity-90 transition-opacity">
-              Buyurtma berish
+            <button
+              onClick={handleCheckout}
+              disabled={!canCheckout}
+              className="flex-1 py-3 rounded-xl bg-primary text-white text-sm font-medium disabled:opacity-40 cursor-pointer hover:opacity-90 transition-opacity"
+            >
+              {isLoading ? "Yuklanmoqda..." : "Buyurtma berish"}
             </button>
           </div>
         </div>
 
+        {/* ✅ FIXED MODAL */}
         {showMarketModal && (
           <MarketRegisterModal
             onSuccess={handleMarketRegistered}

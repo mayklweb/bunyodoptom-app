@@ -23,7 +23,6 @@ export default function Router() {
         <Route path="/categories" element={<CategoriesPage />} />
         <Route path="/categories/:id" element={<ProductsPage />} />
         <Route path="/product/:id" element={<ProductPage />} />
-        <Route path="/checkout" element={<CheckoutPage />} />
 
         {/* Protected routes */}
         <Route
@@ -40,6 +39,7 @@ export default function Router() {
       <Route element={<AuthLayout />}>
         <Route path="/login" element={<LoginPage />} />
         <Route path="/signup" element={<SignupPage />} />
+        <Route path="/checkout" element={<CheckoutPage />} />
       </Route>
 
       {/* Catch all */}
