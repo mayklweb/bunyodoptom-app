@@ -95,7 +95,7 @@ function CartPage() {
   return (
     <>
       <div className="container">
-        <div className="w-full h-full flex flex-col py-20">
+        <div className="w-full h-full flex flex-col pt-20 pb-32">
           <CartHeader />
 
           {cart.length === 0 ? (
@@ -125,7 +125,7 @@ function CartPage() {
             </div>
           )}
 
-          <div className="fixed left-0 bottom-16 w-full bg-white rounded-t-xl shadow-md border-t border-accent p-4 flex items-center justify-between gap-3 lg:hidden">
+          <div className="fixed left-0 bottom-16 w-full bg-white rounded-t-xl shadow-md border-t border-accent py-2 px-4 flex items-center justify-between gap-3">
             <div className="flex flex-col text-sm shrink-0">
               <p className="text-gray-500">Mahsulotlar {totalCount()} dona</p>
               <p className="font-semibold">{total().toLocaleString()} so'm</p>
@@ -134,7 +134,7 @@ function CartPage() {
             <button
               onClick={handleCheckout}
               disabled={!canCheckout}
-              className="flex-1 py-3 rounded-xl bg-primary text-white text-sm font-medium disabled:opacity-40 cursor-pointer hover:opacity-90 transition-opacity"
+              className="py-2 px-5 rounded-lg bg-primary text-white text-sm font-medium disabled:opacity-40"
             >
               {isLoading ? "Yuklanmoqda..." : "Buyurtma berish"}
             </button>
