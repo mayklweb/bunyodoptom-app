@@ -63,7 +63,7 @@ export function CheckoutPage() {
           <div className="">
             {/* 1. User Info */}
             <div className="bg-white rounded-xl p-4 shadow-sm">
-              <h3 className="text-sm font-semibold text-gray-900 mb-3">
+              <h3 className="text-sm font-semibold text-zonc-900 mb-3">
                 Foydalanuvchi
               </h3>
               <div className="flex items-center gap-3">
@@ -71,23 +71,23 @@ export function CheckoutPage() {
                   <span className="text-xl">👤</span>
                 </div>
                 <div>
-                  <p className="font-medium text-gray-900">
+                  <p className="font-medium text-zinc-900">
                     {user?.name || "Ism kiritilmagan"}
                   </p>
-                  <p className="text-sm text-gray-500">+998 {user?.phone}</p>
+                  <p className="text-sm text-zinc-500">+998 {user?.phone}</p>
                 </div>
               </div>
             </div>
             {/* 2. Address */}
             {orderType === "delivery" && (
               <div className="bg-white rounded-xl p-4 shadow-sm">
-                <h3 className="text-sm font-semibold text-gray-900 mb-3">
+                <h3 className="text-sm font-semibold text-zinc-900 mb-3">
                   📍 Yetkazib berish manzili
                 </h3>
                 {addresses.length === 0 ? (
                   <button
                     onClick={() => navigate("/addresses/new")}
-                    className="w-full py-3 border-2 border-dashed border-gray-300 rounded-lg text-sm text-gray-500 hover:border-primary hover:text-primary transition-colors"
+                    className="w-full py-3 border border-dashed border-zinc-300 rounded-lg text-sm text-zinc-500 hover:border-primary hover:text-primary transition-colors"
                   >
                     + Manzil qo'shish
                   </button>
@@ -96,10 +96,10 @@ export function CheckoutPage() {
                     {addresses.map((addr) => (
                       <label
                         key={addr.id}
-                        className={`flex items-start gap-3 p-3 rounded-lg border-2 cursor-pointer transition-colors ${
+                        className={`flex items-start gap-3 p-3 rounded-lg border cursor-pointer transition-colors ${
                           selectedAddressId === addr.id
                             ? "border-primary bg-primary/5"
-                            : "border-gray-200 hover:border-gray-300"
+                            : "border-zinc-200 hover:border-zinc-300"
                         }`}
                       >
                         <input
@@ -110,10 +110,10 @@ export function CheckoutPage() {
                           className="mt-1"
                         />
                         <div className="flex-1 text-sm">
-                          <p className="font-medium text-gray-900">
+                          <p className="font-medium text-zinc-900">
                             {addr.region}, {addr.district}
                           </p>
-                          <p className="text-gray-600">{addr.address}</p>
+                          <p className="text-zinc-600">{addr.address}</p>
                         </div>
                       </label>
                     ))}
@@ -124,20 +124,20 @@ export function CheckoutPage() {
 
             {orderType && (
               <div className="bg-white rounded-xl p-4 shadow-sm">
-                <h3 className="text-sm font-semibold text-gray-900 mb-3">
+                <h3 className="text-sm font-semibold text-zinc-900 mb-3">
                   🏪 Do'kon tanlang
                 </h3>
                 {markets.length === 0 ? (
-                  <p className="text-sm text-gray-500">Do'konlar topilmadi</p>
+                  <p className="text-sm text-zinc-500">Do'konlar topilmadi</p>
                 ) : (
                   <div className="space-y-2">
                     {markets.map((market) => (
                       <label
                         key={market.id}
-                        className={`flex items-start gap-3 p-3 rounded-lg border-2 cursor-pointer transition-colors ${
+                        className={`flex items-start gap-3 p-3 rounded-lg border cursor-pointer transition-colors ${
                           selectedMarketId === market.id
                             ? "border-primary bg-primary/5"
-                            : "border-gray-200 hover:border-gray-300"
+                            : "border-zinc-200 hover:border-zinc-300"
                         }`}
                       >
                         <input
@@ -148,13 +148,13 @@ export function CheckoutPage() {
                           className="mt-1"
                         />
                         <div className="flex-1 text-sm">
-                          <p className="font-medium text-gray-900">
+                          <p className="font-medium text-zinc-900">
                             {market.name}
                           </p>
-                          <p className="text-gray-600">
+                          <p className="text-zinc-600">
                             {market.region}, {market.district}
                           </p>
-                          <p className="text-gray-500 text-xs">
+                          <p className="text-zinc-500 text-xs">
                             {market.address}
                           </p>
                         </div>
@@ -167,7 +167,7 @@ export function CheckoutPage() {
 
             {/* 4. Products */}
             <div className="bg-white rounded-xl p-4 shadow-sm">
-              <h3 className="text-sm font-semibold text-gray-900 mb-3">
+              <h3 className="text-sm font-semibold text-zinc-900 mb-3">
                 📦 Mahsulotlar ({totalCount()} dona)
               </h3>
               <div className="space-y-3">
@@ -180,13 +180,13 @@ export function CheckoutPage() {
                         "/placeholder.png"
                       }
                       alt={item.name}
-                      className="w-16 h-16 rounded-lg object-cover bg-gray-100"
+                      className="w-16 h-16 rounded-lg object-cover bg-zinc-100"
                     />
                     <div className="flex-1 min-w-0">
-                      <p className="text-sm font-medium text-gray-900 truncate">
+                      <p className="text-sm font-medium text-zinc-900 truncate">
                         {item.name}
                       </p>
-                      <p className="text-xs text-gray-500">{item.qty} dona</p>
+                      <p className="text-xs text-zinc-500">{item.qty} dona</p>
                       <p className="text-sm font-semibold text-primary">
                         {(item.price * item.qty).toLocaleString()} so'm
                       </p>
@@ -198,15 +198,15 @@ export function CheckoutPage() {
 
             {/* 6. Payment Method */}
             <div className="bg-white rounded-xl p-4 shadow-sm">
-              <h3 className="text-sm font-semibold text-gray-900 mb-3">
+              <h3 className="text-sm font-semibold text-zinc-900 mb-3">
                 💳 To'lov usuli
               </h3>
               <div className="space-y-2">
                 <label
-                  className={`flex items-center gap-3 p-3 rounded-lg border-2 cursor-pointer transition-colors ${
+                  className={`flex items-center gap-3 p-3 rounded-lg border cursor-pointer transition-colors ${
                     paymentMethod === "cash"
                       ? "border-primary bg-primary/5"
-                      : "border-gray-200 hover:border-gray-300"
+                      : "border-zinc-200 hover:border-zinc-300"
                   }`}
                 >
                   <input
@@ -217,13 +217,13 @@ export function CheckoutPage() {
                     onChange={(e) => setPaymentMethod(e.target.value)}
                   />
                   <span className="text-2xl">💵</span>
-                  <span className="font-medium text-gray-900">Naqd pul</span>
+                  <span className="font-medium text-zinc-900">Naqd pul</span>
                 </label>
                 <label
-                  className={`flex items-center gap-3 p-3 rounded-lg border-2 cursor-pointer transition-colors ${
+                  className={`flex items-center gap-3 p-3 rounded-lg border cursor-pointer transition-colors ${
                     paymentMethod === "click"
                       ? "border-primary bg-primary/5"
-                      : "border-gray-200 hover:border-gray-300"
+                      : "border-zinc-200 hover:border-zinc-300"
                   }`}
                 >
                   <input
@@ -234,15 +234,15 @@ export function CheckoutPage() {
                     onChange={(e) => setPaymentMethod(e.target.value)}
                   />
                   <span className="text-2xl">💳</span>
-                  <span className="font-medium text-gray-900">Click</span>
+                  <span className="font-medium text-zinc-900">Click</span>
                 </label>
               </div>
             </div>
             {/* Total & Checkout Button */}
             <div className="bg-white rounded-xl p-4 shadow-sm">
               <div className="flex items-center justify-between mb-4">
-                <span className="text-sm text-gray-500">Jami summa</span>
-                <span className="text-2xl font-bold text-gray-900">
+                <span className="text-sm text-zinc-500">Jami summa</span>
+                <span className="text-2xl font-bold text-zinc-900">
                   {total().toLocaleString()} so'm
                 </span>
               </div>
