@@ -77,7 +77,7 @@ export default function ProfilePage() {
           <div>
             <div className="pt-20">
               <div className="flex flex-col gap-3">
-                <div className="rounded-[14px] bg-accent border border-accent py-[14px] px-4 flex items-center gap-3">
+                <div className="rounded-[14px] bg-white border border-accent py-[14px] px-4 flex items-center gap-3">
                   <div className="w-12 h-12 text-base font-medium bg-secondary/50 rounded-[50%] flex items-center justify-center">
                     AT
                   </div>
@@ -95,7 +95,7 @@ export default function ProfilePage() {
                   <button
                     key={key}
                     onClick={() => handleNav(key)}
-                    className="w-full text-primary text-base py-2 px-1 bg-white flex items-center justify-between border-b border-primary "
+                    className="w-full text-primary text-base py-2 px-1 flex items-center justify-between border-b border-primary "
                   >
                     <span className="flex items-center gap-3">
                       <span>{icon}</span>

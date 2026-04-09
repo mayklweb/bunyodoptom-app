@@ -7,7 +7,7 @@ function Footer() {
   const { data: user } = useProfile();
 
   return (
-    <footer className="fixed z-[4] bottom-0 left-0 w-full border-t-[0.5px] border-solid border-[#999] bg-[#FAFAFA] px-2">
+    <footer className="fixed z-[4] bottom-0 left-0 w-full border-t-[0.5px] border-solid border-[#999] bg-white px-2">
       <div className="container">
         <div className="flex items-center justify-between">
           <Link
