@@ -82,7 +82,7 @@ export function CheckoutPage() {
             {orderType === "delivery" && (
               <div className="bg-white rounded-xl p-4 shadow-sm">
                 <h3 className="text-sm font-semibold text-zinc-900 mb-3">
-                  📍 Yetkazib berish manzili
+                  Yetkazib berish manzili
                 </h3>
                 {addresses.length === 0 ? (
                   <button
@@ -125,7 +125,7 @@ export function CheckoutPage() {
             {orderType && (
               <div className="bg-white rounded-xl p-4 shadow-sm">
                 <h3 className="text-sm font-semibold text-zinc-900 mb-3">
-                  🏪 Do'kon tanlang
+                  Do'kon tanlang
                 </h3>
                 {markets.length === 0 ? (
                   <p className="text-sm text-zinc-500">Do'konlar topilmadi</p>
@@ -168,7 +168,7 @@ export function CheckoutPage() {
             {/* 4. Products */}
             <div className="bg-white rounded-xl p-4 shadow-sm">
               <h3 className="text-sm font-semibold text-zinc-900 mb-3">
-                📦 Mahsulotlar ({totalCount()} dona)
+                Mahsulotlar ({totalCount()} dona)
               </h3>
               <div className="space-y-3">
                 {selectedProducts.map((item) => (
@@ -199,7 +199,7 @@ export function CheckoutPage() {
             {/* 6. Payment Method */}
             <div className="bg-white rounded-xl p-4 shadow-sm">
               <h3 className="text-sm font-semibold text-zinc-900 mb-3">
-                💳 To'lov usuli
+                To'lov usuli
               </h3>
               <div className="space-y-2">
                 <label
