@@ -60,7 +60,7 @@ export function CheckoutPage() {
         <div>
           {/* Header */}
 
-          <div className="flex flex-col gap-2.5">
+          <div className="flex flex-col gap-5">
             {/* 1. User Info */}
             <div className="bg-white rounded-xl p-4 shadow-sm">
               <h3 className="text-sm font-semibold text-zonc-900 mb-3">
