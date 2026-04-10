@@ -1,53 +1,59 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useCartStore } from "../../app/store/useCartStore";
-import { useAddAddress } from "../../features/addresses/hooks/useAddresses";
 import { useProfile } from "../../features/auth/hooks/useAuthUser";
 import { useMarkets } from "../../features/markets/hooks/useMarkets";
 import { useCheckout } from "../../features/order/hooks/useOrder";
+import { useAddAddress } from "../../features/addresses/hooks/useAddresses";
 
 export function CheckoutPage() {
   const navigate = useNavigate();
   const { data: user } = useProfile();
-  const { data: addresses = [] } = useAddAddress();
-  const { data: markets = [] } = useMarkets();
-  const { cart, selectedIds, clearSelected, total, totalCount } =
-    useCartStore();
+  const { data: addresses, isPending: loadingAddress } = useAddAddress();
+  const { data: markets } = useMarkets();
   const { mutate: checkout, isPending } = useCheckout();
+  const { cart, selectedIds, clearSelected, total, totalCount, selectedItems } =
+    useCartStore();
 
-  const [selectedAddressId, setSelectedAddressId] = useState(null);
-  const [selectedMarketId, setSelectedMarketId] = useState(null);
+  const [selectedAddressId, setSelectedAddressId] = useState(6);
+  const [selectedMarketId, setSelectedMarketId] = useState(10);
   const [paymentMethod, setPaymentMethod] = useState("cash");
-  const [orderType, setOrderType] = useState("delivery"); // delivery or pickup
+  const [orderType, setOrderType] = useState("pickup"); // delivery or pickup
 
   const selectedProducts = cart.filter((item) => selectedIds.includes(item.id));
 
+  const products = selectedItems().map((item) => ({
+    ...item,
+    qty: item.count ?? 1,
+  }));
+
   const canCheckout =
-    selectedProducts.length > 0 &&
-    (orderType === "pickup" ? selectedMarketId : selectedAddressId);
+    selectedProducts.length > 0 && selectedMarketId && selectedAddressId;
 
   const onCheckout = () => {
     if (!canCheckout) return;
 
     checkout(
       {
-        address_id: orderType === "delivery" ? selectedAddressId : null,
-        market_id: orderType === "pickup" ? selectedMarketId : null,
+        user_id: parseInt(user.id),
+        total_amount: 1000000,
+        address_id: selectedAddressId,
+        market_id: selectedMarketId,
         payment_method: paymentMethod,
+        payed: false,
         status: "preparing",
-        products: selectedProducts.map((item) => ({
-          id: item.id,
-          qty: item.qty,
-        })),
+        products: products,
       },
       {
         onSuccess: (data) => {
-          clearSelected();
-          navigate(`/orders/${data.data.id}`);
+          clearSelected;
+          navigate(`/profile`);
         },
       },
     );
   };
+
+  console.log(markets);
 
   return (
     <div className="">
@@ -60,7 +66,7 @@ export function CheckoutPage() {
         <div>
           {/* Header */}
 
-          <div className="flex flex-col gap-5">
+          <div className="mt-5 flex flex-col gap-5">
             {/* 1. User Info */}
             <div className="bg-white rounded-xl p-4 shadow-sm">
               <h3 className="text-sm font-semibold text-zonc-900 mb-3">
@@ -84,7 +90,7 @@ export function CheckoutPage() {
                 <h3 className="text-sm font-semibold text-zinc-900 mb-3">
                   Yetkazib berish manzili
                 </h3>
-                {addresses.length === 0 ? (
+                {addresses?.length === 0 ? (
                   <button
                     onClick={() => navigate("/addresses/new")}
                     className="w-full py-3 border border-dashed border-zinc-300 rounded-lg text-sm text-zinc-500 hover:border-primary hover:text-primary transition-colors"
@@ -93,7 +99,7 @@ export function CheckoutPage() {
                   </button>
                 ) : (
                   <div className="space-y-2">
-                    {addresses.map((addr) => (
+                    {addresses?.map((addr) => (
                       <label
                         key={addr.id}
                         className={`flex items-start gap-3 p-3 rounded-lg border cursor-pointer transition-colors ${
@@ -122,48 +128,46 @@ export function CheckoutPage() {
               </div>
             )}
 
-            {orderType && (
-              <div className="bg-white rounded-xl p-4 shadow-sm">
-                <h3 className="text-sm font-semibold text-zinc-900 mb-3">
-                  Do'kon tanlang
-                </h3>
-                {markets.length === 0 ? (
-                  <p className="text-sm text-zinc-500">Do'konlar topilmadi</p>
-                ) : (
-                  <div className="space-y-2">
-                    {markets.map((market) => (
-                      <label
-                        key={market.id}
-                        className={`flex items-start gap-3 p-3 rounded-lg border cursor-pointer transition-colors ${
-                          selectedMarketId === market.id
-                            ? "border-primary bg-primary/5"
-                            : "border-zinc-200 hover:border-zinc-300"
-                        }`}
-                      >
-                        <input
-                          type="radio"
-                          name="market"
-                          checked={selectedMarketId === market.id}
-                          onChange={() => setSelectedMarketId(market.id)}
-                          className="mt-1"
-                        />
-                        <div className="flex-1 text-sm">
-                          <p className="font-medium text-zinc-900">
-                            {market.name}
-                          </p>
-                          <p className="text-zinc-600">
-                            {market.region}, {market.district}
-                          </p>
-                          <p className="text-zinc-500 text-xs">
-                            {market.address}
-                          </p>
-                        </div>
-                      </label>
-                    ))}
-                  </div>
-                )}
-              </div>
-            )}
+            <div className="bg-white rounded-xl p-4 shadow-sm">
+              <h3 className="text-sm font-semibold text-zinc-900 mb-3">
+                Do'kon tanlang
+              </h3>
+              {markets?.length === 0 ? (
+                <p className="text-sm text-zinc-500">Do'konlar topilmadi</p>
+              ) : (
+                <div className="space-y-2">
+                  {markets?.map((market) => (
+                    <label
+                      key={market.id}
+                      className={`flex items-start gap-3 p-3 rounded-lg border cursor-pointer transition-colors ${
+                        selectedMarketId === market.id
+                          ? "border-primary bg-primary/5"
+                          : "border-zinc-200 hover:border-zinc-300"
+                      }`}
+                    >
+                      <input
+                        type="radio"
+                        name="market"
+                        checked={selectedMarketId === market.id}
+                        onChange={() => setSelectedMarketId(market.id)}
+                        className="mt-1"
+                      />
+                      <div className="flex-1 text-sm">
+                        <p className="font-medium text-zinc-900">
+                          {market.name}
+                        </p>
+                        <p className="text-zinc-600">
+                          {market.region}, {market.district}
+                        </p>
+                        <p className="text-zinc-500 text-xs">
+                          {market.address}
+                        </p>
+                      </div>
+                    </label>
+                  ))}
+                </div>
+              )}
+            </div>
 
             {/* 4. Products */}
             <div className="bg-white rounded-xl p-4 shadow-sm">
@@ -259,7 +263,7 @@ export function CheckoutPage() {
 
               {!canCheckout && selectedProducts.length > 0 && (
                 <p className="text-xs text-center text-red-500 mt-2">
-                  {orderType === "delivery"
+                  {orderType === "pickup"
                     ? "Buyurtma berish uchun manzil tanlang"
                     : "Buyurtma berish uchun do'kon tanlang"}
                 </p>

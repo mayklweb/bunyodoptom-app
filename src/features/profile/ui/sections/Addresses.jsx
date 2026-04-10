@@ -6,22 +6,12 @@ import {
   useEditAddress,
 } from "../../../addresses/hooks/useAddresses";
 import { useAddressStore } from "../../../addresses/model/useAddressStore";
-import { CheckIcon, DeleteIcon, EditIcon, PlusIcon } from "../../../../assets/icons";
-// import {
-//   useAddAddress,
-//   useAddresses,
-//   useDeleteAddress,
-//   useEditAddress,
-// } from "@/app/shared/lib/hooks/useAddresses";
-// import { Address } from "@/app/shared/lib/addressesApi";
-// import {
-//   CheckIcon,
-//   CloseIcon,
-//   DeleteIcon,
-//   EditIcon,
-//   PlusIcon,
-// } from "@/app/shared/icons";
-// import { useAddressStore } from "@/app/store/useAddressStore";
+import {
+  CheckIcon,
+  DeleteIcon,
+  EditIcon,
+  PlusIcon,
+} from "../../../../assets/icons";
 
 const DISTRICTS = [
   "Urganch tumani",
@@ -41,8 +31,6 @@ export function Addresses() {
   const { mutate: addAddress, isPending: adding } = useAddAddress();
   const { mutate: editAddress, isPending: editing } = useEditAddress();
   const { mutate: deleteAddress, isPending: deleting } = useDeleteAddress();
-
-  console.log(addresses);
 
   const { selectedId, setSelected, initFromAddresses } = useAddressStore();
 
