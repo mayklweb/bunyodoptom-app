@@ -1,6 +1,6 @@
 {
   "appId": "com.bunyodoptom.app",
-  "appName": "bunyodoptom",
+  "appName": "Bunyod Optom",
   "webDir": "dist",
   "plugins": {
     "SplashScreen": {
