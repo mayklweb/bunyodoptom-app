@@ -50,7 +50,8 @@ function Categories() {
   const prevRef = useRef(null);
   const nextRef = useRef(null);
 
-  if (isLoading) return <CategoriesSkeleton />;
+  if (isLoading) return <CategoriesSkeleton/>;
+
   if (isError) return <div>Error loading categories</div>;
 
   return (

@@ -48,21 +48,25 @@ function normalizeProducts(products) {
     )
     .map((p) => ({
       ...p,
-      mainImage:
-        `https://api.bunyodoptom.uz${p.images[0]?.url}`
+      mainImage: `https://api.bunyodoptom.uz${p.images[0]?.url}`,
     }));
 }
 
 function FavoriteProducts() {
-  const { data: products, isLoading, isError } = useProducts();
-  const { selectedProduct, openModal, closeModal } = useUIStore();
-  
-const filtred = useMemo(() => normalizeProducts(products), [products]);
+  const { data: products, isLoading, isError, isFetching } = useProducts();
+  const { selectedProduct, openModal, closeModal, isOpen } = useUIStore();
 
-const favoriteProducts = useShuffledProducts(filtred, 20);
+  console.log({ isLoading, isFetching });
+
+  const filtred = useMemo(() => normalizeProducts(products), [products]);
+  
+  const favoriteProducts = useShuffledProducts(filtred, 10);
 
   if (isLoading) return <FavoriteProductsSkeleton />;
+
   if (isError) return <div>Error</div>;
+
+
 
   return (
     <section>
@@ -85,7 +89,11 @@ const favoriteProducts = useShuffledProducts(filtred, 20);
           </div>
         </div>
       </div>
-      <ProductBottomSheet product={selectedProduct} onClose={closeModal} open={openModal} />
+      <ProductBottomSheet
+        product={selectedProduct}
+        onClose={closeModal}
+        open={isOpen}
+      />
     </section>
   );
 }

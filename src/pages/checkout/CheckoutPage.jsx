@@ -12,7 +12,7 @@ export function CheckoutPage() {
   const { data: addresses, isPending: loadingAddress } = useAddAddress();
   const { data: markets } = useMarkets();
   const { mutate: checkout, isPending } = useCheckout();
-  const { cart, selectedIds, clearSelected, total, totalCount, selectedItems } =
+  const { cart, selectedIds, clearCart, total, totalCount, selectedItems } =
     useCartStore();
 
   const [selectedAddressId, setSelectedAddressId] = useState(6);
@@ -33,27 +33,33 @@ export function CheckoutPage() {
   const onCheckout = () => {
     if (!canCheckout) return;
 
+    // 👇 SHU YERGA QO‘YASAN
+    const selectedAddress = addresses?.find((a) => a.id === selectedAddressId);
+
+    const selectedMarket = markets?.find((m) => m.id === selectedMarketId);
+
     checkout(
       {
         user_id: parseInt(user.id),
-        total_amount: 1000000,
-        address_id: selectedAddressId,
-        market_id: selectedMarketId,
+        total_amount: total(),
+        address_id: selectedAddressId, // 👈 asosiy
+        market: selectedMarket,
+        market_id: selectedMarketId, // 👈 asosiy
         payment_method: paymentMethod,
         payed: false,
         status: "preparing",
         products: products,
       },
       {
-        onSuccess: (data) => {
-          clearSelected;
+        onSuccess: () => {
+          clearCart();
           navigate(`/profile`);
         },
       },
     );
   };
 
-  console.log(markets);
+  console.log(total());
 
   return (
     <div className="">
@@ -247,7 +253,7 @@ export function CheckoutPage() {
               <div className="flex items-center justify-between mb-4">
                 <span className="text-sm text-zinc-500">Jami summa</span>
                 <span className="text-2xl font-bold text-zinc-900">
-                  {total().toLocaleString()} so'm
+                  {total()} so'm
                 </span>
               </div>
 

@@ -12,7 +12,6 @@ function PersonalInfo({}) {
   const [fields, setFields] = useState({
     name: MOCK_USER.name,
     phone: MOCK_USER.phone,
-    id: MOCK_USER.id,
   });
 
 
@@ -59,7 +58,7 @@ function PersonalInfo({}) {
           key={key}
           label={label}
           disabled={disabled}
-          value={editing === key ? draft[key] : user[key]}
+          value={editing === key ? draft[key] : user?.[key]}
           editing={editing === key}
           saving={saving && editing === key}
           onChange={(e) =>

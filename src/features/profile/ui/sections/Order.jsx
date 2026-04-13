@@ -55,10 +55,6 @@ const STATUS = {
   },
 };
 
-function getTotal(order) {
-  return order.products.reduce((sum, p) => sum + p.price * p.qty, 0);
-}
-
 // ── Skeleton ──────────────────────────────────────────────────────────────────
 function OrdersSkeleton() {
   return (
@@ -66,7 +62,7 @@ function OrdersSkeleton() {
       {[1, 2, 3].map((i) => (
         <div
           key={i}
-          className="bg-white border border-gray-100 rounded-xl shadow-sm overflow-hidden animate-pulse"
+          className="bg-white border border-ZINC-100 rounded-xl shadow-sm overflow-hidden animate-pulse"
         >
           <div className="flex items-center justify-between px-4 py-3 border-b border-gray-100">
             <div className="h-4 w-32 bg-gray-200 rounded-lg" />
@@ -98,7 +94,6 @@ export function Orders() {
   const { data: orders, isLoading, isError, refetch } = useOrders();
   const { mutate: cancelOrder, isPending: isCancelling } = useCancelOrder();
   const [selectedOrder, setSelectedOrder] = useState(null);
-
 
   return (
     <div className="w-full h-full">
@@ -146,6 +141,7 @@ export function Orders() {
         <div className="flex flex-col gap-3">
           {orders.map((order) => (
             <OrderCard
+        
               key={order.id}
               order={order}
               onViewDetails={() => setSelectedOrder(order)}
@@ -176,10 +172,14 @@ export function Orders() {
               </div>
               <div className="flex items-center gap-3">
                 <span
-                  className={`flex items-center gap-1.5 text-xs font-medium px-2.5 py-1 rounded-lg ${STATUS[selectedOrder.status].className}`}
+                  className={`flex items-center gap-1.5 text-xs font-medium px-2.5 py-1 rounded-lg ${
+                    STATUS[selectedOrder.status].className
+                  }`}
                 >
                   <span
-                    className={`w-1.5 h-1.5 rounded-full ${STATUS[selectedOrder.status].dot}`}
+                    className={`w-1.5 h-1.5 rounded-full ${
+                      STATUS[selectedOrder.status].dot
+                    }`}
                   />
                   {STATUS[selectedOrder.status].label}
                 </span>
@@ -227,7 +227,7 @@ export function Orders() {
             <div className="px-5 py-4 border-t border-gray-100 flex items-center justify-between">
               <p className="text-sm text-gray-500">Jami summa</p>
               <p className="text-lg font-bold text-gray-900">
-                {getTotal(selectedOrder).toLocaleString()} so'm
+                {total().toLocaleString()} so'm
               </p>
             </div>
 
@@ -350,8 +350,10 @@ export function Orders() {
 // import { formatDate, formatPrice } from "@/utils/formatters";
 // import { ChevronDown, Copy, Receipt } from "lucide-react";
 
-export default function OrderCard({ order }) {
+export default function OrderCard({ order, total }) {
   const [isExpanded, setIsExpanded] = useState(false);
+
+  console.log(order);
 
   const handleCopyOrderId = () => {
     navigator.clipboard.writeText(order.id);
@@ -434,9 +436,7 @@ export default function OrderCard({ order }) {
         <div className="flex items-center gap-2 text-sm text-gray-600">
           <span>{order.products.length} ta tovar</span>
           <span>·</span>
-          <span className="font-semibold text-gray-900">
-            {/* {formatPrice(order.total)} */}
-          </span>
+          <span className="font-semibold text-gray-900">{order.price}</span>
         </div>
       </div>
 
@@ -463,7 +463,7 @@ export default function OrderCard({ order }) {
               </p>
             </div>
             <p className="flex items-center gap-1 text-sm text-primary font-medium">
-              {order.products.reduce((sum, p) => sum + p.price, 0)?.toLocaleString()} so'm
+              {total().toLocaleString()} so'm
               {/* <ChevronDown className="w-4 h-4" /> */}
             </p>
           </div>
@@ -500,9 +500,7 @@ export default function OrderCard({ order }) {
 
 // Separate component for individual items
 function OrderItem({ item }) {
-
   console.log(item);
-  
 
   return (
     <div className="flex gap-3">
@@ -513,7 +511,9 @@ function OrderItem({ item }) {
       />
 
       <div className="flex-1 flex flex-col justify-between">
-        <h4 className="text-sm text-gray-900 line-clamp-2">{item.product.name}</h4>
+        <h4 className="text-sm text-gray-900 line-clamp-2">
+          {item.product.name}
+        </h4>
 
         <div className="space-y-1">
           <div className="flex justify-between text-xs">

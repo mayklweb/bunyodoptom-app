@@ -95,7 +95,7 @@ export const useCartStore = create()(
       total: () =>
         get()
           .selectedItems()
-          .reduce((sum, i) => sum + Number(i.price) * i.count, 0),
+          .reduce((sum, i) => sum + Number(i.price) * i.qty, 0),
 
       totalCount: () =>
         get()

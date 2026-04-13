@@ -1,6 +1,11 @@
 import { useState } from "react";
 import { DISTRICTS } from "../../../../shared/config/constants";
-import { DeleteIcon, EditIcon, LocationIcon, MarketIcon } from "../../../../assets/icons";
+import {
+  DeleteIcon,
+  EditIcon,
+  LocationIcon,
+  MarketIcon,
+} from "../../../../assets/icons";
 import {
   useAddMarket,
   useDeleteMarket,
@@ -24,9 +29,7 @@ export function Market() {
   const isEmpty = !shop;
 
   // FIX 1: was returning the whole district object instead of just the name string
-  const districtName =
-    DISTRICTS.find((d) => String(d.id) === String(shop?.district))?.district ??
-    shop?.district;
+  const districtName = DISTRICTS.find((d) => d.id === shop.district)?.district;
 
   const handleEdit = () => {
     setDraft({
