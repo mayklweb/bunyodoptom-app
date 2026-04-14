@@ -29,7 +29,9 @@ export function Market() {
   const isEmpty = !shop;
 
   // FIX 1: was returning the whole district object instead of just the name string
-  const districtName = DISTRICTS.find((d) => d.id === shop.district)?.district;
+  const districtName =
+    DISTRICTS?.find((d) => d && String(d.id) === String(shop?.district))
+      ?.district || shop?.district;
 
   const handleEdit = () => {
     setDraft({

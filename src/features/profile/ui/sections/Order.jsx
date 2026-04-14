@@ -141,7 +141,6 @@ export function Orders() {
         <div className="flex flex-col gap-3">
           {orders.map((order) => (
             <OrderCard
-        
               key={order.id}
               order={order}
               onViewDetails={() => setSelectedOrder(order)}
@@ -436,7 +435,9 @@ export default function OrderCard({ order, total }) {
         <div className="flex items-center gap-2 text-sm text-gray-600">
           <span>{order.products.length} ta tovar</span>
           <span>·</span>
-          <span className="font-semibold text-gray-900">{order.price}</span>
+          <span className="font-medium text-zinc-900">
+            {order.total_amount.toLocaleString()}
+          </span>
         </div>
       </div>
 
@@ -447,8 +448,8 @@ export default function OrderCard({ order, total }) {
             Buyurtmani qabul qiluvchi
           </p>
           <div className="text-sm text-gray-600">
-            <p>{order.user.name}</p>
-            <p>{order.user.phone}</p>
+            <p className="font-medium">{order.user.name}</p>
+            <p>+998 {order.user.phone}</p>
           </div>
         </div>
 
@@ -458,12 +459,11 @@ export default function OrderCard({ order, total }) {
             <div className="flex gap-1">
               <span className="text-sm font-medium text-gray-900">Jami </span>
               <p className="text-sm font-medium text-zinc-700">
-                {" "}
                 {order.products.length} ta mahsulot
               </p>
             </div>
             <p className="flex items-center gap-1 text-sm text-primary font-medium">
-              {total().toLocaleString()} so'm
+              {/* {total()} so'm */}
               {/* <ChevronDown className="w-4 h-4" /> */}
             </p>
           </div>
@@ -487,7 +487,7 @@ export default function OrderCard({ order, total }) {
         </button>
 
         {isExpanded && (
-          <div className="px-4 pb-4 space-y-3">
+          <div className="pb-2 space-y-3">
             {order.products.map((item) => (
               <OrderItem key={item.id} item={item} />
             ))}
@@ -507,7 +507,7 @@ function OrderItem({ item }) {
       <img
         src={`https://api.bunyodoptom.uz${item.product.images[0].url}`}
         alt={item.product.name}
-        className="w-20 h-28 object-cover rounded-lg"
+        className="w-28 h-20 object-cover rounded-lg"
       />
 
       <div className="flex-1 flex flex-col justify-between">
@@ -518,19 +518,13 @@ function OrderItem({ item }) {
         <div className="space-y-1">
           <div className="flex justify-between text-xs">
             <span className="text-gray-500">Soni</span>
-            <span className="text-gray-900">{item.product.quantity}</span>
+            <span className="text-gray-900">{item.qty}</span>
           </div>
           <div className="flex justify-between text-xs">
             <span className="text-gray-500">Narxi</span>
-            {/* <span className="text-gray-900">{formatPrice(item.price)}</span> */}
+            <span className="text-gray-900">{Number(item.subtotal).toLocaleString()} so'm</span>
           </div>
         </div>
-      </div>
-
-      <div className="flex flex-col justify-between items-end">
-        <span className="text-xs text-gray-500">
-          {item.status === "returned" ? "Qaytarildi" : "Yetkazildi"}
-        </span>
       </div>
     </div>
   );
