@@ -2,16 +2,16 @@
 import { Routes, Route, Navigate } from "react-router-dom";
 
 import ProtectedRoute from "../../shared/ui/ProtectedRoute";
-import HomePage from "../../pages/home/HomePage";
-import ProfilePage from "../../pages/profile/ProfilePage";
-import LoginPage from "../../pages/login/LoginPage";
+import HomePage from "../../pages/home/home";
+import ProfilePage from "../../pages/profile/profile";
+import LoginPage from "../../pages/login/login";
 import MainLayout from "../../layouts/MainLayout";
 import AuthLayout from "../../layouts/AuthLayout";
-import SignupPage from "../../pages/signup/SignupPage";
-import CartPage from "../../pages/cart/CartPage";
-import CategoriesPage from "../../pages/categories/CategoriesPage";
-import ProductsPage from "../../pages/products/ProductsPage";
-import ProductPage from "../../pages/product/ProductPage";
+import SignupPage from "../../pages/signup/signup";
+import CartPage from "../../pages/cart/cart";
+import CategoriesPage from "../../pages/categories/categories";
+import ProductsPage from "../../pages/products/products";
+import ProductPage from "../../pages/product/product";
 import CheckoutPage from "../../pages/checkout/CheckoutPage";
 
 export default function Router() {

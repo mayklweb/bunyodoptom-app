@@ -1,19 +1,25 @@
 // main.jsx
-import React from "react";
+import { useEffect } from "react";
 import ReactDOM from "react-dom/client";
 import { BrowserRouter } from "react-router-dom";
 import Providers from "./app/providers";
 import Router from "./app/router/router";
 import "./assets/styles/globals.css";
-import Header from "./widgets/header/Header";
-import Footer from "./widgets/footer/Footer";
+import "./assets/styles/safe-area.css";
+import { initNativeUI } from "./app/native/initNativeUI.js";
 
-ReactDOM.createRoot(document.getElementById("root")).render(
-  <React.StrictMode>
+function AppBootstrap() {
+  useEffect(() => {
+    initNativeUI();
+  }, []);
+
+  return (
     <Providers>
       <BrowserRouter>
         <Router />
       </BrowserRouter>
     </Providers>
-  </React.StrictMode>,
-);
+  );
+}
+
+ReactDOM.createRoot(document.getElementById("root")).render(<AppBootstrap />);

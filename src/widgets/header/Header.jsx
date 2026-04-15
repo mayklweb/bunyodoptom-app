@@ -4,7 +4,7 @@ import { SearchIcon } from "../../assets/icons";
 function Header() {
   return (
     <header>
-      <div className="w-full bg-white shadow-sm fixed top-0 z-10">
+      <div className="w-full safe-top  bg-white shadow-sm fixed top-0 z-10">
         <div className="container">
           <div className="relative">
             <div className="w-full flex gap-4 items-center justify-between py-2">
