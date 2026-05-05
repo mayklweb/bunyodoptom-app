@@ -1,13 +1,16 @@
-// import Header from "@/widgets/Header";
-// import Footer from "@/widgets/Footer";
-import { Outlet } from "react-router-dom";
+import { Outlet, useLocation } from "react-router-dom";
 import Footer from "../widgets/footer/Footer";
 import Header from "../widgets/header/Header";
 
 export default function MainLayout() {
+  const location = useLocation();
+
+  const hideHeader =
+    location.pathname.startsWith("/profile") ||
+    location.pathname.startsWith("/cart");
   return (
     <>
-      <Header />
+      {!hideHeader && <Header />}
       <main>
         <Outlet />
       </main>

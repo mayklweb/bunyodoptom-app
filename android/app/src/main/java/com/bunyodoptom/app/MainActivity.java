@@ -1,4 +1,4 @@
-package com.bunyodoptom.app;
+package uz.bunyodoptom.app;
 
 import com.getcapacitor.BridgeActivity;
 

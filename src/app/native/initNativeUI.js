@@ -5,6 +5,6 @@ export const initNativeUI = async () => {
   if (!Capacitor.isNativePlatform()) return;
 
   await StatusBar.setOverlaysWebView({ overlay: false });
-  await StatusBar.setStyle({ style: Style.Dark });
+  await StatusBar.setStyle({ style: Style.Light });
   await StatusBar.setBackgroundColor({ color: "#ffffff" });
-};
+};  
