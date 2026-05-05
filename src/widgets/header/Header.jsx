@@ -187,7 +187,7 @@ function Header() {
   const handleProductClick = (productId) => {
     setIsDrawerOpen(false);
     setQuery("");
-    navigate(`/products/${productId}`);
+    navigate(`/product/${productId}`);
   };
 
   return (
@@ -245,7 +245,7 @@ function Header() {
                     ) : searchResults.length > 0 ? (
                       <div className="py-2">
                         {searchResults.map((product) => (
-                          <div
+                          <button
                             key={product.id}
                             onClick={() => handleProductClick(product.id)}
                             className="flex items-center gap-3 px-4 py-3 hover:bg-gray-50 cursor-pointer transition-colors"
@@ -263,7 +263,7 @@ function Header() {
                                 {product.price.toLocaleString()} сўм
                               </p>
                             </div>
-                          </div>
+                          </button>
                         ))}
 
                         {/* View All Results */}
