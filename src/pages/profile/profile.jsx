@@ -26,17 +26,17 @@ const NAV_ITEMS = [
 
 const sections = [
   {
-    title: "Profile",
+    title: "Profil",
     items: [
       {
         id: 1,
-        name: "Profile",
+        name: "Profil",
         key: "personal",
         icon: <FileIcon className={"w-5 h-5 text-zinc-600"} />,
       },
       {
         id: 2,
-        name: "Address",
+        name: "Manzillar",
         key: "addresses",
         icon: <LocationIcon className={"w-5 h-5 text-zinc-600"} />,
       },
