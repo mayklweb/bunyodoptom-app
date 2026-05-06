@@ -118,8 +118,8 @@ export default function ProfilePage() {
         <div>
           <div className="">
             <div className="flex flex-col gap-3">
-              <div className="rounded-b-2xl bg-white p-4 flex items-center justify-between">
-                <div className="flex items-center gap-[12px]">
+              <div className="rounded-2xl bg-white p-4 flex items-center justify-between">
+                <div className="flex items-center gap-3">
                   <div style={{ position: "relative", width: 48, height: 48 }}>
                     <img
                       alt="user"
