@@ -128,7 +128,7 @@ export default function ProfilePage() {
                       height={48}
                       decoding="async"
                       data-nimg="1"
-                      src="/images/placeholder-user.webp"
+                      src="/images/placeholder-user.svg"
                       style={{
                         color: "transparent",
                         visibility: "visible",
