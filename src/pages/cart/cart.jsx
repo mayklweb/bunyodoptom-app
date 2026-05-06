@@ -95,7 +95,7 @@ function CartPage() {
   return (
     <>
       <div className="container">
-        <div className="w-full h-[calc(100vh-120px)] flex flex-col pt-20 pb-32">
+        <div className="w-full h-[calc(100vh-140px)] flex flex-col mt-5 pb-32">
           <CartHeader />
 
           {cart.length === 0 ? (
