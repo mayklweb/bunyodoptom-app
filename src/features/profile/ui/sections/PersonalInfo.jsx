@@ -2,11 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import ProfileField from "../ProfileField";
 import { useLogout, useProfile } from "../../../auth/hooks/useAuthUser";
 
-const MOCK_USER = {
-  name: "Alisher Toshmatov",
-  phone: "+998 90 123 45 67",
-  id: "USR-0042",
-};
+
 
 function PersonalInfo({}) {
   const [fields, setFields] = useState({

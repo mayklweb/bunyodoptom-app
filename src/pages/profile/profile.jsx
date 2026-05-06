@@ -14,7 +14,7 @@ import { Orders } from "../../features/profile/ui/sections/Order";
 import { Addresses } from "../../features/profile/ui/sections/Addresses";
 import { Favorites } from "../../features/profile/ui/sections/Fovarite";
 import { Market } from "../../features/profile/ui/sections/Market";
-import { useLogout } from "../../features/auth/hooks/useAuthUser";
+import { useLogout, useProfile } from "../../features/auth/hooks/useAuthUser";
 
 const NAV_ITEMS = [
   { key: "personal", label: "Shaxsiy ma'lumotlar", icon: <FileIcon /> },
@@ -48,7 +48,7 @@ const sections = [
       },
       {
         id: 4,
-        name: "Sevimli",
+        name: "Sevimlilar",
         key: "favorites",
         icon: <FavoriteIcon className={"w-5 h-5 text-zinc-600"} />,
       },
@@ -81,6 +81,7 @@ export default function ProfilePage() {
   const [active, setActive] = useState("personal");
   const [sheetNav, setSheetNav] = useState(null);
   const [sheetOpen, setSheetOpen] = useState(false);
+    const { data: user } = useProfile();
 
   const logout = useLogout();
 
@@ -113,7 +114,7 @@ export default function ProfilePage() {
   return (
     <>
       <div>
-        {/* <div className="container"> */}
+        <div className="container">
         <div>
           <div className="">
             <div className="flex flex-col gap-3">
@@ -139,8 +140,8 @@ export default function ProfilePage() {
                     />
                   </div>
                   <div className="flex flex-col">
-                    <h1 className="text-lg font-medium">Muhammad</h1>
-                    <h2 className="text-lg font-medium">+998770618482</h2>
+                    <h1 className="text-lg font-medium capitalize">{user?.name}</h1>
+                    <h2 className="text-base font-medium">{user?.phone}</h2>
                   </div>
                 </div>
                 <button
@@ -202,7 +203,7 @@ export default function ProfilePage() {
               </button>
             </div>
 
-            <section className="bg-white flex w-full flex-col gap-3 p-4 mt-4 rounded-lg">
+            <section className="bg-white flex w-full flex-col gap-3 p-4 mt-4 rounded-xl">
               <h3 className="text-black60 text">Ijtimoiy tarmoqlar:</h3>
               <ul className="flex gap-[10px]">
                 <li>
@@ -298,7 +299,7 @@ export default function ProfilePage() {
             </BottomSheet>
           </div>
         </div>
-        {/* </div> */}
+        </div>
       </div>
     </>
   );
