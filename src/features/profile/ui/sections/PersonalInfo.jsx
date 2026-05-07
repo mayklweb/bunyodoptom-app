@@ -91,7 +91,8 @@ function PersonalInfo({}) {
           </label>
           <div className="relative w-full">
             <input
-              className="bg-gray flex h-[36px] w-full rounded-[12px] px-[12px] py-[10px] caret-primary invalid:border-red placeholder:text-md invalid:!caret-red invalid:!text-red focus:caret-primary focus:border-primary focus:outline-primary focus:invalid:border-red focus:invalid:outline-red placeholder:font-medium focus:outline disabled:border-gray-200 disabled:bg-gray-50 disabled:text-gray-500 disabled:shadow-none"
+              className="w-full bg-gray rounded-xl py-1.5 px-3 outline-none  focus:ring-[1px] focus:ring-primary focus:ring-offset-0.5 disabled:bg-gray-50 disabled:border-gray-200 disabled:text-gray-500 disabled:shadow-none"
+              // className="bg-gray flex h-[36px] w-full rounded-[12px] px-[12px] py-[10px] caret-primary invalid:border-red placeholder:text-md invalid:!caret-red invalid:!text-red focus:caret-primary focus:border-primary focus:outline-primary focus:invalid:border-red focus:invalid:outline-red placeholder:font-medium focus:outline disabled:border-gray-200 disabled:bg-gray-50 disabled:text-gray-500 disabled:shadow-none"
               type="tel"
               value="+998 77 061 84 82"
               name="phone"
@@ -110,13 +111,14 @@ function PersonalInfo({}) {
           <div className="relative w-full">
             <input
               id="email"
-              className="bg-gray flex h-[36px] w-full min-w-0 rounded-[12px] px-[12px] py-[10px] caret-primary invalid:border-red placeholder:text-md invalid:!caret-red invalid:!text-red focus:caret-primary focus:border-primary focus:outline-primary focus:invalid:border-red focus:invalid:outline-red placeholder:font-medium focus:outline disabled:border-gray-200 disabled:bg-gray-50 disabled:text-gray-500 disabled:shadow-none"
+              className="w-full bg-gray rounded-xl py-1.5 px-3 outline-none  focus:ring-[1px] focus:ring-primary focus:ring-offset-0.5 disabled:bg-gray-50 disabled:border-gray-200 disabled:text-gray-500 disabled:shadow-none"
+              // className="bg-gray flex h-[36px] w-full min-w-0 rounded-[12px] px-[12px] py-[10px] caret-primary invalid:border-red placeholder:text-md invalid:!caret-red invalid:!text-red focus:caret-primary focus:border-primary focus:outline-primary focus:invalid:border-red focus:invalid:outline-red placeholder:font-medium focus:outline disabled:border-gray-200 disabled:bg-gray-50 disabled:text-gray-500 disabled:shadow-none"
               placeholder="Elektron pochtangizni kiriting"
               data-slot="input"
               type="email"
               value=""
               name="email"
-            />
+              />
           </div>
         </div>
         <div className="">
@@ -124,13 +126,14 @@ function PersonalInfo({}) {
             data-slot="form-label"
             className="text-md data-[error=true]:text-red mb-[6px] flex items-center gap-2 leading-none font-medium select-none group-data-[disabled=true]:pointer-events-none group-data-[disabled=true]:opacity-50 peer-disabled:cursor-not-allowed peer-disabled:opacity-50 first-letter:uppercase"
             for="date"
-          >
+            >
             Tug‘ilgan sana
           </label>
           <div className="relative w-full">
             <input
               readonly=""
-              className="bg-gray flex h-[36px] w-full min-w-0 rounded-[12px] px-[12px] py-[10px] caret-primary invalid:border-red placeholder:text-md invalid:!caret-red invalid:!text-red focus:caret-primary focus:border-primary focus:outline-primary focus:invalid:border-red focus:invalid:outline-red placeholder:font-medium focus:outline disabled:border-gray-200 disabled:bg-gray-50 disabled:text-gray-500 disabled:shadow-none pr-[40px]"
+              className="w-full bg-gray rounded-xl py-1.5 px-3 outline-none  focus:ring-[1px] focus:ring-primary focus:ring-offset-0.5 disabled:bg-gray-50 disabled:border-gray-200 disabled:text-gray-500 disabled:shadow-none"
+              // className="bg-gray flex h-[36px] w-full min-w-0 rounded-[12px] px-[12px] py-[10px] caret-primary invalid:border-red placeholder:text-md invalid:!caret-red invalid:!text-red focus:caret-primary focus:border-primary focus:outline-primary focus:invalid:border-red focus:invalid:outline-red placeholder:font-medium focus:outline disabled:border-gray-200 disabled:bg-gray-50 disabled:text-gray-500 disabled:shadow-none pr-[40px]"
               data-slot="input"
               type="text"
               value="KK / OO / YY"
