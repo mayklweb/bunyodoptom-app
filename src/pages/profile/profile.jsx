@@ -54,7 +54,7 @@ const sections = [
       },
       {
         id: 5,
-        name: "Market",
+        name: "Do'kon",
         key: "shop",
         icon: <MarketIcon className={"w-5 h-5 text-zinc-600"} />,
       },

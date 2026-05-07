@@ -87,16 +87,16 @@ export function Market() {
     return <div className="text-sm text-gray-400">Yuklanmoqda...</div>;
 
   return (
-    <div className="w-full">
+    <div className="w-full p-5">
       {/* Page header */}
       <div className="hidden lg:block lg:mb-3">
         <h1 className="text-2xl font-semibold">Mening do'konim</h1>
       </div>
 
       {/* Card */}
-      <div className="bg-white rounded-xl border border-gray-100 shadow-sm overflow-hidden">
+      <div className="bg-white rounded-xl shadow-md overflow-hidden">
         {/* Card header */}
-        <div className="bg-primary/5 border-b border-gray-100 p-4 flex items-center gap-3">
+        <div className="bg-primary/5 p-4 flex items-center gap-3">
           <div className="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center">
             <MarketIcon className="w-5 h-5 text-primary" />
           </div>
@@ -104,7 +104,7 @@ export function Market() {
             <p className="text-xs text-gray-400 font-medium uppercase tracking-wide">
               Do'kon ma'lumotlari
             </p>
-            <p className="text-sm font-semibold text-gray-700">
+            <p className="text-sm font-semibold text-zinc-700">
               {shop?.name ?? (
                 <span className="text-gray-400 font-normal">
                   Nom kiritilmagan
@@ -118,14 +118,14 @@ export function Market() {
             <div className="flex items-center gap-2">
               <button
                 onClick={handleEdit}
-                className="flex items-center gap-2 px-4 py-2 rounded-xl border border-gray-200 text-sm font-medium text-gray-600 hover:bg-gray-50 transition-colors"
+                className="flex items-center gap-2 px-4 py-2 rounded-xl border border-zinc-200 text-sm font-medium text-gray-600 hover:bg-gray-50 transition-colors"
               >
                 <EditIcon className="w-4 h-4" />
                 Tahrirlash
               </button>
               <button
                 onClick={() => setConfirmDelete(true)}
-                className="flex items-center gap-2 px-4 py-2 rounded-xl border border-red-200 text-sm font-medium text-red-500 hover:bg-red-50 transition-colors"
+                className="flex items-center gap-2 px-4 py-2 rounded-xl border border-rose-600 text-sm font-medium text-rose-500 hover:bg-rose-50 transition-colors"
               >
                 <DeleteIcon className="w-4 h-4" />
                 O'chirish

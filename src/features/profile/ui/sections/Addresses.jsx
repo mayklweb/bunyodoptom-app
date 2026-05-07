@@ -95,7 +95,7 @@ export function Addresses() {
     return <div className="text-sm text-gray-400">Yuklanmoqda...</div>;
 
   return (
-    <div className="flex flex-col gap-3">
+    <div className="flex flex-col gap-3 p-5">
       {addresses?.map((address) => {
         const isSelected = selectedId === address.id;
 

@@ -6,7 +6,7 @@ export function Favorites() {
         
   return (
     <div>
-      <div className="grid grid-cols-2 lg:grid-cols-4 gap-3">
+      <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 p-5">
         {favorites.map((product, i) => (
           <ProductCard key={i} product={product} />
         ))}
