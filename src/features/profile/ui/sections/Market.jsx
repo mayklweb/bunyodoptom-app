@@ -94,7 +94,7 @@ export function Market() {
       </div>
 
       {/* Card */}
-      <div className="bg-white rounded-xl shadow-md overflow-hidden">
+      <div className="bg-white rounded-xl shadow-md   overflow-hidden">
         {/* Card header */}
         <div className="bg-primary/5 p-4 flex items-center gap-3">
           <div className="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center">

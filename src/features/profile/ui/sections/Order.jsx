@@ -64,7 +64,7 @@ function OrdersSkeleton() {
           key={i}
           className="bg-white border border-ZINC-100 rounded-xl shadow-sm overflow-hidden animate-pulse"
         >
-          <div className="flex items-center justify-between px-4 py-3 border-b border-gray-100">
+          <div className="flex items-center justify-between px-4 py-3 border-b border-zinc-100">
             <div className="h-4 w-32 bg-gray-200 rounded-lg" />
             <div className="h-6 w-20 bg-gray-200 rounded-xl" />
           </div>
@@ -96,7 +96,7 @@ export function Orders() {
   const [selectedOrder, setSelectedOrder] = useState(null);
 
   return (
-    <div className="w-full h-full">
+    <div className="w-full h-full p-5">
       <div className="hidden lg:block lg:mb-5">
         <h1 className="text-2xl font-semibold">Buyurtmalar</h1>
       </div>
@@ -360,7 +360,7 @@ export default function OrderCard({ order, total }) {
 
   const getStatusStyle = (status) => {
     const styles = {
-      returned: "bg-gray-200 text-gray-900",
+      returned: "bg-zinc-200 text-zinc-900",
       delivered: "bg-green-100 text-green-900",
       pending: "bg-yellow-100 text-yellow-900",
       cancelled: "bg-red-100 text-red-900",
@@ -379,7 +379,7 @@ export default function OrderCard({ order, total }) {
   };
 
   return (
-    <article className="bg-secondary/20 p-2 rounded-lg overflow-hidden">
+    <article className="bg-secondary/20 p-2 rounded-xl shadow-sm overflow-hidden">
       {/* Header */}
       <header className="p-2 border-b border-zinc-300">
         <div className="flex items-start justify-between">
@@ -487,7 +487,7 @@ export default function OrderCard({ order, total }) {
         </button>
 
         {isExpanded && (
-          <div className="pb-2 space-y-3">
+          <div className="p-5">
             {order.products.map((item) => (
               <OrderItem key={item.id} item={item} />
             ))}
