@@ -7,7 +7,8 @@ export default function MainLayout() {
 
   const hideHeader =
     location.pathname.startsWith("/profile") ||
-    location.pathname.startsWith("/cart");
+    location.pathname.startsWith("/cart") ||
+    location.pathname.startsWith("/delete-account")
   return (
     <>
       {!hideHeader && <Header />}

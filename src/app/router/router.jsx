@@ -13,6 +13,7 @@ import CategoriesPage from "../../pages/categories/categories";
 import ProductsPage from "../../pages/products/products";
 import ProductPage from "../../pages/product/product";
 import CheckoutPage from "../../pages/checkout/CheckoutPage";
+import DeleteAccount from "../../pages/daleteaccount/daleteaccount";
 
 export default function Router() {
   return (
@@ -23,6 +24,7 @@ export default function Router() {
         <Route path="/categories" element={<CategoriesPage />} />
         <Route path="/categories/:id" element={<ProductsPage />} />
         <Route path="/product/:id" element={<ProductPage />} />
+        <Route path="/delete-account" element={<DeleteAccount />} />
 
         {/* Protected routes */}
         <Route
