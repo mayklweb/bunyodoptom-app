@@ -45,8 +45,7 @@ function PersonalInfo({}) {
 
   return (
     <div className="flex flex-col gap-2.5">
-      <div className=" flex grow flex-col gap-[24px] overflow-y-auto">
-       
+      <div className=" flex grow flex-col gap-[24px] overflow-y-auto p-5">
         <div className="mt-[8px] flex justify-center">
           <div className="relative w-[72px] h-[72px]">
             <img
@@ -56,7 +55,7 @@ function PersonalInfo({}) {
               height="72"
               decoding="async"
               data-nimg="1"
-              src="https://jmmobile.uz/_next/image?url=%2Fplaceholder-user.webp&amp;w=256&amp;q=75"
+              src="/images/placeholder-user.svg"
               className="w-[72px] h-[72px] text-transparent visible object-cover"
             />
           </div>
@@ -73,7 +72,8 @@ function PersonalInfo({}) {
           <div className="relative w-full">
             <input
               id="firstname"
-              className="bg-gray flex h-[36px] w-full min-w-0 rounded-[12px] px-[12px] py-[10px] caret-primary invalid:border-red placeholder:text-md invalid:!caret-red invalid:!text-red focus:caret-primary focus:border-primary focus:outline-primary focus:invalid:border-red focus:invalid:outline-red placeholder:font-medium focus:outline disabled:border-gray-200 disabled:bg-gray-50 disabled:text-gray-500 disabled:shadow-none"
+              className="w-full bg-gray rounded-xl py-1.5 px-3 outline-none  focus:ring-[1px] focus:ring-primary focus:ring-offset-0.5 disabled:bg-gray-50 disabled:border-gray-200 disabled:text-gray-500 disabled:shadow-none"
+              // className="bg-gray flex h-[36px] w-full min-w-0 rounded-[12px] px-[12px] py-[10px] caret-primary invalid:border-red placeholder:text-md invalid:!caret-red invalid:!text-red focus:caret-primary focus:border-primary focus:outline-primary focus:invalid:border-red focus:invalid:outline-red placeholder:font-medium focus:outline "
               placeholder="Ismingizni kiriting"
               data-slot="input"
               type="text"
@@ -89,34 +89,9 @@ function PersonalInfo({}) {
           >
             Telefon raqami
           </label>
-          <div className=" input:w-full border-red flex w-full rounded-[12px] bg-gray">
-            <div className="bg-gray">
-              <button
-                title="Uzbekistan"
-                role="combobox"
-                aria-label="Country selector"
-                aria-haspopup="listbox"
-                aria-expanded="false"
-                type="button"
-                className=""
-                data-country="uz"
-              >
-                <div className="">
-                  <img
-                    className=""
-                    draggable="false"
-                    data-country="uz"
-                    loading="lazy"
-                    alt=""
-                    src="https://cdnjs.cloudflare.com/ajax/libs/twemoji/14.0.2/svg/1f1fa-1f1ff.svg"
-                  />
-                  <div className="button__dropdown-arrow"></div>
-                </div>
-              </button>
-            </div>
-
+          <div className="relative w-full">
             <input
-              className="outline-none w-full rounded-r-[12px]"
+              className="bg-gray flex h-[36px] w-full rounded-[12px] px-[12px] py-[10px] caret-primary invalid:border-red placeholder:text-md invalid:!caret-red invalid:!text-red focus:caret-primary focus:border-primary focus:outline-primary focus:invalid:border-red focus:invalid:outline-red placeholder:font-medium focus:outline disabled:border-gray-200 disabled:bg-gray-50 disabled:text-gray-500 disabled:shadow-none"
               type="tel"
               value="+998 77 061 84 82"
               name="phone"
@@ -142,46 +117,6 @@ function PersonalInfo({}) {
               value=""
               name="email"
             />
-          </div>
-        </div>
-        <div>
-          <label
-            data-slot="form-label"
-            className="text-md data-[error=true]:text-red mb-[6px] flex items-center gap-2 leading-none font-medium select-none group-data-[disabled=true]:pointer-events-none group-data-[disabled=true]:opacity-50 peer-disabled:cursor-not-allowed peer-disabled:opacity-50 first-letter:uppercase"
-            for="country"
-          >
-            Mamlakat
-          </label>
-          <div className="relative w-full">
-            <input
-              readonly=""
-              id="country"
-              className="bg-gray flex h-[36px] w-full min-w-0 rounded-[12px] px-[12px] py-[10px] caret-primary invalid:border-red placeholder:text-md invalid:!caret-red invalid:!text-red focus:caret-primary focus:border-primary focus:outline-primary focus:invalid:border-red focus:invalid:outline-red placeholder:font-medium focus:outline disabled:border-gray-200 disabled:bg-gray-50 disabled:text-gray-500 disabled:shadow-none pr-[40px]"
-              placeholder="Mamlakatni tanlang"
-              data-slot="input"
-              type="text"
-              value=""
-              name="country"
-            />
-            <div className="absolute top-1/2 right-3 -translate-y-1/2 transform">
-              <div className="[&amp;_*]:stroke-gray170 rotate-90">
-                <svg
-                  width="24"
-                  height="24"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    d="M10 7L14 12L10 17"
-                    stroke="var(--primary)"
-                    stroke-width="1.5"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                  ></path>
-                </svg>
-              </div>
-            </div>
           </div>
         </div>
         <div className="">
@@ -343,7 +278,7 @@ function PersonalInfo({}) {
         <button
           type="submit"
           data-slot="button"
-          className="items-center cursor-pointer justify-center gap-2 whitespace-nowrap radius-md text-md transition-all disabled:pointer-events-none disabled:opacity-50 [&amp;_svg]:pointer-events-none shrink-0 outline-none aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive bg-primary text-white !text-md font-semibold hover:bg-primary/90 leading-[150%] disabled:bg-gray20 disabled:text-gray30 h-[42px] px-6 hidden w-full rounded-[14px] lg:flex"
+          className="items-center cursor-pointer justify-center gap-2 text-md transition-all disabled:pointer-events-none disabled:opacity-50 shrink-0 outline-none bg-primary text-white font-semibold leading-[150%] disabled:bg-zinc-200 disabled:text-gray30 h-[42px] px-6 w-full rounded-[14px]"
         >
           Saqlash
         </button>

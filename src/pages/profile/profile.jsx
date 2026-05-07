@@ -197,7 +197,7 @@ export default function ProfilePage() {
               </button> */}
               <button
                 onClick={logout}
-                className="text-red bg-white p-2 rounded-xl font-medium"
+                className="text-red bg-red/10 p-2 rounded-xl font-medium"
               >
                 Chiqish
               </button>

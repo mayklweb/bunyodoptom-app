@@ -67,7 +67,7 @@ function BottomSheet({ title, open, onClose, children }) {
         </div>
 
         {/* Content */}
-        <div style={{ flex: 1, overflowY: "auto", padding: 16 }}>
+        <div style={{ flex: 1, overflowY: "auto", }}>
           {children}
         </div>
       </div>
