@@ -14,6 +14,7 @@ import ProductsPage from "../../pages/products/products";
 import ProductPage from "../../pages/product/product";
 import CheckoutPage from "../../pages/checkout/CheckoutPage";
 import DeleteAccount from "../../pages/daleteaccount/daleteaccount";
+import PrivacyPolicy from "../../pages/privacypolicy/privacy-policy";
 
 export default function Router() {
   return (
@@ -25,6 +26,7 @@ export default function Router() {
         <Route path="/categories/:id" element={<ProductsPage />} />
         <Route path="/product/:id" element={<ProductPage />} />
         <Route path="/delete-account" element={<DeleteAccount />} />
+        <Route path="/privacy-policy" element={<PrivacyPolicy />} />
 
         {/* Protected routes */}
         <Route
