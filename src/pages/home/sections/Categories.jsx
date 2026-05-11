@@ -101,20 +101,19 @@ function Categories() {
               className="w-full mt-2.5 lg:mt-5"
             >
               {categories
-                .slice(2)
                 .reverse()
                 .map(({ name, id }) => (
                   <SwiperSlide key={id}>
                     <Link to={`/categories/${id}`}>
-                      <div className="w-full p-2 bg-primary/10 rounded-xl overflow-hidden">
+                      <div className="w-full  bg-white rounded-xl overflow-hidden shadow-md">
                         <div className="relative w-full aspect-[4/3] rounded-lg overflow-hidden">
                           <img
-                            src={`/images/${id}.jpg`}
+                            src={`/images/${id}.jpeg`}
                             alt={name}
                             className="object-cover w-full h-full rounded-lg"
                           />
                         </div>
-                        <p className="w-full pt-2 text-sm  text-primary text-center font-semibold line-clamp-2">
+                        <p className="w-full pb-1 text-sm  text-primary text-center font-semibold line-clamp-2">
                           {name}
                         </p>
                       </div>

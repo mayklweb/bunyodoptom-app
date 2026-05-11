@@ -34,7 +34,7 @@ function HeroBanner() {
     <section>
       <div className="mt-20">
         <div className="container">
-          <div className="rounded-xl overflow-hidden relative">
+          <div className="rounded-2xl overflow-hidden relative">
             <Swiper
               cssMode={true}
               loop={true}
