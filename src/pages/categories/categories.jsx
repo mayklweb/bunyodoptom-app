@@ -48,20 +48,19 @@ function CategoriesPage() {
                 <button
                   key={category.id}
                   onClick={() => handleMobileClick(category)}
-                  className="flex flex-col bg-white border border-zinc-100 rounded-xl overflow-hidden shadow-md active:scale-[0.97] transition-transform text-left"
+                  className="flex flex-col bg-white border border-zinc-100 rounded-3xl overflow-hidden shadow-md active:scale-[0.97] transition-transform text-left"
                 >
                   <div className=" relative overflow-hidden rounded-md">
                     <img
-                      src={`/images/${category.id}.jpg`}
+                      src={`/images/${category.id}.jpeg`}
                       alt={category.name}
                       width={300}
                       height={225}
                       className="w-full h-full object-cover aspect-[4/3]"
-                      unoptimized
                     />
                   </div>
-                  <div className="px-2 py-2">
-                    <p className="text-xs font-semibold text-gray-800 leading-snug line-clamp-2 text-center">
+                  <div className="pb-1">
+                    <p className="text-lg text-primary font-semibold text-gray-800 leading-snug line-clamp-2 text-center">
                       {category.name}
                     </p>
                   </div>

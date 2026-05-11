@@ -5,7 +5,7 @@
 @tailwind utilities;
 
 :root {
-  --background:#f2f5f9;
+  --background: #f2f5f9;
   --foreground: #171717;
   --font-nunito: var(--font-nunito);
   --radius: 0.625rem;
@@ -72,6 +72,7 @@ body {
 main {
   width: 100%;
   height: 100%;
+  margin-top: 80px;
 }
 
 .container {

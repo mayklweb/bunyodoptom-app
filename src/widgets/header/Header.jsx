@@ -1,221 +1,202 @@
 import { useState, useEffect, useRef } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useLocation } from "react-router-dom";
 import { SearchIcon } from "../../assets/icons";
 import { useProducts } from "../../features/product/hooks/useProducts";
 
-function Header() {
+const latinToCyrillic = (text) => {
+  const map = {
+    A: "А",
+    a: "а",
+    B: "Б",
+    b: "б",
+    D: "Д",
+    d: "д",
+    E: "Е",
+    e: "е",
+    F: "Ф",
+    f: "ф",
+    G: "Г",
+    g: "г",
+    H: "Ҳ",
+    h: "ҳ",
+    I: "И",
+    i: "и",
+    J: "Ж",
+    j: "ж",
+    K: "К",
+    k: "к",
+    L: "Л",
+    l: "л",
+    M: "М",
+    m: "м",
+    N: "Н",
+    n: "н",
+    O: "О",
+    o: "о",
+    P: "П",
+    p: "п",
+    Q: "Қ",
+    q: "қ",
+    R: "Р",
+    r: "р",
+    S: "С",
+    s: "с",
+    T: "Т",
+    t: "т",
+    U: "У",
+    u: "у",
+    V: "В",
+    v: "в",
+    X: "Х",
+    x: "х",
+    Y: "Й",
+    y: "й",
+    Z: "З",
+    z: "з",
+    "O'": "Ў",
+    "o'": "ў",
+    "G'": "Ғ",
+    "g'": "ғ",
+    Sh: "Ш",
+    sh: "ш",
+    Ch: "Ч",
+    ch: "ч",
+    Yo: "Ё",
+    yo: "ё",
+    Yu: "Ю",
+    yu: "ю",
+    Ya: "Я",
+    ya: "я",
+  };
+  let result = text;
+  [
+    "Sh",
+    "sh",
+    "Ch",
+    "ch",
+    "Yo",
+    "yo",
+    "Yu",
+    "yu",
+    "Ya",
+    "ya",
+    "O'",
+    "o'",
+    "G'",
+    "g'",
+  ].forEach((k) => {
+    if (map[k]) result = result.split(k).join(map[k]);
+  });
+  return result
+    .split("")
+    .map((c) => map[c] || c)
+    .join("");
+};
+
+// Map routes to their page titles
+const PAGE_TITLES = {
+  "/profile": "Profil",
+  "/products": "Mahsulotlar",
+  "/cart": "Savat",
+  "/orders": "Buyurtmalar",
+  "/settings": "Sozlamalar",
+};
+
+export default function Header() {
   const [query, setQuery] = useState("");
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
   const [searchResults, setSearchResults] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const drawerRef = useRef(null);
   const navigate = useNavigate();
-  const { data: products } = useProducts(); // Replace with your actual product fetching hook
+  const { pathname } = useLocation();
+  const { data: products } = useProducts();
 
-  // Latin to Cyrillic transliteration for Uzbek
-  const latinToCyrillic = (text) => {
-    const map = {
-      A: "А",
-      a: "а",
-      B: "Б",
-      b: "б",
-      D: "Д",
-      d: "д",
-      E: "Е",
-      e: "е",
-      F: "Ф",
-      f: "ф",
-      G: "Г",
-      g: "г",
-      H: "Ҳ",
-      h: "ҳ",
-      I: "И",
-      i: "и",
-      J: "Ж",
-      j: "ж",
-      K: "К",
-      k: "к",
-      L: "Л",
-      l: "л",
-      M: "М",
-      m: "м",
-      N: "Н",
-      n: "н",
-      O: "О",
-      o: "о",
-      P: "П",
-      p: "п",
-      Q: "Қ",
-      q: "қ",
-      R: "Р",
-      r: "р",
-      S: "С",
-      s: "с",
-      T: "Т",
-      t: "т",
-      U: "У",
-      u: "у",
-      V: "В",
-      v: "в",
-      X: "Х",
-      x: "х",
-      Y: "Й",
-      y: "й",
-      Z: "З",
-      z: "з",
-      "O'": "Ў",
-      "o'": "ў",
-      "G'": "Ғ",
-      "g'": "ғ",
-      Sh: "Ш",
-      sh: "ш",
-      Ch: "Ч",
-      ch: "ч",
-      Yo: "Ё",
-      yo: "ё",
-      Yu: "Ю",
-      yu: "ю",
-      Ya: "Я",
-      ya: "я",
-    };
+  const isHome = pathname === "/";
+  const pageTitle = PAGE_TITLES[pathname];
 
-    let result = text;
-
-    // Replace multi-character combinations first
-    const multiChar = [
-      "Sh",
-      "sh",
-      "Ch",
-      "ch",
-      "Yo",
-      "yo",
-      "Yu",
-      "yu",
-      "Ya",
-      "ya",
-      "O'",
-      "o'",
-      "G'",
-      "g'",
-    ];
-    multiChar.forEach((key) => {
-      if (map[key]) {
-        result = result.split(key).join(map[key]);
-      }
-    });
-
-    // Replace single characters
-    return result
-      .split("")
-      .map((char) => map[char] || char)
-      .join("");
-  };
-
-  // Close drawer when clicking outside
   useEffect(() => {
-    const handleClickOutside = (event) => {
-      if (drawerRef.current && !drawerRef.current.contains(event.target)) {
+    const handleClickOutside = (e) => {
+      if (drawerRef.current && !drawerRef.current.contains(e.target))
         setIsDrawerOpen(false);
-      }
     };
-
     document.addEventListener("mousedown", handleClickOutside);
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
-  // Search products as user types
   useEffect(() => {
-    if (query.trim().length > 0) {
-      setIsDrawerOpen(true);
-      setIsLoading(true);
-
-      // Debounce search
-      const timer = setTimeout(() => {
-        // Convert Latin to Cyrillic before searching
-        const cyrillicQuery = latinToCyrillic(query);
-        fetchProducts(query, cyrillicQuery);
-      }, 300);
-
-      return () => clearTimeout(timer);
-    } else {
+    if (!query.trim()) {
       setIsDrawerOpen(false);
       setSearchResults([]);
+      return;
     }
-  }, [query]);
-
-  // Replace this with your actual product fetching logic
-  const fetchProducts = async (originalQuery, cyrillicQuery) => {
-    try {
-      // Example: Search with both Latin and Cyrillic
-      // const response = await axios.get(`/api/products?search=${originalQuery}&searchCyrillic=${cyrillicQuery}`);
-      // const data = response.data;
-
-      // Mock data - replace with your actual API call
-
-      // Search in both Latin and Cyrillic
-      const filtered = products.filter((product) => {
-        const nameLower = product.name.toLowerCase();
-        const queryLower = originalQuery.toLowerCase();
-        const cyrillicQueryLower = cyrillicQuery.toLowerCase();
-
-        return (
-          nameLower.includes(queryLower) ||
-          nameLower.includes(cyrillicQueryLower)
-        );
-      });
-
+    setIsDrawerOpen(true);
+    setIsLoading(true);
+    const timer = setTimeout(() => {
+      const cyrillicQuery = latinToCyrillic(query);
+      const filtered =
+        products?.filter((p) => {
+          const name = p.name.toLowerCase();
+          return (
+            name.includes(query.toLowerCase()) ||
+            name.includes(cyrillicQuery.toLowerCase())
+          );
+        }) ?? [];
       setSearchResults(filtered);
       setIsLoading(false);
-    } catch (error) {
-      console.error("Search error:", error);
-      setIsLoading(false);
-    }
-  };
+    }, 300);
+    return () => clearTimeout(timer);
+  }, [query, products]);
 
   const handleSearch = (e) => {
-    e.preventDefault();
-    if (query.trim()) {
-      setIsDrawerOpen(false);
-      const cyrillicQuery = latinToCyrillic(query.trim());
-      navigate("/products", {
-        state: { search: query.trim(), searchCyrillic: cyrillicQuery },
-      });
-      setQuery("");
-    }
+    e?.preventDefault();
+    if (!query.trim()) return;
+    setIsDrawerOpen(false);
+    navigate("/products", {
+      state: {
+        search: query.trim(),
+        searchCyrillic: latinToCyrillic(query.trim()),
+      },
+    });
+    setQuery("");
   };
 
-  const handleProductClick = (productId) => {
+  const handleProductClick = (id) => {
     setIsDrawerOpen(false);
     setQuery("");
-    navigate(`/product/${productId}`);
+    navigate(`/product/${id}`);
   };
 
   return (
-    <header>
-      <div className="w-full safe-top bg-white shadow-sm fixed top-0 z-10">
-        <div className="container">
-          <div className="relative" ref={drawerRef}>
-            <div className="w-full flex gap-5 items-center justify-between py-2">
-              <div>
-                <Link to={"/"} className="w-40 h-12 hidden lg:block">
+    <header className="w-full safe-top bg-white shadow-sm fixed top-0 z-10 rounded-b-3xl">
+      <div className="container">
+        <div className="relative" ref={drawerRef}>
+          <div className="w-full flex gap-3 items-center py-2">
+            {/* Left side: back button on inner pages, logo on home */}
+            {isHome && (
+              <div className="shrink-0">
+                <Link to="/" className="hidden lg:block">
                   <img
                     src="/images/logo.png"
                     alt="Logo"
                     className="w-44 h-10 object-cover"
                   />
                 </Link>
-                <Link to={"/"} className="w-10 h-10 block lg:hidden">
+                <Link to="/" className="block lg:hidden">
                   <img
                     src="/images/logo1.svg"
                     alt="Logo"
-                    className="w-10 h-10 object-cover lg:hidden"
+                    className="w-10 h-10 object-cover"
                   />
                 </Link>
               </div>
+            )}
 
-              <div className="w-full flex flex-auto lg:flex-0 gap-3 relative">
-                <form className="w-full" onSubmit={handleSearch}>
-                  <div className="lg:w-100 flex flex-auto border border-primary/10 rounded-xl overflow-hidden focus-within:border-secondary transition-all ease-in-out duration-300">
+            {/* Center: search on home, title on inner pages */}
+            {isHome ? (
+              <div className="flex-1 relative">
+                <form onSubmit={handleSearch}>
+                  <div className="flex border border-primary/10 rounded-xl overflow-hidden focus-within:border-secondary transition-all duration-300">
                     <div className="flex flex-auto px-3 py-2">
                       <input
                         value={query}
@@ -227,15 +208,15 @@ function Header() {
                       />
                     </div>
                     <button
-                      className="px-2.5 bg-primary/10 rounded-md hover:bg-secondary transition-all ease-in-out duration-300"
+                      className="px-2.5 bg-primary/10 rounded-md hover:bg-secondary transition-all duration-300"
                       type="submit"
                     >
-                      <SearchIcon className={"text-primary"} />
+                      <SearchIcon className="text-primary" />
                     </button>
                   </div>
                 </form>
 
-                {/* Search Drawer */}
+                {/* Search dropdown */}
                 {isDrawerOpen && (
                   <div className="absolute top-full left-0 right-0 mt-2 bg-white rounded-lg shadow-lg max-h-96 overflow-y-auto z-50">
                     {isLoading ? (
@@ -248,14 +229,14 @@ function Header() {
                           <button
                             key={product.id}
                             onClick={() => handleProductClick(product.id)}
-                            className="flex items-center gap-3 px-4 py-3 hover:bg-gray-50 cursor-pointer transition-colors"
+                            className="w-full flex items-center gap-3 px-4 py-3 hover:bg-gray-50 transition-colors"
                           >
                             <img
-                              src={`https://api.bunyodoptom.uz${product.images[0]?.url}`} // Assuming the first image is the thumbnail
+                              src={`https://api.bunyodoptom.uz${product.images[0]?.url}`}
                               alt={product.name}
-                              className="w-16 h-12 object-cover aspect-4/3 rounded"
+                              className="w-16 h-12 object-cover rounded"
                             />
-                            <div className="flex-1">
+                            <div className="flex-1 text-left">
                               <h4 className="font-medium text-sm">
                                 {product.name}
                               </h4>
@@ -265,8 +246,6 @@ function Header() {
                             </div>
                           </button>
                         ))}
-
-                        {/* View All Results */}
                         <button
                           onClick={handleSearch}
                           className="w-full pt-2 px-4 text-center text-primary font-medium hover:bg-gray-50 border-t border-zinc-100"
@@ -276,18 +255,22 @@ function Header() {
                       </div>
                     ) : (
                       <div className="p-4 text-center text-gray-500">
-                        Xech narsa topilmadi
+                        Hech narsa topilmadi
                       </div>
                     )}
                   </div>
                 )}
               </div>
-            </div>
+            ) : (
+              <div className="w-full py-2">
+                <h1 className="text-xl text-center font-semibold">
+                  {pageTitle}
+                </h1>
+              </div>
+            )}
           </div>
         </div>
       </div>
     </header>
   );
 }
-
-export default Header;
