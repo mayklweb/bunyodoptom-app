@@ -96,10 +96,8 @@ const latinToCyrillic = (text) => {
 // Map routes to their page titles
 const PAGE_TITLES = {
   "/profile": "Profil",
-  "/products": "Mahsulotlar",
+  "/categories": "Kategoriyalar",
   "/cart": "Savat",
-  "/orders": "Buyurtmalar",
-  "/settings": "Sozlamalar",
 };
 
 export default function Header() {
