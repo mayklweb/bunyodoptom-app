@@ -96,7 +96,7 @@ const latinToCyrillic = (text) => {
 // Map routes to their page titles
 const PAGE_TITLES = {
   "/profile": "Profil",
-  "/categories": "Kategoriyalar",
+  "/categories": "Katalog",
   "/cart": "Savat",
 };
 
