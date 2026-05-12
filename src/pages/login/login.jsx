@@ -30,15 +30,15 @@ function LoginPage() {
         <button
           type="button"
           onClick={() => navigate("/")}
-          className="flex items-center gap-1 text-base font-semibold text-gray-900 absolute top-10 left-5"
+          className="flex items-center gap-1 text-base font-semibold text-zinc-900 absolute top-10 left-5"
         >
           <LeftArrowIcon />
           <span>Orqaga</span>
         </button>
         <div className="max-w-md w-full">
           <div className="mb-5 text-center">
-            <h1 className="text-3xl font-bold text-gray-900 mb-1">Kirish</h1>
-            <p className="text-sm text-gray-500">Hisobingizga kiring</p>
+            <h1 className="text-3xl font-bold text-zinc-900 mb-1">Kirish</h1>
+            <p className="text-sm text-zinc-500">Hisobingizga kiring</p>
           </div>
 
           <form
@@ -54,7 +54,7 @@ function LoginPage() {
 
             {/* Phone */}
             <div className="space-y-1.5">
-              <label className="block text-sm font-medium text-gray-700">
+              <label className="ml-1 block text-sm font-medium text-zinc-700">
                 Telefon raqam
               </label>
               <Controller
@@ -76,7 +76,7 @@ function LoginPage() {
                     ${
                       errors.phone
                         ? "border-red"
-                        : "border-zinc-700 bg-zinc-50-50 hover:border-primary/30"
+                        : "border-zinc-300 bg-zinc-50-50 hover:border-primary/30"
                     }`}
                   />
                 )}
@@ -88,18 +88,18 @@ function LoginPage() {
 
             {/* Password */}
             <div className="space-y-1.5">
-              <label className="block text-sm font-medium text-zinc-800">
+              <label className="ml-1 block text-sm font-medium text-zinc-800">
                 Parol
               </label>
               <input
                 type="password"
                 placeholder="••••••••"
-                className={`w-full px-4 py-3 rounded-xl border outline-none transition-all duration-200
+                className={`w-full px-4 py-3 rounded-xl border border-zinc-200 outline-none transition-all duration-200
                 focus:ring-2 focus:ring-primary/30 focus:border-primary
                 ${
                   errors.password
                     ? "border-red"
-                    : "border-zinc-700 bg-zinc-50-50 hover:border-primary/30"
+                    : "border-zinc-300 bg-zinc-50 hover:border-primary/30"
                 }`}
                 {...register("password", {
                   required: "Parol kiritilishi shart",
@@ -150,7 +150,7 @@ function LoginPage() {
             </button>
 
             {/* ✅ Signup route */}
-            <p className="text-center text-sm text-gray-500">
+            <p className="text-center text-sm text-zinc-500">
               Hisobingiz yo'qmi?{" "}
               <button
                 type="button"

@@ -30,7 +30,7 @@ function SignupPage() {
     ${
       hasError
         ? "border-red"
-        : "border-gray-200 bg-gray-50 hover:border-gray-300"
+        : "border-zinc-300 bg-zinc-50 hover:border-zinc-300"
     }`;
 
   return (
@@ -40,17 +40,17 @@ function SignupPage() {
         <button
           type="button"
           onClick={() => navigate(-1)}
-          className="flex items-center gap-1 text-base font-semibold text-gray-900 mb-6 absolute top-10 left-2"
+          className="flex items-center gap-1 text-base font-semibold text-zinc-900 mb-6 absolute top-10 left-2"
         >
           <LeftArrowIcon />
           <span>Orqaga</span>
         </button>
         <div className="max-w-md w-full">
-          <div className="mb-8 text-center">
-            <h1 className="text-3xl font-bold text-gray-900 mb-1">
+          <div className="mb-5 text-center">
+            <h1 className="text-3xl font-bold text-zinc-900 mb-1">
               Ro'yxatdan o'tish
             </h1>
-            <p className="text-sm text-gray-500">Yangi hisob yarating</p>
+            <p className="text-sm text-zinc-500">Yangi hisob yarating</p>
           </div>
 
           <form
@@ -78,7 +78,7 @@ function SignupPage() {
             )}
             {/* Name */}
             <div className="">
-              <label className="block text-sm font-medium text-gray-700">
+              <label className="ml-1 mb-1 block text-sm font-medium text-zinc-700">
                 Ism
               </label>
               <input
@@ -96,7 +96,7 @@ function SignupPage() {
 
             {/* Phone */}
             <div className="">
-              <label className="block text-sm font-medium text-gray-700">
+              <label className="ml-1 mb-1block text-sm font-medium text-zinc-700">
                 Telefon raqam
               </label>
               <Controller
@@ -124,7 +124,7 @@ function SignupPage() {
 
             {/* Password */}
             <div className="">
-              <label className="block text-sm font-medium text-gray-700">
+              <label className="ml-1 mb-1 block text-sm font-medium text-zinc-700">
                 Parol
               </label>
               <input
@@ -180,7 +180,7 @@ function SignupPage() {
             </button>
 
             {/* ✅ Login route */}
-            <p className="text-center text-sm text-gray-500">
+            <p className="text-center text-sm text-zinc-500">
               Hisobingiz bormi?{" "}
               <button
                 type="button"
