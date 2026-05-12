@@ -69,12 +69,6 @@ body {
   height: 100%;
 }
 
-main {
-  width: 100%;
-  height: calc(100% - 80px);
-  margin-top: 80px;
-}
-
 .container {
   max-width: 768px;
   width: 100%;

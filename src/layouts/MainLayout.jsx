@@ -13,7 +13,7 @@ export default function MainLayout() {
   return (
     <>
       {!hideHeader && <Header />}
-      <main>
+      <main className="w-full mt-20 h-[calc(100%-80px)]">
         <Outlet />
       </main>
       <Footer />
