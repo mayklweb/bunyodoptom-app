@@ -26,19 +26,35 @@ export default function Router() {
       <Routes>
         <Route element={<MainLayout />}>
           <Route path="/" element={isOnline ? <HomePage /> : <OfflinePage />} />
-          <Route path="/cart" element={<CartPage />} />
-          <Route path="/categories" element={<CategoriesPage />} />
-          <Route path="/categories/:id" element={<ProductsPage />} />
-          <Route path="/product/:id" element={<ProductPage />} />
+          <Route
+            path="/cart"
+            element={isOnline ? <CartPage /> : <OfflinePage />}
+          />
+          <Route
+            path="/categories"
+            element={isOnline ? <CategoriesPage /> : <OfflinePage />}
+          />
+          <Route
+            path="/categories/:id"
+            element={isOnline ? <ProductsPage /> : <OfflinePage />}
+          />
+          <Route
+            path="/product/:id"
+            element={isOnline ? <ProductPage /> : <OfflinePage />}
+          />
           <Route path="/delete-account" element={<DeleteAccount />} />
           <Route path="/privacy-policy" element={<PrivacyPolicy />} />
 
           <Route
             path="/profile"
             element={
-              <ProtectedRoute>
-                <ProfilePage />
-              </ProtectedRoute>
+              isOnline ? (
+                <ProtectedRoute>
+                  <ProfilePage />
+                </ProtectedRoute>
+              ) : (
+                <OfflinePage />
+              )
             }
           />
         </Route>
