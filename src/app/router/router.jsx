@@ -15,39 +15,42 @@ import ProductPage from "../../pages/product/product";
 import CheckoutPage from "../../pages/checkout/CheckoutPage";
 import DeleteAccount from "../../pages/daleteaccount/daleteaccount";
 import PrivacyPolicy from "../../pages/privacypolicy/privacy-policy";
+import OfflinePage from "../../pages/offline/offline";
+import useOnlineStatus from "../../shared/hooks/useOnlineStatus";
 
 export default function Router() {
+  const isOnline = useOnlineStatus();
+
   return (
-    <Routes>
-      <Route element={<MainLayout />}>
-        <Route path="/" element={<HomePage />} />
-        <Route path="/cart" element={<CartPage />} />
-        <Route path="/categories" element={<CategoriesPage />} />
-        <Route path="/categories/:id" element={<ProductsPage />} />
-        <Route path="/product/:id" element={<ProductPage />} />
-        <Route path="/delete-account" element={<DeleteAccount />} />
-        <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+    <>
+      <Routes>
+        <Route element={<MainLayout />}>
+          <Route path="/" element={isOnline ? <HomePage /> : <OfflinePage />} />
+          <Route path="/cart" element={<CartPage />} />
+          <Route path="/categories" element={<CategoriesPage />} />
+          <Route path="/categories/:id" element={<ProductsPage />} />
+          <Route path="/product/:id" element={<ProductPage />} />
+          <Route path="/delete-account" element={<DeleteAccount />} />
+          <Route path="/privacy-policy" element={<PrivacyPolicy />} />
 
-        {/* Protected routes */}
-        <Route
-          path="/profile"
-          element={
-            <ProtectedRoute>
-              <ProfilePage />
-            </ProtectedRoute>
-          }
-        />
-      </Route>
+          <Route
+            path="/profile"
+            element={
+              <ProtectedRoute>
+                <ProfilePage />
+              </ProtectedRoute>
+            }
+          />
+        </Route>
 
-      {/* 🔥 AUTH LAYOUT */}
-      <Route element={<AuthLayout />}>
-        <Route path="/login" element={<LoginPage />} />
-        <Route path="/signup" element={<SignupPage />} />
-        <Route path="/checkout" element={<CheckoutPage />} />
-      </Route>
+        <Route element={<AuthLayout />}>
+          <Route path="/login" element={<LoginPage />} />
+          <Route path="/signup" element={<SignupPage />} />
+          <Route path="/checkout" element={<CheckoutPage />} />
+        </Route>
 
-      {/* Catch all */}
-      <Route path="*" element={<Navigate to="/" replace />} />
-    </Routes>
+        <Route path="*" element={<Navigate to="/" replace />} />
+      </Routes>
+    </>
   );
 }

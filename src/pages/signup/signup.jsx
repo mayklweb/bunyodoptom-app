@@ -40,7 +40,7 @@ function SignupPage() {
         <button
           type="button"
           onClick={() => navigate(-1)}
-          className="flex items-center gap-1 text-base font-semibold text-zinc-900 mb-6 absolute top-10 left-2"
+          className="flex items-center gap-1 text-base font-semibold text-zinc-900 mb-6 absolute top-20 left-2"
         >
           <LeftArrowIcon />
           <span>Orqaga</span>

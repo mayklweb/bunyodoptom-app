@@ -8,17 +8,13 @@ import {
 } from "./sections";
 
 function Home() {
-  // const { selectedProduct, openModal, closeModal } = /();
-  // const { isModalOpen, openModal, closeModal } = useUIStore();
-
   return (
-    <div>
+    <div className="mt-32 lg:mt-24">
       <HeroBanner />
       <Categories />
       <FavoriteProducts />
       <Brands />
       <RecomendedProducts />
-      {/* <ProductModal   closeModal/> */}
     </div>
   );
 }

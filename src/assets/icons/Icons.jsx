@@ -17,6 +17,7 @@ import {
   Location01Icon,
   Logout01Icon,
   MenuSquareIcon,
+  NoInternetIcon,
   Remove01Icon,
   Search01Icon,
   ShoppingBasket03Icon,
@@ -294,6 +295,16 @@ export const KatalogIcon = ({ className }) => {
     <HugeiconsIcon
       className={className}
       icon={WalletCardsIcon}
+      size={24}
+      strokeWidth={1.5}
+    />
+  );
+};
+export const NoConnectionIcon = ({ className }) => {
+  return (
+    <HugeiconsIcon
+      className={className}
+      icon={NoInternetIcon}
       size={24}
       strokeWidth={1.5}
     />

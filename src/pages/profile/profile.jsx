@@ -113,7 +113,7 @@ export default function ProfilePage() {
 
   return (
     <>
-      <div>
+      <div className="mt-32 lg:mt-24">
         <div className="container">
           <div className="">
             <div className="flex flex-col gap-3">

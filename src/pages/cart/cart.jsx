@@ -93,7 +93,7 @@ function CartPage() {
   const canCheckout = selectedItems().length > 0 && !isLoading;
 
   return (
-    <>
+    <div className="mt-32 lg:mt-24">
       <div className="container">
         <div className="w-full h-[calc(100%-80px)] flex flex-col">
           <CartHeader />
@@ -149,7 +149,7 @@ function CartPage() {
           />
         )}
       </div>
-    </>
+    </div>
   );
 }
 

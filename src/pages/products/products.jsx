@@ -39,7 +39,7 @@ function ProductsPage() {
   const productsReady = !productsLoading && !!allProducts;
 
   return (
-    <section>
+    <section className="mt-32 lg:mt-24">
       <div className="container">
         <div>
           <div className="flex h-full overflow-hidden mt-20">

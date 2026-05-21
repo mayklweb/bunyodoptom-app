@@ -30,7 +30,7 @@ function CategoriesPage() {
   };
 
   return (
-    <>
+    <div className="mt-32 lg:mt-24">
       <div className="container">
         <div className="flex flex-col h-full mt-20">
           {categoriesLoading ? (
@@ -76,7 +76,7 @@ function CategoriesPage() {
           )}
         </div>
       </div>
-    </>
+    </div>
   );
 }
 
